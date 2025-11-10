@@ -43,6 +43,9 @@ public class GuiController implements Initializable {
     @FXML
     private Labeled scoreLabel;
 
+    @FXML
+    private Labeled totalClearedLinesLabel;
+
     private Rectangle[][] displayMatrix;
 
     private InputEventListener eventListener;
@@ -208,6 +211,10 @@ public class GuiController implements Initializable {
 
     public void bindScore(IntegerProperty integerProperty) {
         scoreLabel.textProperty().bind(integerProperty.asString("Score: %d"));
+    }
+
+    public void bindTotalClearedLines(IntegerProperty integerProperty) {
+        totalClearedLinesLabel.textProperty().bind(integerProperty.asString("Lines: %d"));
     }
 
     public void gameOver() {

@@ -30,11 +30,13 @@
             </Group>
         </Pane>
 
-        <!-- Left Panel -->
-        <VBox fx:id="leftPanel">
+        <!-- Right Panel -->
+        <VBox fx:id="rightPanel">
 
             <!-- Score -->
             <Label fx:id="scoreLabel" text="Score: 0" />
+
+            <Label fx:id="totalClearedLinesLabel" text="Lines: 0" />
         </VBox>
 
     </HBox>

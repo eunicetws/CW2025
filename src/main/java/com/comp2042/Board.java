@@ -20,7 +20,11 @@ public interface Board {
 
     ClearRow clearRows();
 
+
     Score getScore();
+
+    LinesCleared getTotalLinesCleared();
+
 
     void newGame();
 }

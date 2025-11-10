@@ -15,6 +15,7 @@ public class SimpleBoard implements Board {
     private int[][] currentGameMatrix;
     private Point currentOffset;
     private final Score score;
+    private final LinesCleared totalLinesCleared;
 
     public SimpleBoard(int width, int height) {
         this.width = width;
@@ -23,6 +24,7 @@ public class SimpleBoard implements Board {
         brickGenerator = new RandomBrickGenerator();
         brickRotator = new BrickRotator();
         score = new Score();
+        totalLinesCleared = new LinesCleared();
     }
 
     @Override
@@ -115,6 +117,11 @@ public class SimpleBoard implements Board {
     @Override
     public Score getScore() {
         return score;
+    }
+
+    @Override
+    public LinesCleared getTotalLinesCleared() {
+        return totalLinesCleared;
     }
 
 

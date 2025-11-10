@@ -1,6 +1,5 @@
 .root {
     -fx-background-image: url("background_image.png");
-    -fx-padding: 50;
 }
 
 .nextBrick {
@@ -58,30 +57,47 @@
     -fx-font-weight: bold;
 }
 
-/* Tetris Board*/
+/* Playing Box */
+#playing{
+    -fx-max-width: 420px;
+    -fx-min-width: 420px;
 
-#tetrisBoard{
-     -fx-pref-width: 250px;
-     -fx-max-width: 250px;
-     -fx-padding: 20 0 0 20;
-
+    -fx-min-height: 520px;
+    -fx-max-height: 520px;
 }
 
-.gameOverStyle {
-    -fx-font-family: "Let's go Digital";
-    -fx-font-size: 48;
-    -fx-background-color: red;
-}
+    /* Tetris Board*/
 
-/* Left Panel */
+    #tetrisBoard{
+        -fx-min-width: 250px;
+        -fx-max-width: 250px;
+        -fx-padding: 20 0 0 20;
+    }
 
-#leftPanel{
+    .gameOverStyle {
+        -fx-font-family: "Let's go Digital";
+        -fx-font-size: 48;
+        -fx-background-color: red;
+    }
+
+/* Right Panel */
+
+#rightPanel{
     -fx-padding: 0 0 30 0;
 }
 
-#scoreLabel{
-    -fx-font-family: "Let's go Digital";
-    -fx-font-size: 25;
-    -fx-text-fill: #fff;
-    -fx-padding: 10 0 0 0;
+    /* Score */
+    #scoreLabel{
+        -fx-font-family: "Let's go Digital";
+        -fx-font-size: 25;
+        -fx-text-fill: #fff;
+        -fx-padding: 10 0 0 0;
+    }
+
+    /* Lines */
+    #totalClearedLinesLabel{
+        -fx-font-family: "Let's go Digital";
+        -fx-font-size: 25;
+        -fx-text-fill: #fff;
+        -fx-padding: 10 0 0 0;
 }
