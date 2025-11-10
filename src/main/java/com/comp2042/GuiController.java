@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.Labeled;
 import javafx.scene.effect.Reflection;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -38,6 +39,9 @@ public class GuiController implements Initializable {
 
     @FXML
     private GameOverPanel gameOverPanel;
+
+    @FXML
+    private Labeled scoreLabel;
 
     private Rectangle[][] displayMatrix;
 
@@ -141,7 +145,7 @@ public class GuiController implements Initializable {
                 returnPaint = Color.YELLOW;
                 break;
             case 5:
-                returnPaint = Color.RED;
+                returnPaint = Color.PINK;
                 break;
             case 6:
                 returnPaint = Color.BEIGE;
@@ -177,12 +181,14 @@ public class GuiController implements Initializable {
         }
     }
 
+    // display the tetris blocks' color, and rounded corner
     private void setRectangleData(int color, Rectangle rectangle) {
         rectangle.setFill(getFillColor(color));
         rectangle.setArcHeight(9);
         rectangle.setArcWidth(9);
     }
 
+    // display score when a row is cleared
     private void moveDown(MoveEvent event) {
         if (isPause.getValue() == Boolean.FALSE) {
             DownData downData = eventListener.onDownEvent(event);
@@ -201,6 +207,7 @@ public class GuiController implements Initializable {
     }
 
     public void bindScore(IntegerProperty integerProperty) {
+        scoreLabel.textProperty().bind(integerProperty.asString("Score: %d"));
     }
 
     public void gameOver() {

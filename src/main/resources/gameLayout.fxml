@@ -6,21 +6,41 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
-<Pane fx:controller="com.comp2042.GuiController"
-      xmlns:fx="http://javafx.com/fxml">
-    <GridPane fx:id="brickPanel" vgap="1" hgap="1"/>
-    <BorderPane styleClass="gameBoard" fx:id="gameBoard">
-        <center>
-            <GridPane fx:id="gamePanel" hgap="1" vgap="1" layoutY="30" layoutX="40"/>
-        </center>
-    </BorderPane>
 
-    <Group fx:id="groupNotification" layoutX="14" layoutY="203">
-        <VBox alignment="CENTER">
-            <GameOverPanel fx:id="gameOverPanel"/>
+<!-- Root -->
+<StackPane fx:controller="com.comp2042.GuiController"
+      xmlns:fx="http://javafx.com/fxml">
+
+    <!--  Play Screen  -->
+    <HBox id="playing">
+
+        <!-- Tetris Board -->
+        <Pane id = "tetrisBoard">
+            <GridPane fx:id="brickPanel" vgap="1" hgap="1"/>
+            <BorderPane styleClass="gameBoard" fx:id="gameBoard">
+                <center>
+                    <GridPane fx:id="gamePanel" hgap="1" vgap="1" layoutY="30" layoutX="40"/>
+                </center>
+            </BorderPane>
+
+            <Group fx:id="groupNotification" layoutX="12" layoutY="203">
+                <VBox alignment="CENTER">
+                    <GameOverPanel fx:id="gameOverPanel"/>
+                </VBox>
+            </Group>
+        </Pane>
+
+        <!-- Left Panel -->
+        <VBox fx:id="leftPanel">
+
+            <!-- Score -->
+            <Label fx:id="scoreLabel" text="Score: 0" />
         </VBox>
-    </Group>
+
+    </HBox>
+
+
     <stylesheets>
         <URL value="@window_style.css"/>
     </stylesheets>
-</Pane>
+</StackPane>

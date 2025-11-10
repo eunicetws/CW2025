@@ -10,6 +10,7 @@ public class BrickRotator {
     public NextShapeInfo getNextShape() {
         int nextShape = currentShape;
         nextShape = (++nextShape) % brick.getShapeMatrix().size();
+            // % to make sure it loops back to 0 after reaching the last shape.
         return new NextShapeInfo(brick.getShapeMatrix().get(nextShape), nextShape);
     }
 

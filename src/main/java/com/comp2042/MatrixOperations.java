@@ -60,6 +60,8 @@ public class MatrixOperations {
         return copy;
     }
 
+
+    // Clears the Row, Checks the row size, checks the score
     public static ClearRow checkRemoving(final int[][] matrix) {
         int[][] tmp = new int[matrix.length][matrix[0].length];
         Deque<int[]> newRows = new ArrayDeque<>();
