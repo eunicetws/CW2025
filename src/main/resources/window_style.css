@@ -100,4 +100,12 @@
         -fx-font-size: 25;
         -fx-text-fill: #fff;
         -fx-padding: 10 0 0 0;
-}
+    }
+
+    /* Level */
+    #levelLabel{
+        -fx-font-family: "Let's go Digital";
+        -fx-font-size: 25;
+        -fx-text-fill: #fff;
+        -fx-padding: 10 0 0 0;
+    }

@@ -1,7 +1,9 @@
 package com.comp2042;
 
-public interface Board {
+import com.comp2042.logic.*;
 
+public interface Board {
+    //Brick Controls
     boolean moveBrickDown();
 
     boolean moveBrickLeft();
@@ -9,6 +11,7 @@ public interface Board {
     boolean moveBrickRight();
 
     boolean rotateLeftBrick();
+    //
 
     boolean createNewBrick();
 
@@ -20,11 +23,13 @@ public interface Board {
 
     ClearRow clearRows();
 
-
+    // Getters
     Score getScore();
 
     LinesCleared getTotalLinesCleared();
 
+    Level getLevel();
+    //
 
     void newGame();
 }

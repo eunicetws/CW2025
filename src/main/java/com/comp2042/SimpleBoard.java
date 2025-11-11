@@ -1,5 +1,6 @@
 package com.comp2042;
 
+import com.comp2042.logic.*;
 import com.comp2042.logic.bricks.Brick;
 import com.comp2042.logic.bricks.BrickGenerator;
 import com.comp2042.logic.bricks.RandomBrickGenerator;
@@ -16,6 +17,7 @@ public class SimpleBoard implements Board {
     private Point currentOffset;
     private final Score score;
     private final LinesCleared totalLinesCleared;
+    private final Level level;
 
     public SimpleBoard(int width, int height) {
         this.width = width;
@@ -23,10 +25,13 @@ public class SimpleBoard implements Board {
         currentGameMatrix = new int[width][height];
         brickGenerator = new RandomBrickGenerator();
         brickRotator = new BrickRotator();
+
         score = new Score();
         totalLinesCleared = new LinesCleared();
+        level = new Level();
     }
 
+// Brick Movement
     @Override
     public boolean moveBrickDown() {
         int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
@@ -82,6 +87,7 @@ public class SimpleBoard implements Board {
             return true;
         }
     }
+//
 
     @Override
     public boolean createNewBrick() {
@@ -114,6 +120,7 @@ public class SimpleBoard implements Board {
 
     }
 
+//Getters
     @Override
     public Score getScore() {
         return score;
@@ -124,11 +131,17 @@ public class SimpleBoard implements Board {
         return totalLinesCleared;
     }
 
+    public Level getLevel() {
+        return level;
+    }
+//
 
     @Override
     public void newGame() {
         currentGameMatrix = new int[width][height];
         score.reset();
+        totalLinesCleared.reset();
+        level.reset();
         createNewBrick();
     }
 }

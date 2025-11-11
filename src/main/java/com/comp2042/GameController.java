@@ -13,6 +13,8 @@ public class GameController implements InputEventListener {
         viewGuiController.initGameView(board.getBoardMatrix(), board.getViewData());
         viewGuiController.bindScore(board.getScore().scoreProperty());
         viewGuiController.bindTotalClearedLines(board.getTotalLinesCleared().PropertiesTotalLinesCleared());
+        viewGuiController.bindLevel(board.getLevel().propertiesLevel());
+        viewGuiController.setSpeed(board.getLevel().calcSpeed());
     }
 
     @Override
@@ -23,8 +25,14 @@ public class GameController implements InputEventListener {
             board.mergeBrickToBackground();
             clearRow = board.clearRows();
             if (clearRow.getLinesRemoved() > 0) {
-                board.getScore().add(clearRow.getScoreBonus());
-                board.getTotalLinesCleared().add(clearRow.getLinesRemoved());
+                board.getScore().add(clearRow.getScoreBonus()); //Add Score
+                board.getTotalLinesCleared().add(clearRow.getLinesRemoved()); //Add Lines
+
+                // Level Up
+                if (board.getLevel().reachLevelRequirement(board.getTotalLinesCleared().PropertiesTotalLinesCleared().getValue())){
+                    board.getLevel().levelUp();
+                    viewGuiController.setSpeed(board.getLevel().calcSpeed());
+                }
             }
             if (board.createNewBrick()) {
                 viewGuiController.gameOver();

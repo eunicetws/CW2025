@@ -36,7 +36,12 @@
             <!-- Score -->
             <Label fx:id="scoreLabel" text="Score: 0" />
 
+            <!-- Lines-->
             <Label fx:id="totalClearedLinesLabel" text="Lines: 0" />
+
+            <!-- Level-->
+            <Label fx:id="levelLabel" text="Level: 1" />
+
         </VBox>
 
     </HBox>

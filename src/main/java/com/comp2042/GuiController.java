@@ -46,6 +46,10 @@ public class GuiController implements Initializable {
     @FXML
     private Labeled totalClearedLinesLabel;
 
+    @FXML
+    private Labeled levelLabel;
+
+
     private Rectangle[][] displayMatrix;
 
     private InputEventListener eventListener;
@@ -57,6 +61,8 @@ public class GuiController implements Initializable {
     private final BooleanProperty isPause = new SimpleBooleanProperty();
 
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
+
+    private int speed;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -119,14 +125,6 @@ public class GuiController implements Initializable {
         }
         brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
         brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
-
-
-        timeLine = new Timeline(new KeyFrame(
-                Duration.millis(400),
-                ae -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD))
-        ));
-        timeLine.setCycleCount(Timeline.INDEFINITE);
-        timeLine.play();
     }
 
     private Paint getFillColor(int i) {
@@ -209,20 +207,8 @@ public class GuiController implements Initializable {
         this.eventListener = eventListener;
     }
 
-    public void bindScore(IntegerProperty integerProperty) {
-        scoreLabel.textProperty().bind(integerProperty.asString("Score: %d"));
-    }
 
-    public void bindTotalClearedLines(IntegerProperty integerProperty) {
-        totalClearedLinesLabel.textProperty().bind(integerProperty.asString("Lines: %d"));
-    }
-
-    public void gameOver() {
-        timeLine.stop();
-        gameOverPanel.setVisible(true);
-        isGameOver.setValue(Boolean.TRUE);
-    }
-
+// Event
     public void newGame(ActionEvent actionEvent) {
         timeLine.stop();
         gameOverPanel.setVisible(false);
@@ -236,4 +222,44 @@ public class GuiController implements Initializable {
     public void pauseGame(ActionEvent actionEvent) {
         gamePanel.requestFocus();
     }
+//
+
+// Label
+    public void gameOver() {
+        timeLine.stop();
+        gameOverPanel.setVisible(true);
+        isGameOver.setValue(Boolean.TRUE);
+    }
+
+    public void bindScore(IntegerProperty integerProperty) {
+        scoreLabel.textProperty().bind(integerProperty.asString("Score: %d"));
+    }
+
+    public void bindTotalClearedLines(IntegerProperty integerProperty) {
+        totalClearedLinesLabel.textProperty().bind(integerProperty.asString("Lines: %d"));
+    }
+
+    public void bindLevel(IntegerProperty integerProperty) {
+        levelLabel.textProperty().bind(integerProperty.asString("Level: %d"));
+    }
+//
+
+//setters
+    public void setSpeed(int speed) {
+
+        // Reset the timeline to fit the new speed
+        if (timeLine != null) {
+            timeLine.stop();
+        }
+
+        // Create a new timeline with updated speed
+        timeLine = new Timeline(new KeyFrame(
+                Duration.millis(speed),
+                ae -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD))
+        ));
+        timeLine.setCycleCount(Timeline.INDEFINITE);
+        timeLine.play();
+        System.out.println(speed);
+    }
+//
 }
