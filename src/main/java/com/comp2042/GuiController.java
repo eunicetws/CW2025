@@ -38,6 +38,9 @@ public class GuiController implements Initializable {
     private GridPane brickPanel;
 
     @FXML
+    private GridPane nextBrickDisplay;
+
+    @FXML
     private GameOverPanel gameOverPanel;
 
     @FXML
@@ -49,20 +52,19 @@ public class GuiController implements Initializable {
     @FXML
     private Labeled levelLabel;
 
-
     private Rectangle[][] displayMatrix;
 
     private InputEventListener eventListener;
 
     private Rectangle[][] rectangles;
 
+    private Rectangle[][] rectanglesNextBrick;
+
     private Timeline timeLine;
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
 
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
-
-    private int speed;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -114,6 +116,7 @@ public class GuiController implements Initializable {
             }
         }
 
+        // Get Current Brick
         rectangles = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
         for (int i = 0; i < brick.getBrickData().length; i++) {
             for (int j = 0; j < brick.getBrickData()[i].length; j++) {
@@ -125,6 +128,18 @@ public class GuiController implements Initializable {
         }
         brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
         brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
+
+        //Get Next Brick
+        rectanglesNextBrick = new Rectangle[brick.getNextBrickData().length][brick.getNextBrickData()[0].length];
+        for (int i = 0; i < brick.getNextBrickData().length; i++) {
+            for (int j = 0; j < brick.getNextBrickData()[i].length; j++) {
+                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
+                rectanglesNextBrick[i][j] = rectangle;
+                nextBrickDisplay.add(rectangle, j, i);
+            }
+        }
+        refreshNextBrick(brick);
+
     }
 
     private Paint getFillColor(int i) {
@@ -164,11 +179,24 @@ public class GuiController implements Initializable {
 
     private void refreshBrick(ViewData brick) {
         if (isPause.getValue() == Boolean.FALSE) {
+            // brick x and y position
             brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
             brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
+
             for (int i = 0; i < brick.getBrickData().length; i++) {
                 for (int j = 0; j < brick.getBrickData()[i].length; j++) {
                     setRectangleData(brick.getBrickData()[i][j], rectangles[i][j]);
+                }
+            }
+        }
+    }
+
+    // get next brick to display
+    public void refreshNextBrick(ViewData brick){
+        if (isPause.getValue() == Boolean.FALSE) {
+            for (int i = 0; i < brick.getNextBrickData().length; i++) {
+                for (int j = 0; j < brick.getNextBrickData()[i].length; j++) {
+                    setRectangleData(brick.getNextBrickData()[i][j], rectanglesNextBrick[i][j]);
                 }
             }
         }
@@ -182,7 +210,7 @@ public class GuiController implements Initializable {
         }
     }
 
-    // display the tetris blocks' color, and rounded corner
+    // display the tetris blocks' shape, color, and rounded corner
     private void setRectangleData(int color, Rectangle rectangle) {
         rectangle.setFill(getFillColor(color));
         rectangle.setArcHeight(9);
@@ -259,7 +287,6 @@ public class GuiController implements Initializable {
         ));
         timeLine.setCycleCount(Timeline.INDEFINITE);
         timeLine.play();
-        System.out.println(speed);
     }
 //
 }

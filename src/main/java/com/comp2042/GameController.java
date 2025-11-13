@@ -39,6 +39,7 @@ public class GameController implements InputEventListener {
             }
 
             viewGuiController.refreshGameBackground(board.getBoardMatrix());
+            viewGuiController.refreshNextBrick(board.getViewData());
 
         } else {
             if (event.getEventSource() == EventSource.USER) {

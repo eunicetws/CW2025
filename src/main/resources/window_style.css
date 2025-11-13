@@ -2,12 +2,6 @@
     -fx-background-image: url("background_image.png");
 }
 
-.nextBrick {
-    -fx-border-width: 2px;
-    -fx-border-color: whitesmoke;
-    -fx-border-radius: 17px;
-}
-
 .gameBoard {
     -fx-border-color: #61a2b1;
     -fx-border-width: 10px;
@@ -83,8 +77,28 @@
 /* Right Panel */
 
 #rightPanel{
-    -fx-padding: 0 0 30 0;
+    -fx-padding: 10 0 30 0;
 }
+
+    /* Next Brick */
+    .nextBrick {
+        -fx-border-width: 2px;
+        -fx-border-color: whitesmoke;
+        -fx-alignment: center;
+    }
+
+    #nextBrickLabel{
+        -fx-font-family: "Let's go Digital";
+        -fx-font-size: 25;
+        -fx-text-fill: #fff;
+        -fx-padding: 10 0 0 0;
+    }
+
+    #nextBrickDisplay{
+        -fx-alignment: center;
+        -fx-min-width: 100px;
+        -fx-max-width: 100px;
+    }
 
     /* Score */
     #scoreLabel{

@@ -33,6 +33,12 @@
         <!-- Right Panel -->
         <VBox fx:id="rightPanel">
 
+            <!-- Next Brick  -->
+            <VBox styleClass="nextBrick">
+                <Label fx:id="nextBrickLabel" text="Next:"/>
+                <GridPane fx:id="nextBrickDisplay" vgap="1" hgap="1"/>
+            </VBox>
+
             <!-- Score -->
             <Label fx:id="scoreLabel" text="Score: 0" />
 
