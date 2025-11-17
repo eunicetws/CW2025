@@ -1,17 +1,11 @@
 .root {
-    -fx-background-image: url("background_image.png");
+    -fx-background-color: "#b8d0eb";
 }
 
 .gameBoard {
-    -fx-border-color: #61a2b1;
+    -fx-border-color: #5F445E;
+    -fx-background-color: #F3EFE8;
     -fx-border-width: 10px;
-}
-
-.nextBrickLabel {
-    -fx-font-family: "Let's go Digital";
-    -fx-padding: 20px 0 0 0;
-    -fx-font-size: 16px;
-    -fx-text-fill: yellow;
 }
 
 .ipad-dark-grey {
@@ -78,7 +72,7 @@
     #tetrisBoard{
         -fx-min-width: 230px;
         -fx-max-width: 230px;
-        -fx-padding: 20 0 0 0;
+        -fx-padding: 0 0 0 0;
     }
 
     .gameOverStyle {
@@ -90,7 +84,7 @@
     /* Side Panel */
 
     .rightPanel{
-        -fx-padding: 0 0 30 0;
+        -fx-padding: 10 0 30 0;
     }
 
     .leftPanel{
@@ -109,26 +103,31 @@
 
     /* Labels*/
     .label{
-        -fx-font-family: "Let's go Digital";
+        -fx-font-family: "Gluten Bold";
         -fx-font-size: 25;
-        -fx-text-fill: #fff;
+        -fx-text-fill: #5F445E;
         -fx-padding: 10 0 0 0;
     }
 
         .brickLabel{
-            -fx-font-family: "Let's go Digital";
+            -fx-font-family: "Gluten Bold";
             -fx-font-size: 25;
-            -fx-text-fill: #fff;
+            -fx-text-fill: #5F445E;
             -fx-padding: 10 0 0 0;
         }
 
     /* Display Bricks */
         .brickPanel {
-            -fx-border-width: 2px;
-            -fx-border-color: whitesmoke;
+            -fx-border-color: #5F445E;
+            -fx-border-width: 5;
+            -fx-border-radius: 5;
+
+            -fx-background-color: #F3EFE8;
+            -fx-background-radius: 10;
+
             -fx-alignment: center;
-            -fx-min-width: 100px;
-            -fx-max-width: 100px;
+            -fx-min-width: 120px;
+            -fx-max-width: 120px;
         }
 
         .brickDisplay{

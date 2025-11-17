@@ -21,6 +21,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
@@ -87,8 +88,6 @@ public class GuiController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Font.loadFont(getClass().getClassLoader().getResource("fonts/digital.ttf").toExternalForm(), 38);
-
         // Set Pause Button in playing
         Image normal = new Image("/buttons/Buttons-pause.png");
         Image hover = new Image("/buttons/Buttons-pause-pressed.png");
@@ -153,6 +152,17 @@ public class GuiController implements Initializable {
     }
 
     public void initGameView(int[][] boardMatrix, ViewData brick) {
+        for (int i = 2; i < boardMatrix.length; i++) {
+            for (int j = 0; j < boardMatrix[i].length; j++) {
+                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
+                rectangle.setFill(Color.TRANSPARENT);
+                rectangle.setStroke(Color.web("#ede0d4"));
+                rectangle.setStrokeType(StrokeType.INSIDE);
+                rectangle.setStrokeWidth(0.5);
+                gamePanel.add(rectangle, j, i - 2);
+            }
+        }
+
         displayMatrix = new Rectangle[boardMatrix.length][boardMatrix[0].length];
         for (int i = 2; i < boardMatrix.length; i++) {
             for (int j = 0; j < boardMatrix[i].length; j++) {
@@ -169,12 +179,14 @@ public class GuiController implements Initializable {
             for (int j = 0; j < brick.getBrickData()[i].length; j++) {
                 Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
                 rectangle.setFill(getFillColor(brick.getBrickData()[i][j]));
+                rectangle.setStroke(getBorderColour(brick.getBrickData()[i][j]));
+                rectangle.setStrokeWidth(1);
                 rectangles[i][j] = rectangle;
                 brickPanel.add(rectangle, j, i);
             }
         }
         brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
-        brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
+        brickPanel.setLayoutY(-40 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
 
         //Get Next Brick
         rectanglesNextBrick = new Rectangle[brick.getNextBrickData().length][brick.getNextBrickData()[0].length];
@@ -200,36 +212,32 @@ public class GuiController implements Initializable {
     }
 
     private Paint getFillColor(int i) {
-        Paint returnPaint;
-        switch (i) {
-            case 0:
-                returnPaint = Color.TRANSPARENT;
-                break;
-            case 1:
-                returnPaint = Color.AQUA;
-                break;
-            case 2:
-                returnPaint = Color.BLUEVIOLET;
-                break;
-            case 3:
-                returnPaint = Color.DARKGREEN;
-                break;
-            case 4:
-                returnPaint = Color.YELLOW;
-                break;
-            case 5:
-                returnPaint = Color.PINK;
-                break;
-            case 6:
-                returnPaint = Color.BEIGE;
-                break;
-            case 7:
-                returnPaint = Color.BURLYWOOD;
-                break;
-            default:
-                returnPaint = Color.WHITE;
-                break;
-        }
+        Paint returnPaint = switch (i) {
+            case 0 -> Color.TRANSPARENT;
+            case 1 -> Color.web("#caf0f8"); //light blue
+            case 2 -> Color.web("#ccdbfd"); // blue
+            case 3 -> Color.web("#d8f3dc"); // green
+            case 4 -> Color.web("#f8dda4"); // orange
+            case 5 -> Color.web("#ffc4d6"); // pink
+            case 6 -> Color.web("#e7c6ff"); // purple
+            case 7 -> Color.web("#e6ccb2"); //brown
+            default -> Color.WHITE;
+        };
+        return returnPaint;
+    }
+
+    private Paint getBorderColour(int i) {
+        Paint returnPaint = switch (i) {
+            case 0 -> Color.TRANSPARENT;
+            case 1 -> Color.web("#90e0ef"); //light blue
+            case 2 -> Color.web("#abc4ff"); // blue
+            case 3 -> Color.web("#95d5b2"); // green
+            case 4 -> Color.web("#f9c784"); // orange
+            case 5 -> Color.web("#ffa6c1"); // pink
+            case 6 -> Color.web("#c8b6ff"); // purple
+            case 7 -> Color.web("#ddb892"); //brown
+            default -> Color.WHITE;
+        };
         return returnPaint;
     }
 
@@ -238,7 +246,7 @@ public class GuiController implements Initializable {
         if (isPause.getValue() == Boolean.FALSE) {
             // brick x and y position
             brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
-            brickPanel.setLayoutY(-42 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
+            brickPanel.setLayoutY(-40 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
 
             for (int i = 0; i < brick.getBrickData().length; i++) {
                 for (int j = 0; j < brick.getBrickData()[i].length; j++) {
@@ -280,8 +288,9 @@ public class GuiController implements Initializable {
     // display the tetris blocks' shape, color, and rounded corner
     private void setRectangleData(int color, Rectangle rectangle) {
         rectangle.setFill(getFillColor(color));
-        rectangle.setArcHeight(9);
-        rectangle.setArcWidth(9);
+        rectangle.setStroke(getBorderColour(color));
+        rectangle.setStrokeType(StrokeType.INSIDE);
+        rectangle.setStrokeWidth(1);
     }
 
     // display score when a row is cleared
