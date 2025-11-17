@@ -274,6 +274,7 @@ public class GuiController implements Initializable {
                     setRectangleData(brick.getHoldBrickData()[i][j], rectanglesHoldBrick[i][j]);
                 }
             }
+            refreshNextBrick(brick);
         }
     }
 
