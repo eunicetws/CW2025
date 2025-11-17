@@ -75,6 +75,29 @@
         </HBox>
     </VBox>
 
+    <!-- Pause Menu -->
+    <StackPane styleClass="Overlay" fx:id="PauseMenu">
+        <StackPane styleClass="PausePane">
+            <StackPane fx:id="PauseMenuMargin">
+                <VBox styleClass="PauseMenu" >
+                    <StackPane styleClass="ResumePane" fx:id="Resume">
+                        <Label styleClass="ResumeBox"/>
+                        <Label styleClass="ResumeLabel" text="Resume"/>
+                    </StackPane>
+
+                    <HBox styleClass="BottomPanel">
+                        <Label styleClass="Restart"/>
+                        <Label styleClass="Home"/>
+                        <Label styleClass="Setting"/>
+                    </HBox>
+                </VBox>
+            </StackPane>
+
+            <Label styleClass="PauseTitle" text="Pause" />
+        </StackPane>
+
+    </StackPane>
+
     <stylesheets>
         <URL value="@window_style.css"/>
         <URL value="@pauseLayout.css"/>

@@ -12,9 +12,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Labeled;
 import javafx.scene.effect.Reflection;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +31,7 @@ public class GuiController implements Initializable {
 
     private static final int BRICK_SIZE = 20;
 
+    //Playing
     @FXML
     private GridPane gamePanel;
 
@@ -47,6 +51,9 @@ public class GuiController implements Initializable {
     private GameOverPanel gameOverPanel;
 
     @FXML
+    private ImageView pauseImage;
+
+    @FXML
     private Labeled scoreLabel;
 
     @FXML
@@ -54,6 +61,13 @@ public class GuiController implements Initializable {
 
     @FXML
     private Labeled levelLabel;
+
+    //Pause Menu
+    @FXML
+    private StackPane PauseMenu;
+
+    @FXML
+    private StackPane Resume;
 
     private Rectangle[][] displayMatrix;
 
@@ -74,11 +88,29 @@ public class GuiController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Font.loadFont(getClass().getClassLoader().getResource("fonts/digital.ttf").toExternalForm(), 38);
+
+        // Set Pause Button in playing
+        Image normal = new Image("/buttons/Buttons-pause.png");
+        Image hover = new Image("/buttons/Buttons-pause-pressed.png");
+        pauseImage.setImage(normal);
+        pauseImage.setOnMouseEntered(e -> pauseImage.setImage(hover));
+        pauseImage.setOnMouseExited(e -> pauseImage.setImage(normal));
+
+        // Set pause Menu
+        PauseMenu.setVisible(false);
+
+
         gamePanel.setFocusTraversable(true);
         gamePanel.requestFocus();
+
+        /* Keyboard Events */
         gamePanel.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.P) {
+                    pauseGame(null);
+                    keyEvent.consume();
+                }
                 if (isPause.getValue() == Boolean.FALSE && isGameOver.getValue() == Boolean.FALSE) {
                     if (keyEvent.getCode() == KeyCode.LEFT || keyEvent.getCode() == KeyCode.A) {
                         refreshBrick(eventListener.onLeftEvent(new MoveEvent(EventType.LEFT, EventSource.USER)));
@@ -106,6 +138,12 @@ public class GuiController implements Initializable {
                 }
             }
         });
+
+        /* Mouse Events */
+        pauseImage.setOnMouseClicked(e -> pauseGame(null));
+        Resume.setOnMouseClicked(e -> pauseGame(null));
+
+
         gameOverPanel.setVisible(false);
 
         final Reflection reflection = new Reflection();
@@ -266,6 +304,17 @@ public class GuiController implements Initializable {
 
 
     // Event
+    public void pauseGame(ActionEvent actionEvent) {
+        gamePanel.requestFocus();
+        if (isPause.getValue() == true){
+            isPause.setValue(Boolean.FALSE);
+        } else if (isPause.getValue() == false){
+            isPause.setValue(Boolean.TRUE);
+        }
+        PauseMenu.setVisible(isPause.getValue());
+        pauseImage.setVisible(!isPause.getValue());
+    }
+
     public void newGame(ActionEvent actionEvent) {
         timeLine.stop();
         gameOverPanel.setVisible(false);
@@ -274,10 +323,6 @@ public class GuiController implements Initializable {
         timeLine.play();
         isPause.setValue(Boolean.FALSE);
         isGameOver.setValue(Boolean.FALSE);
-    }
-
-    public void pauseGame(ActionEvent actionEvent) {
-        gamePanel.requestFocus();
     }
 //
 

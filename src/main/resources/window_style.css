@@ -51,10 +51,21 @@
     -fx-font-weight: bold;
 }
 
+.Screen{
+    -fx-max-width: 520px;
+    -fx-min-width: 520px;
+    -fx-min-height: 580px;
+    -fx-max-height: 580px;
+
+    -fx-alignment: top-right;
+    -fx-spacing: 10
+
+}
+
 /* Playing Box */
 #playing{
-    -fx-max-width: 500px;
-    -fx-min-width: 500px;
+    -fx-max-width: 520px;
+    -fx-min-width: 520px;
 
     -fx-min-height: 520px;
     -fx-max-height: 520px;
@@ -79,13 +90,22 @@
     /* Side Panel */
 
     .rightPanel{
-        -fx-padding: 10 0 30 0;
+        -fx-padding: 0 0 30 0;
     }
+
     .leftPanel{
         -fx-padding: 10 0 0 10;
         -fx-alignment: top-center;
     }
+        /* Pause */
+        .Pause {
+            -fx-max-width: 15px;
+            -fx-max-height: 15px;
+        }
 
+        .Pause:hover {
+            -fx-graphic: url("buttons/Buttons-pause-pressed.png");
+        }
 
     /* Labels*/
     .label{
