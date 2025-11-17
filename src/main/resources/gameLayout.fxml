@@ -8,61 +8,75 @@
 <?import java.net.URL?>
 
 <!-- Root -->
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <StackPane fx:controller="com.comp2042.GuiController"
            xmlns:fx="http://javafx.com/fxml">
 
-    <!--  Play Screen  -->
-    <HBox id="playing">
+    <!-- Playing -->
+    <VBox styleClass="Screen">
+        <!-- Pause -->
+        <ImageView fx:id="pauseImage" StackPane.alignment="TOP_RIGHT">
+            <fitWidth>50</fitWidth>
+            <preserveRatio>true</preserveRatio>
+            <image>
+                <Image url="@/buttons/Buttons-pause.png"/>
+            </image>
+        </ImageView>
 
-        <!-- Left Panel -->
-        <VBox styleClass="leftPanel">
-            <!-- Hold Brick -->
-            <VBox styleClass="brickPanel">
-                <Label styleClass="brickLabel" text="Hold:"/>
-                <GridPane styleClass="brickDisplay"  fx:id="holdBrickDisplay" vgap="1" hgap="1"/>
-            </VBox>
-        </VBox>
+        <!--  Play Screen  -->
+        <HBox id="playing">
 
-        <!-- Tetris Board -->
-        <Pane id = "tetrisBoard">
-            <GridPane fx:id="brickPanel" vgap="1" hgap="1"/>
-            <BorderPane styleClass="gameBoard" fx:id="gameBoard">
-                <center>
-                    <GridPane fx:id="gamePanel" hgap="1" vgap="1" layoutY="30" layoutX="40"/>
-                </center>
-            </BorderPane>
-
-            <Group fx:id="groupNotification" layoutX="12" layoutY="203">
-                <VBox alignment="CENTER">
-                    <GameOverPanel fx:id="gameOverPanel"/>
+            <!-- Left Panel -->
+            <VBox styleClass="leftPanel">
+                <!-- Hold Brick -->
+                <VBox styleClass="brickPanel">
+                    <Label styleClass="brickLabel" text="Hold:"/>
+                    <GridPane styleClass="brickDisplay"  fx:id="holdBrickDisplay" vgap="1" hgap="1"/>
                 </VBox>
-            </Group>
-        </Pane>
-
-        <!-- Right Panel -->
-        <VBox styleClass="rightPanel">
-
-            <!-- Next Brick  -->
-            <VBox styleClass="brickPanel">
-                <Label styleClass="brickLabel" text="Next:"/>
-                <GridPane styleClass="brickDisplay" fx:id="nextBrickDisplay" vgap="1" hgap="1"/>
             </VBox>
 
-            <!-- Score -->
-            <Label styleClass="label" fx:id="scoreLabel" text="Score: 0" />
+            <!-- Tetris Board -->
+            <Pane id = "tetrisBoard">
+                <GridPane fx:id="brickPanel" vgap="1" hgap="1"/>
+                <BorderPane styleClass="gameBoard" fx:id="gameBoard">
+                    <center>
+                        <GridPane fx:id="gamePanel" hgap="1" vgap="1" layoutY="30" layoutX="40"/>
+                    </center>
+                </BorderPane>
 
-            <!-- Lines-->
-            <Label styleClass="label" fx:id="totalClearedLinesLabel" text="Lines: 0" />
+                <Group fx:id="groupNotification" layoutX="12" layoutY="203">
+                    <VBox alignment="CENTER">
+                        <GameOverPanel fx:id="gameOverPanel"/>
+                    </VBox>
+                </Group>
+            </Pane>
 
-            <!-- Level-->
-            <Label styleClass="label" fx:id="levelLabel" text="Level: 1" />
+            <!-- Right Panel -->
+            <VBox styleClass="rightPanel">
 
-        </VBox>
+                <!-- Next Brick  -->
+                <VBox styleClass="brickPanel">
+                    <Label styleClass="brickLabel" text="Next:"/>
+                    <GridPane styleClass="brickDisplay" fx:id="nextBrickDisplay" vgap="1" hgap="1"/>
+                </VBox>
 
-    </HBox>
+                <!-- Score -->
+                <Label styleClass="label" fx:id="scoreLabel" text="Score: 0" />
 
+                <!-- Lines-->
+                <Label styleClass="label" fx:id="totalClearedLinesLabel" text="Lines: 0" />
+
+                <!-- Level-->
+                <Label styleClass="label" fx:id="levelLabel" text="Level: 1" />
+
+            </VBox>
+
+        </HBox>
+    </VBox>
 
     <stylesheets>
         <URL value="@window_style.css"/>
+        <URL value="@pauseLayout.css"/>
     </stylesheets>
 </StackPane>

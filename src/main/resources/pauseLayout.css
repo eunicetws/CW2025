@@ -1,0 +1,137 @@
+.Overlay{
+    -fx-background-color: rgba(97, 97, 97, 0.7);
+}
+
+.PausePane{
+    -fx-min-width: 475px;
+    -fx-max-width: 475px;
+
+    -fx-min-height: 285px;
+    -fx-max-height: 285px;
+
+    -fx-alignment: top-center;
+}
+
+#PauseMenuMargin{
+    -fx-padding: 100 0 0 0;
+    -fx-min-width: 450px;
+    -fx-max-width: 450px;
+
+    -fx-min-height: 250px;
+    -fx-max-height: 250px;
+}
+
+.PauseMenu{
+    -fx-padding: 25 0 0 0;
+
+    -fx-min-width: 450px;
+    -fx-max-width: 450px;
+
+    -fx-min-height: 280px;
+    -fx-max-height: 280px;
+
+    -fx-background-color: #f0eae4;
+    -fx-background-radius: 25;
+
+    -fx-border-color: #6b4f6a;
+    -fx-border-width: 10px;
+    -fx-border-radius: 20;
+
+    -fx-alignment: center;
+
+    -fx-spacing: 10;
+}
+
+/* Resume*/
+    .ResumeBox {
+        -fx-graphic: url("buttons/Long-Button.png");
+    }
+
+    .ResumePane:hover .ResumeBox {
+        -fx-graphic: url("buttons/Long-Button-pressed.png");
+    }
+
+    .ResumeLabel{
+        -fx-padding: 10 0 0 0;
+
+        -fx-min-height: 90;
+        -fx-max-height: 90;
+
+        -fx-alignment: top-center;
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 50px;
+    }
+
+    .ResumePane:hover .ResumeLabel{
+        -fx-padding: 15 0 0 0;
+
+        -fx-min-height: 90;
+        -fx-max-height: 90;
+
+        -fx-alignment: top-center;
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 50px;
+    }
+
+/* Bottom Pane */
+
+    .BottomPanel{
+        -fx-min-width: 250px;
+        -fx-max-width: 250px;
+        -fx-spacing: 10;
+        -fx-alignment: center
+    }
+
+    /* Restart*/
+        .Restart {
+            -fx-graphic: url("buttons/Buttons-return.png");
+        }
+
+        .Restart:hover {
+            -fx-graphic: url("buttons/Buttons-return-pressed.png");
+        }
+
+    /* Home*/
+        .Home {
+            -fx-graphic: url("buttons/Buttons-house.png");
+        }
+
+        .Home:hover {
+            -fx-graphic: url("buttons/Buttons-house-pressed.png");
+        }
+
+    /* Setting*/
+        .Setting {
+            -fx-graphic: url("buttons/Buttons-setting.png");
+        }
+
+        .Setting:hover {
+            -fx-graphic: url("buttons/Buttons-setting-pressed.png");
+        }
+
+
+/* Pause Label */
+    .PauseTitle{
+        -fx-padding: 3;
+        -fx-min-width: 230px;
+        -fx-max-width: 230px;
+
+        -fx-min-height: 80px;
+        -fx-max-height: 80px;
+
+        -fx-background-color: #ede8dd;
+        -fx-background-radius: 20;
+
+        -fx-border-color: #5c415b;
+        -fx-border-width: 8px;
+        -fx-border-radius: 15;
+
+        -fx-alignment: center;
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: black;
+        -fx-font-size: 50px;
+    }
+
+

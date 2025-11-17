@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import java.net.URL?>
+<StackPane styleClass="Overlay" fx:id="PauseMenu" xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.comp2042.test.PauseGuiController">
+    <StackPane styleClass="PausePane">
+        <StackPane fx:id="PauseMenuMargin">
+            <VBox styleClass="PauseMenu" >
+                <StackPane styleClass="ResumePane" fx:id="Resume">
+                    <Label styleClass="ResumeBox"/>
+                    <Label styleClass="ResumeLabel" text="Resume"/>
+                </StackPane>
+
+                <HBox styleClass="BottomPanel">
+                    <Label styleClass="Restart"/>
+                    <Label styleClass="Home"/>
+                    <Label styleClass="Setting"/>
+                </HBox>
+            </VBox>
+        </StackPane>
+
+        <Label styleClass="PauseTitle" text="Pause" />
+    </StackPane>
+
+    <stylesheets>
+        <URL value="@pauseLayout.css"/>
+    </stylesheets>
+
+</StackPane>
+
