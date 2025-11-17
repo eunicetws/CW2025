@@ -41,6 +41,9 @@ public class GuiController implements Initializable {
     private GridPane nextBrickDisplay;
 
     @FXML
+    private GridPane holdBrickDisplay;
+
+    @FXML
     private GameOverPanel gameOverPanel;
 
     @FXML
@@ -59,6 +62,8 @@ public class GuiController implements Initializable {
     private Rectangle[][] rectangles;
 
     private Rectangle[][] rectanglesNextBrick;
+
+    private Rectangle[][] rectanglesHoldBrick;
 
     private Timeline timeLine;
 
@@ -89,6 +94,10 @@ public class GuiController implements Initializable {
                     }
                     if (keyEvent.getCode() == KeyCode.DOWN || keyEvent.getCode() == KeyCode.S) {
                         moveDown(new MoveEvent(EventType.DOWN, EventSource.USER));
+                        keyEvent.consume();
+                    }
+                    if (keyEvent.getCode() == KeyCode.H) {
+                        refreshHoldBrick(eventListener.onHoldEvent(new MoveEvent(EventType.HOLD, EventSource.USER)));
                         keyEvent.consume();
                     }
                 }
@@ -139,6 +148,16 @@ public class GuiController implements Initializable {
             }
         }
         refreshNextBrick(brick);
+
+        rectanglesHoldBrick = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
+        for (int i = 0; i < brick.getBrickData().length; i++) {
+            for (int j = 0; j < brick.getBrickData()[i].length; j++) {
+                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
+                rectangle.setFill(Color.TRANSPARENT);
+                rectanglesHoldBrick[i][j] = rectangle;
+                holdBrickDisplay.add(rectangle, j, i);
+            }
+        }
 
     }
 
@@ -202,6 +221,16 @@ public class GuiController implements Initializable {
         }
     }
 
+    public void refreshHoldBrick(ViewData brick){
+        if (isPause.getValue() == Boolean.FALSE && brick.getHoldBrickData() != null) {
+            for (int i = 0; i < brick.getHoldBrickData().length; i++) {
+                for (int j = 0; j < brick.getHoldBrickData()[i].length; j++) {
+                    setRectangleData(brick.getHoldBrickData()[i][j], rectanglesHoldBrick[i][j]);
+                }
+            }
+        }
+    }
+
     public void refreshGameBackground(int[][] board) {
         for (int i = 2; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -236,7 +265,7 @@ public class GuiController implements Initializable {
     }
 
 
-// Event
+    // Event
     public void newGame(ActionEvent actionEvent) {
         timeLine.stop();
         gameOverPanel.setVisible(false);
@@ -252,7 +281,7 @@ public class GuiController implements Initializable {
     }
 //
 
-// Label
+    // Label
     public void gameOver() {
         timeLine.stop();
         gameOverPanel.setVisible(true);
@@ -272,7 +301,7 @@ public class GuiController implements Initializable {
     }
 //
 
-//setters
+    //setters
     public void setSpeed(int speed) {
 
         // Reset the timeline to fit the new speed

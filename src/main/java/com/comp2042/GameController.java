@@ -67,6 +67,13 @@ public class GameController implements InputEventListener {
         return board.getViewData();
     }
 
+    public ViewData onHoldEvent(MoveEvent event) {
+        if(board.holdBrick()) {
+            board.getViewData().refreshHoldBrickData();
+            return board.getViewData();
+        } else {return null;}
+    }
+
 
     @Override
     public void createNewGame() {

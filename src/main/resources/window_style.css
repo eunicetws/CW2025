@@ -53,19 +53,21 @@
 
 /* Playing Box */
 #playing{
-    -fx-max-width: 420px;
-    -fx-min-width: 420px;
+    -fx-max-width: 500px;
+    -fx-min-width: 500px;
 
     -fx-min-height: 520px;
     -fx-max-height: 520px;
+
+    -fx-spacing: 10px;
 }
 
     /* Tetris Board*/
 
     #tetrisBoard{
-        -fx-min-width: 250px;
-        -fx-max-width: 250px;
-        -fx-padding: 20 0 0 20;
+        -fx-min-width: 230px;
+        -fx-max-width: 230px;
+        -fx-padding: 20 0 0 0;
     }
 
     .gameOverStyle {
@@ -74,52 +76,43 @@
         -fx-background-color: red;
     }
 
-/* Right Panel */
+    /* Side Panel */
 
-#rightPanel{
-    -fx-padding: 10 0 30 0;
-}
-
-    /* Next Brick */
-    .nextBrick {
-        -fx-border-width: 2px;
-        -fx-border-color: whitesmoke;
-        -fx-alignment: center;
+    .rightPanel{
+        -fx-padding: 10 0 30 0;
+    }
+    .leftPanel{
+        -fx-padding: 10 0 0 10;
+        -fx-alignment: top-center;
     }
 
-    #nextBrickLabel{
+
+    /* Labels*/
+    .label{
         -fx-font-family: "Let's go Digital";
         -fx-font-size: 25;
         -fx-text-fill: #fff;
         -fx-padding: 10 0 0 0;
     }
 
-    #nextBrickDisplay{
-        -fx-alignment: center;
-        -fx-min-width: 100px;
-        -fx-max-width: 100px;
-    }
+        .brickLabel{
+            -fx-font-family: "Let's go Digital";
+            -fx-font-size: 25;
+            -fx-text-fill: #fff;
+            -fx-padding: 10 0 0 0;
+        }
 
-    /* Score */
-    #scoreLabel{
-        -fx-font-family: "Let's go Digital";
-        -fx-font-size: 25;
-        -fx-text-fill: #fff;
-        -fx-padding: 10 0 0 0;
-    }
+    /* Display Bricks */
+        .brickPanel {
+            -fx-border-width: 2px;
+            -fx-border-color: whitesmoke;
+            -fx-alignment: center;
+            -fx-min-width: 100px;
+            -fx-max-width: 100px;
+        }
 
-    /* Lines */
-    #totalClearedLinesLabel{
-        -fx-font-family: "Let's go Digital";
-        -fx-font-size: 25;
-        -fx-text-fill: #fff;
-        -fx-padding: 10 0 0 0;
-    }
-
-    /* Level */
-    #levelLabel{
-        -fx-font-family: "Let's go Digital";
-        -fx-font-size: 25;
-        -fx-text-fill: #fff;
-        -fx-padding: 10 0 0 0;
-    }
+        .brickDisplay{
+            -fx-alignment: center;
+            -fx-min-width: 100px;
+            -fx-max-width: 100px;
+        }
