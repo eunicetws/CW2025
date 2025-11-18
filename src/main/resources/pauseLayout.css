@@ -44,11 +44,11 @@
 
 /* Resume*/
     .ResumeBox {
-        -fx-graphic: url("buttons/Long-Button.png");
+        -fx-graphic: url("images/buttons/Long-Button.png");
     }
 
     .ResumePane:hover .ResumeBox {
-        -fx-graphic: url("buttons/Long-Button-pressed.png");
+        -fx-graphic: url("images/buttons/Long-Button-pressed.png");
     }
 
     .ResumeLabel{
@@ -86,29 +86,29 @@
 
     /* Restart*/
         .Restart {
-            -fx-graphic: url("buttons/Buttons-return.png");
+            -fx-graphic: url("images/buttons/Buttons-return.png");
         }
 
         .Restart:hover {
-            -fx-graphic: url("buttons/Buttons-return-pressed.png");
+            -fx-graphic: url("images/buttons/Buttons-return-pressed.png");
         }
 
     /* Home*/
         .Home {
-            -fx-graphic: url("buttons/Buttons-house.png");
+            -fx-graphic: url("images/buttons/Buttons-house.png");
         }
 
         .Home:hover {
-            -fx-graphic: url("buttons/Buttons-house-pressed.png");
+            -fx-graphic: url("images/buttons/Buttons-house-pressed.png");
         }
 
     /* Setting*/
         .Setting {
-            -fx-graphic: url("buttons/Buttons-setting.png");
+            -fx-graphic: url("images/buttons/Buttons-setting.png");
         }
 
         .Setting:hover {
-            -fx-graphic: url("buttons/Buttons-setting-pressed.png");
+            -fx-graphic: url("images/buttons/Buttons-setting-pressed.png");
         }
 
 

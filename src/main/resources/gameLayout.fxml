@@ -20,7 +20,7 @@
             <fitWidth>50</fitWidth>
             <preserveRatio>true</preserveRatio>
             <image>
-                <Image url="@/buttons/Buttons-pause.png"/>
+                <Image url="@/images/buttons/Buttons-pause.png"/>
             </image>
         </ImageView>
 

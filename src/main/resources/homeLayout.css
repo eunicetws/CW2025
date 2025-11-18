@@ -1,0 +1,78 @@
+.root{
+    -fx-background-color: "#42405d";
+}
+
+.MainMenu{
+    -fx-max-width: 520px;
+    -fx-min-width: 520px;
+    -fx-min-height: 580px;
+    -fx-max-height: 580px;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+.Title{
+    -fx-alignment: center;
+}
+
+/* HighScore */
+.HighScorePanel{
+    -fx-border-color: #5F445E;
+    -fx-border-width: 5;
+    -fx-border-radius: 10;
+
+    -fx-background-color: #F3EFE8;
+    -fx-background-radius: 20;
+
+    -fx-spacing: 5;
+
+    -fx-alignment: center;
+    -fx-min-width: 400px;
+    -fx-max-width: 400px;
+
+    -fx-min-height: 100px;
+    -fx-max-height: 100px;
+}
+
+    .HighScoreLabel{
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 30px;
+    }
+
+    .HighScoreDisplay{
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #da627d;
+        -fx-font-size: 25px;
+    }
+
+
+/* Buttons */
+.ButtonsPanel{
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+   .Play {
+       -fx-graphic: url("images/buttons/Buttons-control.png");
+   }
+
+   .Play:hover {
+       -fx-graphic: url("images/buttons/Buttons-control-pressed.png");
+   }
+
+   .Setting {
+       -fx-graphic: url("images/buttons/Buttons-setting.png");
+   }
+
+   .Setting:hover {
+       -fx-graphic: url("images/buttons/Buttons-setting-pressed.png");
+   }
+
+   .Exit {
+       -fx-graphic: url("images/buttons/Buttons-exit.png");
+   }
+
+   .Exit:hover {
+       -fx-graphic: url("images/buttons/Buttons-exit-pressed.png");
+   }

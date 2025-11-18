@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.comp2042.test.HomeGUI">
+    <VBox styleClass="MainMenu">
+        <Label styleClass="Title">
+            <graphic>
+                <ImageView fitWidth="400" fitHeight="200" preserveRatio="true">
+                    <Image url="@images/TETRIS.png"/>
+                </ImageView>
+            </graphic>
+        </Label>
+
+        <VBox styleClass="HighScorePanel">
+            <Label styleClass="HighScoreLabel" text="HighScore"/>
+            <Label styleClass="HighScoreDisplay" fx:id="HighScoreDisplay"/>
+        </VBox>
+
+        <HBox styleClass="ButtonsPanel">
+            <Label styleClass="Setting"/>
+            <Label styleClass="Play"/>
+            <Label styleClass="Exit"/>
+        </HBox>
+
+
+
+    </VBox>
+
+    <stylesheets>
+        <URL value="@homeLayout.css"/>
+    </stylesheets>
+</StackPane>

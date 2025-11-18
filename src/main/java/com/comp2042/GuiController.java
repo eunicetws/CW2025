@@ -22,7 +22,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
-import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -89,8 +88,8 @@ public class GuiController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set Pause Button in playing
-        Image normal = new Image("/buttons/Buttons-pause.png");
-        Image hover = new Image("/buttons/Buttons-pause-pressed.png");
+        Image normal = new Image("/images/buttons/Buttons-pause.png");
+        Image hover = new Image("/images/buttons/Buttons-pause-pressed.png");
         pauseImage.setImage(normal);
         pauseImage.setOnMouseEntered(e -> pauseImage.setImage(hover));
         pauseImage.setOnMouseExited(e -> pauseImage.setImage(normal));
@@ -106,7 +105,7 @@ public class GuiController implements Initializable {
         gamePanel.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.P) {
+                if (keyEvent.getCode() == KeyCode.ESCAPE || keyEvent.getCode() == KeyCode.P) {
                     pauseGame(null);
                     keyEvent.consume();
                 }
