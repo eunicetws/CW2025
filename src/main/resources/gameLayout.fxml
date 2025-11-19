@@ -89,8 +89,8 @@
                     </StackPane>
 
                     <HBox styleClass="BottomPanel">
-                        <Label styleClass="Restart"/>
-                        <Label styleClass="Home"/>
+                        <Label styleClass="Restart" fx:id="Restart"/>
+                        <Label styleClass="Home" fx:id="Home"/>
                         <Label styleClass="Setting"/>
                     </HBox>
                 </VBox>

@@ -1,10 +1,10 @@
 .root {
-    -fx-background-color: "#b8d0eb";
+    -fx-background-image: url("images/background.png");
 }
 
 .gameBoard {
     -fx-border-color: #5F445E;
-    -fx-background-color: #F3EFE8;
+    -fx-background-color: #02060F;
     -fx-border-width: 10px;
 }
 
@@ -105,24 +105,24 @@
     .label{
         -fx-font-family: "Gluten Bold";
         -fx-font-size: 25;
-        -fx-text-fill: #5F445E;
+        -fx-text-fill: #F3EFE8;
         -fx-padding: 10 0 0 0;
     }
 
+    /* Display Bricks */
         .brickLabel{
             -fx-font-family: "Gluten Bold";
             -fx-font-size: 25;
-            -fx-text-fill: #5F445E;
+            -fx-text-fill: #F3EFE8;
             -fx-padding: 10 0 0 0;
         }
 
-    /* Display Bricks */
         .brickPanel {
             -fx-border-color: #5F445E;
             -fx-border-width: 5;
             -fx-border-radius: 5;
 
-            -fx-background-color: #F3EFE8;
+            -fx-background-color: #02060F;
             -fx-background-radius: 10;
 
             -fx-alignment: center;

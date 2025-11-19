@@ -1,5 +1,5 @@
 .root{
-    -fx-background-color: "#42405d";
+    -fx-background-image: url("images/background.png");
 }
 
 .MainMenu{
