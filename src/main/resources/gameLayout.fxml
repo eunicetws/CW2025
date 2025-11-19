@@ -10,7 +10,7 @@
 <!-- Root -->
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<StackPane fx:controller="com.comp2042.GuiController"
+<StackPane fx:controller="com.comp2042.Controllers.GuiController"
            xmlns:fx="http://javafx.com/fxml">
 
     <!-- Playing -->

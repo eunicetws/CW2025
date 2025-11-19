@@ -1,4 +1,6 @@
-package com.comp2042;
+package com.comp2042.Controllers;
+
+import com.comp2042.*;
 
 public class GameController implements InputEventListener {
 
@@ -6,8 +8,8 @@ public class GameController implements InputEventListener {
 
     private final GuiController viewGuiController;
 
-    public GameController(GuiController c) {
-        viewGuiController = c;
+    public GameController(GuiController guiController) {
+        this.viewGuiController = guiController;
         board.createNewBrick();
         viewGuiController.setEventListener(this);
         viewGuiController.initGameView(board.getBoardMatrix(), board.getViewData());

@@ -1,5 +1,6 @@
-package com.comp2042;
+package com.comp2042.Controllers;
 
+import com.comp2042.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
@@ -184,8 +185,8 @@ public class GuiController implements Initializable {
                 brickPanel.add(rectangle, j, i);
             }
         }
-        brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + brick.getxPosition() * BRICK_SIZE);
-        brickPanel.setLayoutY(-40 + gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + brick.getyPosition() * BRICK_SIZE);
+        brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * brickPanel.getVgap() + (brick.getxPosition()-1) * BRICK_SIZE);
+        brickPanel.setLayoutY(-40+ gamePanel.getLayoutY() + brick.getyPosition() * brickPanel.getHgap() + (brick.getyPosition()-1) * BRICK_SIZE);
 
         //Get Next Brick
         rectanglesNextBrick = new Rectangle[brick.getNextBrickData().length][brick.getNextBrickData()[0].length];
