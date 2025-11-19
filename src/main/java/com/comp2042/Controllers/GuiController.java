@@ -9,8 +9,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
@@ -23,6 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -69,6 +74,12 @@ public class GuiController implements Initializable {
 
     @FXML
     private StackPane Resume;
+
+    @FXML
+    private Label Restart;
+
+    @FXML
+    private Label Home;
 
     private Rectangle[][] displayMatrix;
 
@@ -138,17 +149,33 @@ public class GuiController implements Initializable {
             }
         });
 
-        /* Mouse Events */
+        /* Playing Mouse Events */
         pauseImage.setOnMouseClicked(e -> pauseGame(null));
+
+        /* Pause Mouse Events */
         Resume.setOnMouseClicked(e -> pauseGame(null));
 
+        Restart.setOnMouseClicked(e -> {
+            pauseGame(null);
+            newGame(null);
+        });
+
+        Home.setOnMouseClicked(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("/homeLayout.fxml")
+                );
+                Parent home = loader.load();
+
+                Stage stage = (Stage) Home.getScene().getWindow();
+                stage.setScene(new Scene(home));
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
 
         gameOverPanel.setVisible(false);
-
-        final Reflection reflection = new Reflection();
-        reflection.setFraction(0.8);
-        reflection.setTopOpacity(0.9);
-        reflection.setTopOffset(-12);
     }
 
     public void initGameView(int[][] boardMatrix, ViewData brick) {
