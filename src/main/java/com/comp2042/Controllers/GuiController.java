@@ -1,6 +1,7 @@
 package com.comp2042.Controllers;
 
 import com.comp2042.*;
+import com.comp2042.logic.SaveData;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
@@ -29,6 +30,7 @@ import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -99,6 +101,8 @@ public class GuiController implements Initializable {
 
     private Timeline timeLine;
 
+    private int currentScore;
+
     private final BooleanProperty isPause = new SimpleBooleanProperty();
 
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
@@ -127,7 +131,7 @@ public class GuiController implements Initializable {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ESCAPE || keyEvent.getCode() == KeyCode.P) {
-                    pauseGame(null);
+                    pauseGame();
                     keyEvent.consume();
                 }
                 if (isPause.getValue() == Boolean.FALSE && isGameOver.getValue() == Boolean.FALSE) {
@@ -153,27 +157,28 @@ public class GuiController implements Initializable {
                     }
                 }
                 if (keyEvent.getCode() == KeyCode.N) {
-                    newGame(null);
+                    newGame();
                 }
             }
         });
 
         /* Playing Mouse Events */
-        pauseImage.setOnMouseClicked(e -> pauseGame(null));
+        pauseImage.setOnMouseClicked(e -> pauseGame());
 
         /* Pause Mouse Events */
-        Resume.setOnMouseClicked(e -> pauseGame(null));
+        Resume.setOnMouseClicked(e -> pauseGame());
 
         Pause_Restart.setOnMouseClicked(e -> {
-            pauseGame(null);
-            newGame(null);
+            pauseGame();
+            saveScore();
+            newGame();
         });
 
         Pause_Home.setOnMouseClicked(e -> returnHome());
 
         /* Game Over Mouse Events*/
 
-        GameOver_Restart.setOnMouseClicked(e -> newGame(null));
+        GameOver_Restart.setOnMouseClicked(e -> newGame());
 
         GameOver_Home.setOnMouseClicked(e -> returnHome());
 
@@ -336,13 +341,19 @@ public class GuiController implements Initializable {
         gamePanel.requestFocus();
     }
 
-    public void setEventListener(InputEventListener eventListener) {
-        this.eventListener = eventListener;
+    private void saveScore(){
+        try {
+            if (currentScore > SaveData.ReadFile(0))
+                SaveData.overWriteFile(currentScore, 0);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
     // Event
-    public void pauseGame(ActionEvent actionEvent) {
+    private void pauseGame() {
         gamePanel.requestFocus();
         if (isPause.getValue() == true){
             isPause.setValue(Boolean.FALSE);
@@ -353,7 +364,7 @@ public class GuiController implements Initializable {
         pauseImage.setVisible(!isPause.getValue());
     }
 
-    public void newGame(ActionEvent actionEvent) {
+    private void newGame() {
         timeLine.stop();
         GameOverMenu.setVisible(false);
         eventListener.createNewGame();
@@ -369,7 +380,8 @@ public class GuiController implements Initializable {
         isGameOver.setValue(Boolean.TRUE);
     }
 
-    public void returnHome(){
+    private void returnHome(){
+        saveScore();
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/homeLayout.fxml")
@@ -380,7 +392,7 @@ public class GuiController implements Initializable {
             stage.setScene(new Scene(home));
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
     }
 
@@ -413,6 +425,14 @@ public class GuiController implements Initializable {
         ));
         timeLine.setCycleCount(Timeline.INDEFINITE);
         timeLine.play();
+    }
+
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
+    }
+
+    public void setEventListener(InputEventListener eventListener) {
+        this.eventListener = eventListener;
     }
 //
 }

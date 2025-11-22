@@ -1,5 +1,6 @@
 package com.comp2042.Controllers;
 
+import com.comp2042.logic.SaveData;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -11,11 +12,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
-
     @FXML
     private Label HighScoreDisplay;
     @FXML
@@ -31,7 +32,15 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        IntegerProperty highScore = new SimpleIntegerProperty(14560);
+        int currentHighScore;
+        SaveData.createSaveFile();
+        try {
+            currentHighScore = SaveData.ReadFile(0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        IntegerProperty highScore = new SimpleIntegerProperty(currentHighScore);
         bindHighScore(highScore);
 
         Setting.setOnMouseClicked(e -> {});

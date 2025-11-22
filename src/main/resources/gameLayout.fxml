@@ -44,6 +44,8 @@
                         </center>
                     </BorderPane>
 
+                    <Group fx:id="groupNotification" layoutX="12" layoutY="203"/>
+
                     <GridPane fx:id="brickPanel"/>
                 </Pane>
             </StackPane>
