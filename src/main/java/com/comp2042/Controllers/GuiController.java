@@ -16,7 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
-import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -54,9 +53,6 @@ public class GuiController implements Initializable {
     private GridPane holdBrickDisplay;
 
     @FXML
-    private GameOverPanel gameOverPanel;
-
-    @FXML
     private ImageView pauseImage;
 
     @FXML
@@ -76,10 +72,20 @@ public class GuiController implements Initializable {
     private StackPane Resume;
 
     @FXML
-    private Label Restart;
+    private Label Pause_Restart;
 
     @FXML
-    private Label Home;
+    private Label Pause_Home;
+
+    // Game Over
+    @FXML
+    private StackPane GameOverMenu;
+
+    @FXML
+    private Label GameOver_Restart;
+
+    @FXML
+    private Label GameOver_Home;
 
     private Rectangle[][] displayMatrix;
 
@@ -108,6 +114,9 @@ public class GuiController implements Initializable {
 
         // Set pause Menu
         PauseMenu.setVisible(false);
+
+        isGameOver.setValue(Boolean.FALSE);
+        GameOverMenu.setVisible(false);
 
 
         gamePanel.setFocusTraversable(true);
@@ -155,27 +164,19 @@ public class GuiController implements Initializable {
         /* Pause Mouse Events */
         Resume.setOnMouseClicked(e -> pauseGame(null));
 
-        Restart.setOnMouseClicked(e -> {
+        Pause_Restart.setOnMouseClicked(e -> {
             pauseGame(null);
             newGame(null);
         });
 
-        Home.setOnMouseClicked(e -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/homeLayout.fxml")
-                );
-                Parent home = loader.load();
+        Pause_Home.setOnMouseClicked(e -> returnHome());
 
-                Stage stage = (Stage) Home.getScene().getWindow();
-                stage.setScene(new Scene(home));
+        /* Game Over Mouse Events*/
 
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
+        GameOver_Restart.setOnMouseClicked(e -> newGame(null));
 
-        gameOverPanel.setVisible(false);
+        GameOver_Home.setOnMouseClicked(e -> returnHome());
+
     }
 
     public void initGameView(int[][] boardMatrix, ViewData brick) {
@@ -354,22 +355,36 @@ public class GuiController implements Initializable {
 
     public void newGame(ActionEvent actionEvent) {
         timeLine.stop();
-        gameOverPanel.setVisible(false);
+        GameOverMenu.setVisible(false);
         eventListener.createNewGame();
         gamePanel.requestFocus();
         timeLine.play();
         isPause.setValue(Boolean.FALSE);
         isGameOver.setValue(Boolean.FALSE);
     }
-//
 
-    // Label
     public void gameOver() {
         timeLine.stop();
-        gameOverPanel.setVisible(true);
+        GameOverMenu.setVisible(true);
         isGameOver.setValue(Boolean.TRUE);
     }
 
+    public void returnHome(){
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/homeLayout.fxml")
+            );
+            Parent home = loader.load();
+
+            Stage stage = (Stage) Pause_Home.getScene().getWindow();
+            stage.setScene(new Scene(home));
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    // Label
     public void bindScore(IntegerProperty integerProperty) {
         scoreLabel.textProperty().bind(integerProperty.asString("Score: %d"));
     }

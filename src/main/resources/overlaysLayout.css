@@ -75,6 +75,70 @@
         -fx-font-size: 50px;
     }
 
+/* Pause Label */
+    .PauseTitle{
+        -fx-padding: 3;
+        -fx-min-width: 230px;
+        -fx-max-width: 230px;
+
+        -fx-min-height: 80px;
+        -fx-max-height: 80px;
+
+        -fx-background-color: #ede8dd;
+        -fx-background-radius: 20;
+
+        -fx-border-color: #5c415b;
+        -fx-border-width: 8px;
+        -fx-border-radius: 15;
+
+        -fx-alignment: center;
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: black;
+        -fx-font-size: 50px;
+    }
+
+/*Game Over*/
+    .GameOverPane{
+        -fx-min-width: 475px;
+        -fx-max-width: 475px;
+
+        -fx-min-height: 285px;
+        -fx-max-height: 285px;
+
+        -fx-alignment: center;
+    }
+
+    .GameOverMenu{
+        -fx-padding: 0 0 0 0;
+
+        -fx-alignment: center;
+
+        -fx-spacing: 10;
+    }
+
+/* Game Over Label */
+    .GameOverTitle{
+        -fx-padding: 3;
+        -fx-min-width: 400px;
+        -fx-max-width: 400px;
+
+        -fx-min-height: 100px;
+        -fx-max-height: 100px;
+
+        -fx-background-color: #ede8dd;
+        -fx-background-radius: 20;
+
+        -fx-border-color: #5c415b;
+        -fx-border-width: 8px;
+        -fx-border-radius: 15;
+
+        -fx-alignment: center;
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: black;
+        -fx-font-size: 55px;
+    }
+
+/* Shared UI */
 /* Bottom Pane */
 
     .BottomPanel{
@@ -110,28 +174,5 @@
         .Setting:hover {
             -fx-graphic: url("images/buttons/Buttons-setting-pressed.png");
         }
-
-
-/* Pause Label */
-    .PauseTitle{
-        -fx-padding: 3;
-        -fx-min-width: 230px;
-        -fx-max-width: 230px;
-
-        -fx-min-height: 80px;
-        -fx-max-height: 80px;
-
-        -fx-background-color: #ede8dd;
-        -fx-background-radius: 20;
-
-        -fx-border-color: #5c415b;
-        -fx-border-width: 8px;
-        -fx-border-radius: 15;
-
-        -fx-alignment: center;
-        -fx-font-family: "Gluten Bold";
-        -fx-text-fill: black;
-        -fx-font-size: 50px;
-    }
 
 
