@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.comp2042.test.SettingsGuiController">
+    <VBox styleClass="SettingsPane">
+        <BorderPane styleClass="topPane">
+            <left>
+                <ImageView fx:id="closeImage">
+                    <fitWidth>50</fitWidth>
+                    <preserveRatio>true</preserveRatio>
+                </ImageView>
+            </left>
+
+            <center>
+                <Label styleClass="SettingsTitle" text="Settings"/>
+            </center>
+        </BorderPane>
+
+        <HBox>
+            <VBox styleClass="shortcutPanel">
+                <VBox styleClass="ShortcutBox">
+                    <Label styleClass="ShortcutLabel" text="Move Left"/>
+                    <Label styleClass="ShortcutKey" fx:id="Left" text="W"/>
+                </VBox>
+                <VBox styleClass="ShortcutBox">
+                    <Label styleClass="ShortcutLabel" text="Move Right"/>
+                    <Label styleClass="ShortcutKey" fx:id="Right" text="W"/>
+                </VBox>
+                <VBox styleClass="ShortcutBox">
+                    <Label styleClass="ShortcutLabel" text="Move Down"/>
+                    <Label styleClass="ShortcutKey" fx:id="Down" text="W"/>
+                </VBox>
+                <VBox styleClass="ShortcutBox">
+                    <Label styleClass="ShortcutLabel" text="Rotate"/>
+                    <Label styleClass="ShortcutKey" fx:id="Rotate" text="W"/>
+                </VBox>
+            </VBox>
+
+            <VBox styleClass="shortcutPanel">
+                <VBox styleClass="ShortcutBox">
+                    <Label styleClass="ShortcutLabel" text="Pause"/>
+                    <Label styleClass="ShortcutKey" fx:id="Pause" text="W"/>
+                </VBox>
+                <VBox styleClass="ShortcutBox">
+                    <Label styleClass="ShortcutLabel" text="Hold"/>
+                    <Label styleClass="ShortcutKey" fx:id="Hold" text="W"/>
+                </VBox>
+                <VBox styleClass="ShortcutBox">
+                    <Label styleClass="ShortcutLabel" text="New Game"/>
+                    <Label styleClass="ShortcutKey" fx:id="NewGame" text="W"/>
+                </VBox>
+            </VBox>
+        </HBox>
+    </VBox>
+
+    <stylesheets>
+        <URL value="@settingsLayout.css"/>
+    </stylesheets>
+</StackPane>

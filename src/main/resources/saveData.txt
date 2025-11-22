@@ -1,0 +1,8 @@
+0
+UP
+DOWN
+LEFT
+RIGHT
+H
+ESCAPE
+N

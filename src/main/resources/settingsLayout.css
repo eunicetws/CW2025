@@ -1,0 +1,94 @@
+/*Scene scene = new Scene(root, 540, 600)*/
+.root {
+    -fx-background-image: url("images/background.png");
+}
+
+.SettingsPane{
+    -fx-min-width: 500px;
+    -fx-max-width: 500px;
+
+    -fx-min-height: 550px;
+    -fx-max-height: 550px;
+
+    -fx-padding: 5;
+
+    -fx-background-color: #f0eae4;
+    -fx-background-radius: 25;
+
+    -fx-border-color: #6b4f6a;
+    -fx-border-width: 8px;
+    -fx-border-radius: 20;
+}
+
+.topPane{
+    -fx-min-width: 430px;
+    -fx-max-width: 430px;
+    -fx-min-height: 60px;
+    -fx-max-height: 60px;
+}
+
+    .SettingsTitle{
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 30px;
+    }
+
+.shortcutPanel{
+    -fx-alignment: center;
+    -fx-min-width: 235px;
+    -fx-max-width: 235px;
+
+    -fx-min-height: 460px;
+    -fx-max-height: 460px;
+}
+
+    .ShortcutBox{
+        -fx-alignment: center;
+
+        -fx-min-width: 220px;
+        -fx-max-width: 220px;
+
+        -fx-min-height: 110px;
+        -fx-max-height: 110px;
+
+        -fx-spacing: 5;
+    }
+
+    .ShortcutLabel{
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 25px;
+    }
+
+    .ShortcutKey{
+        -fx-alignment: center;
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 23px;
+
+        -fx-min-width: 200px;
+        -fx-max-width: 200px;
+
+        -fx-min-height: 50px;
+        -fx-max-height: 50px;
+
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 20px;
+
+        -fx-background-color: #f0eae4;
+        -fx-background-radius: 25;
+
+        -fx-border-color: #6b4f6a;
+        -fx-border-width: 4px;
+        -fx-border-radius: 20;
+    }
+
+    .ShortcutKey:hover{
+        -fx-text-fill: #da627d;
+        -fx-border-color: #da627d;
+    }
+
+    .ShortcutKeySelect{
+        -fx-text-fill: #da627d;
+        -fx-border-color: #da627d;
+    }
