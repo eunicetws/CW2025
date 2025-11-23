@@ -1,4 +1,4 @@
-package com.comp2042;
+package com.comp2042.logic;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ public class MatrixOperations {
 
     }
 
+    // check if it intersects with the background
     public static boolean intersect(final int[][] matrix, final int[][] brick, int x, int y) {
         for (int i = 0; i < brick.length; i++) {
             for (int j = 0; j < brick[i].length; j++) {
@@ -28,11 +29,7 @@ public class MatrixOperations {
     }
 
     private static boolean checkOutOfBound(int[][] matrix, int targetX, int targetY) {
-        boolean returnValue = true;
-        if (targetX >= 0 && targetY < matrix.length && targetX < matrix[targetY].length) {
-            returnValue = false;
-        }
-        return returnValue;
+        return targetX < 0 || targetY >= matrix.length || targetX >= matrix[targetY].length;
     }
 
     public static int[][] copy(int[][] original) {

@@ -1,16 +1,17 @@
-package com.comp2042;
+package com.comp2042.logic;
 
-import com.comp2042.logic.*;
-import com.comp2042.logic.bricks.Brick;
-import com.comp2042.logic.bricks.BrickGenerator;
+import com.comp2042.view.ViewData;
+import com.comp2042.data.*;
+import com.comp2042.interfaces.Board;
+import com.comp2042.interfaces.Brick;
+import com.comp2042.interfaces.BrickGenerator;
 import com.comp2042.logic.bricks.RandomBrickGenerator;
 
 import java.awt.*;
 
 public class SimpleBoard implements Board {
 
-    private final int width;
-    private final int height;
+    private final int width, height;
     private final BrickGenerator brickGenerator;
     private final BrickRotator brickRotator;
     private int[][] currentGameMatrix;
@@ -91,7 +92,7 @@ public class SimpleBoard implements Board {
     public boolean holdBrick() {
         int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
 
-        if (brickRotator.getHoldBrick() == null && !MatrixOperations.intersect( currentMatrix, brickGenerator.getNextBrick().getShapeMatrix().get(0), (int) currentOffset.getX(), (int) currentOffset.getY()))
+        if (brickRotator.getHoldBrick() == null && !MatrixOperations.intersect( currentMatrix, brickGenerator.getNextBrick().getShapeMatrix().getFirst(), (int) currentOffset.getX(), (int) currentOffset.getY()))
         {
             brickRotator.setHoldBrick();
             createNewBrick();
@@ -134,7 +135,7 @@ public class SimpleBoard implements Board {
 
     @Override
     public ViewData getViewData() {
-        return new ViewData(brickRotator.getCurrentShape(), (int) currentOffset.getX(), (int) currentOffset.getY(), brickGenerator.getNextBrick().getShapeMatrix().get(0), brickRotator.getHoldBrick());
+        return new ViewData(brickRotator.getCurrentShape(), (int) currentOffset.getX(), (int) currentOffset.getY(), brickGenerator.getNextBrick().getShapeMatrix().getFirst(), brickRotator.getHoldBrick());
     }
 
     @Override

@@ -1,8 +1,0 @@
-2
-LEFT
-RIGHT
-UP
-DOWN
-H
-ESCAPE
-N

@@ -1,0 +1,90 @@
+.root {
+    -fx-background-image: url("images/background.png");
+}
+
+.Screen{
+    -fx-max-width: 520px;
+    -fx-min-width: 520px;
+    -fx-min-height: 580px;
+    -fx-max-height: 580px;
+
+    -fx-alignment: top-right;
+    -fx-spacing: 10
+
+}
+
+/* Playing Box */
+#playing{
+    -fx-max-width: 520px;
+    -fx-min-width: 520px;
+
+    -fx-min-height: 520px;
+    -fx-max-height: 520px;
+
+    -fx-spacing: 10px;
+}
+
+    /* Tetris Board*/
+
+    #tetrisBoard{
+        -fx-min-width: 230px;
+        -fx-max-width: 230px;
+        -fx-padding: 0 0 0 0;
+    }
+
+    .gameBoard {
+        -fx-border-color: #5F445E;
+        -fx-background-color: #02060F;
+        -fx-border-width: 10px;
+    }
+
+    .bonusStyle {
+        -fx-font-family: "Gluten Bold";
+        -fx-font-size: 30px;
+    }
+
+    /* Side Panel */
+
+    .rightPanel{
+        -fx-padding: 10 0 30 0;
+    }
+
+    .leftPanel{
+        -fx-padding: 10 0 0 10;
+        -fx-alignment: top-center;
+    }
+
+    /* Labels*/
+    .DisplayLabel{
+        -fx-font-family: "Gluten Bold";
+        -fx-font-size: 20;
+        -fx-text-fill: #F3EFE8;
+        -fx-padding: 10 0 0 0;
+    }
+
+    /* Display Bricks */
+        .brickLabel{
+            -fx-font-family: "Gluten Bold";
+            -fx-font-size: 25;
+            -fx-text-fill: #F3EFE8;
+            -fx-padding: 10 0 0 0;
+        }
+
+        .brickPanel {
+            -fx-border-color: #5F445E;
+            -fx-border-width: 5;
+            -fx-border-radius: 5;
+
+            -fx-background-color: #02060F;
+            -fx-background-radius: 10;
+
+            -fx-alignment: center;
+            -fx-min-width: 120px;
+            -fx-max-width: 120px;
+        }
+
+        .brickDisplay{
+            -fx-alignment: center;
+            -fx-min-width: 100px;
+            -fx-max-width: 100px;
+        }

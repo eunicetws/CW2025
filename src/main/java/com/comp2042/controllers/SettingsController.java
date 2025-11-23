@@ -1,7 +1,7 @@
-package com.comp2042.Controllers;
+package com.comp2042.controllers;
 
-import com.comp2042.logic.KeyEventType;
-import com.comp2042.logic.SaveData;
+import com.comp2042.enums.KeyEventType;
+import com.comp2042.data.SaveData;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -54,14 +54,14 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // close settings
+        // create close settings buttons
         Image closeNormal = new Image("/images/buttons/C_X.png");
         Image closeHover = new Image("/images/buttons/C_X_P.png");
         closeImage.setImage(closeNormal);
         closeImage.setOnMouseEntered(e -> closeImage.setImage(closeHover));
         closeImage.setOnMouseExited(e -> closeImage.setImage(closeNormal));
 
-    // load keys
+        // load keys
         getKeyCode(Left, SaveData.getKeyEvent(KeyEventType.LEFT));
         getKeyCode(Right, SaveData.getKeyEvent(KeyEventType.RIGHT));
         getKeyCode(Down, SaveData.getKeyEvent(KeyEventType.DOWN));
@@ -70,7 +70,7 @@ public class SettingsController implements Initializable {
         getKeyCode(Hold, SaveData.getKeyEvent(KeyEventType.HOLD));
         getKeyCode(Restart, SaveData.getKeyEvent(KeyEventType.RESTART));
 
-    // Setup shortcut labels
+        // Setup shortcut labels
         setupShortcutLabel(Left, SaveData.getKeyEvent(KeyEventType.LEFT));
         setupShortcutLabel(Right, SaveData.getKeyEvent(KeyEventType.RIGHT));
         setupShortcutLabel(Down, SaveData.getKeyEvent(KeyEventType.DOWN));
@@ -83,19 +83,26 @@ public class SettingsController implements Initializable {
         closeImage.setOnMouseClicked(e -> closeSettings());
     }
 
+    // highlight the label and allow keyboard shortcut to change
     private void setupShortcutLabel(Label label, int saveDataLine) {
+        //
         label.setOnMouseClicked(event -> {
+
+            //if a prev label is selected, deselect it and select the new label instead
             if (selectedLabel != null) {
                 selectedLabel.getStyleClass().remove("ShortcutKeySelect");
                 selectedLabel.getScene().setOnKeyPressed(null);
             }
             selectedLabel = label;
-            label.getStyleClass().add("ShortcutKeySelect"); // when clicked, change colour to show it is selected
+
+            // when clicked, change colour to show it is selected
+            label.getStyleClass().add("ShortcutKeySelect");
 
             // start listening for key input
             label.getScene().setOnKeyPressed(keyEvent -> {
                 String key = keyEvent.getCode().toString();
 
+                //write new shortcut to dave file
                 try {
                     SaveData.overWriteFile(key, saveDataLine);
                 } catch (IOException e) {
@@ -123,6 +130,7 @@ public class SettingsController implements Initializable {
         }
     }
 
+    // from another gui controller, open the settings itself
     public static Parent openSettings(StackPane rootPane) {
         FXMLLoader loader;
         Parent settingsPane = null;
@@ -138,11 +146,12 @@ public class SettingsController implements Initializable {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return settingsPane;
     }
 
+    // close it when done
     public void closeSettings() {
         rootPane.getChildren().remove(settingsPane);
     }

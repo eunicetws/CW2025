@@ -1,5 +1,8 @@
 package com.comp2042.logic.bricks;
 
+import com.comp2042.interfaces.Brick;
+import com.comp2042.interfaces.BrickGenerator;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
