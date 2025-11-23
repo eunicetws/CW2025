@@ -17,6 +17,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
+
+    @FXML
+    private StackPane rootPane;
     @FXML
     private Label HighScoreDisplay;
     @FXML
@@ -43,7 +46,9 @@ public class HomeController implements Initializable {
         IntegerProperty highScore = new SimpleIntegerProperty(currentHighScore);
         bindHighScore(highScore);
 
-        Setting.setOnMouseClicked(e -> {});
+        Setting.setOnMouseClicked(e -> {
+            SettingsController.openSettings(rootPane);
+        });
 
         Play.setOnMouseClicked(e -> {
             try {

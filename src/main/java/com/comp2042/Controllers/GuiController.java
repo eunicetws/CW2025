@@ -38,6 +38,9 @@ public class GuiController implements Initializable {
 
     private static final int BRICK_SIZE = 20;
 
+    @FXML
+    private StackPane rootPane;
+
     //Playing
     @FXML
     private GridPane gamePanel;
@@ -79,6 +82,9 @@ public class GuiController implements Initializable {
     @FXML
     private Label Pause_Home;
 
+    @FXML
+    private Label Pause_Settings;
+
     // Game Over
     @FXML
     private StackPane GameOverMenu;
@@ -88,6 +94,11 @@ public class GuiController implements Initializable {
 
     @FXML
     private Label GameOver_Home;
+
+    @FXML
+    private Label GameOver_Settings;
+
+    //Settings
 
     private Rectangle[][] displayMatrix;
 
@@ -107,6 +118,10 @@ public class GuiController implements Initializable {
 
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
 
+    private final BooleanProperty isKeyboardEnabled = new SimpleBooleanProperty(true);
+
+    Parent settingsPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set Pause Button in playing
@@ -122,7 +137,6 @@ public class GuiController implements Initializable {
         isGameOver.setValue(Boolean.FALSE);
         GameOverMenu.setVisible(false);
 
-
         gamePanel.setFocusTraversable(true);
         gamePanel.requestFocus();
 
@@ -130,6 +144,9 @@ public class GuiController implements Initializable {
         gamePanel.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                if (rootPane.getChildren().contains(settingsPane)) {
+                    return;
+                }
                 // Pause
                 if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.PAUSE))) {
                     pauseGame();
@@ -182,17 +199,24 @@ public class GuiController implements Initializable {
 
         Pause_Restart.setOnMouseClicked(e -> {
             pauseGame();
-            saveScore();
             newGame();
         });
 
         Pause_Home.setOnMouseClicked(e -> returnHome());
+
+        Pause_Settings.setOnMouseClicked(e -> {
+            settingsPane = SettingsController.openSettings(rootPane);
+        });
 
         /* Game Over Mouse Events*/
 
         GameOver_Restart.setOnMouseClicked(e -> newGame());
 
         GameOver_Home.setOnMouseClicked(e -> returnHome());
+
+        GameOver_Settings.setOnMouseClicked(e -> {
+            settingsPane = SettingsController.openSettings(rootPane);
+        });
 
     }
 
@@ -387,8 +411,10 @@ public class GuiController implements Initializable {
 
     private void newGame() {
         timeLine.stop();
+        saveScore();
         GameOverMenu.setVisible(false);
         PauseMenu.setVisible(false);
+        pauseImage.setVisible(true);
         eventListener.createNewGame();
         gamePanel.requestFocus();
         timeLine.play();

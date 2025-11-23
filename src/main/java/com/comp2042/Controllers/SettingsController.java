@@ -1,13 +1,16 @@
-package com.comp2042.test;
+package com.comp2042.Controllers;
 
 import com.comp2042.logic.KeyEventType;
 import com.comp2042.logic.SaveData;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +18,8 @@ import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
 
+    @FXML
+    private StackPane rootPane;
 
     @FXML
     private ImageView closeImage;
@@ -40,7 +45,12 @@ public class SettingsController implements Initializable {
     @FXML
     private Label Restart;
 
+    @FXML
+    private StackPane SettingsRoot;
+
     private Label selectedLabel = null;
+
+    private Parent settingsPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,6 +79,8 @@ public class SettingsController implements Initializable {
         setupShortcutLabel(Hold, SaveData.getKeyEvent(KeyEventType.HOLD));
         setupShortcutLabel(Restart, SaveData.getKeyEvent(KeyEventType.RESTART));
 
+        //mouse event
+        closeImage.setOnMouseClicked(e -> closeSettings());
     }
 
     private void setupShortcutLabel(Label label, int saveDataLine) {
@@ -110,6 +122,40 @@ public class SettingsController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    public static Parent openSettings(StackPane rootPane) {
+        FXMLLoader loader;
+        Parent settingsPane = null;
+        try {
+            loader = new FXMLLoader(SettingsController.class.getResource("/settingsLayout.fxml"));
+            settingsPane = loader.load();
+
+            rootPane.getChildren().add(settingsPane);
+
+            SettingsController settingsController = loader.getController();
+            settingsController.setRootPane(rootPane);
+            settingsController.setSettingsPane(settingsPane);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return settingsPane;
+    }
+
+    public void closeSettings() {
+        rootPane.getChildren().remove(settingsPane);
+    }
+
+    public void setRootPane(StackPane rootPane){
+        this.rootPane = rootPane;
+    }
+
+    public void setSettingsPane(Parent settingsPane){
+        this.settingsPane = settingsPane;
+    }
+
 }
+
 
 

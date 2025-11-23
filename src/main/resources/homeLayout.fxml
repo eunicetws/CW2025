@@ -8,7 +8,8 @@
 <?import javafx.scene.image.Image?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.comp2042.Controllers.HomeController">
+           fx:controller="com.comp2042.Controllers.HomeController"
+           fx:id="rootPane">
 
     <VBox styleClass="MainMenu">
 

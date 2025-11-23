@@ -10,7 +10,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <StackPane fx:controller="com.comp2042.Controllers.GuiController"
-           xmlns:fx="http://javafx.com/fxml">
+           xmlns:fx="http://javafx.com/fxml"
+           fx:id="rootPane">
 
     <!-- Playing -->
     <VBox styleClass="Screen">
@@ -60,13 +61,13 @@
                 </VBox>
 
                 <!-- Score -->
-                <Label styleClass="label" fx:id="scoreLabel" text="Score: 0" />
+                <Label styleClass="DisplayLabel" fx:id="scoreLabel" text="Score: 0" />
 
                 <!-- Lines-->
-                <Label styleClass="label" fx:id="totalClearedLinesLabel" text="Lines: 0" />
+                <Label styleClass="DisplayLabel" fx:id="totalClearedLinesLabel" text="Lines: 0" />
 
                 <!-- Level-->
-                <Label styleClass="label" fx:id="levelLabel" text="Level: 1" />
+                <Label styleClass="DisplayLabel" fx:id="levelLabel" text="Level: 1" />
 
             </VBox>
 
@@ -86,7 +87,7 @@
                     <HBox styleClass="BottomPanel">
                         <Label styleClass="Restart" fx:id="Pause_Restart"/>
                         <Label styleClass="Home" fx:id="Pause_Home"/>
-                        <Label styleClass="Setting"/>
+                        <Label styleClass="Setting" fx:id="Pause_Settings"/>
                     </HBox>
                 </VBox>
             </StackPane>
@@ -105,7 +106,7 @@
                 <HBox styleClass="BottomPanel">
                     <Label styleClass="Restart" fx:id="GameOver_Restart"/>
                     <Label styleClass="Home" fx:id="GameOver_Home"/>
-                    <Label styleClass="Setting"/>
+                    <Label styleClass="Setting" fx:id="GameOver_Settings"/>
                 </HBox>
             </VBox>
 

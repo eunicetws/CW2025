@@ -11,9 +11,10 @@
 <?import javafx.scene.image.Image?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.comp2042.test.SettingsController">
+           fx:controller="com.comp2042.Controllers.SettingsController"
+            fx:id="SettingsRoot">
     <VBox styleClass="SettingsPane">
-        <BorderPane styleClass="topPane">
+        <BorderPane styleClass="settingsTopPane">
             <left>
                 <ImageView fx:id="closeImage">
                     <fitWidth>50</fitWidth>
