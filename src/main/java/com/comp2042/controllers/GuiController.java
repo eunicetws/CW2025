@@ -292,7 +292,10 @@ public class GuiController implements Initializable {
 
     // get hold brick display
     public void refreshHoldBrick(ViewData brick){
-        if (isPause.getValue() == Boolean.FALSE && brick.getHoldBrickData() != null) {
+        if (brick == null || isPause.getValue() == Boolean.TRUE) {
+            return;
+        }
+        if (brick.getHoldBrickData() != null) {
             for (int i = 0; i < brick.getHoldBrickData().length; i++) {
                 for (int j = 0; j < brick.getHoldBrickData()[i].length; j++) {
                     setRectangleData(brick.getHoldBrickData()[i][j], rectanglesHoldBrick[i][j]);
