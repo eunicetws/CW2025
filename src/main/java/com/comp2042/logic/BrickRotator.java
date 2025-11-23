@@ -1,6 +1,7 @@
-package com.comp2042;
+package com.comp2042.logic;
 
-import com.comp2042.logic.bricks.Brick;
+import com.comp2042.data.NextShapeInfo;
+import com.comp2042.interfaces.Brick;
 
 public class BrickRotator {
 
@@ -9,6 +10,7 @@ public class BrickRotator {
     private int currentShape = 0;
 
     /* Getters */
+    // get next shape
     public NextShapeInfo getNextShape() {
         int nextShape = currentShape;
         nextShape = (++nextShape) % brick.getShapeMatrix().size();
@@ -16,13 +18,15 @@ public class BrickRotator {
         return new NextShapeInfo(brick.getShapeMatrix().get(nextShape), nextShape);
     }
 
+    // get current shape
     public int[][] getCurrentShape() {
         return brick.getShapeMatrix().get(currentShape);
     }
 
+    // get hold brick shape
     public int[][] getHoldBrick() {
         if (holdBrick == null) return null;
-        return holdBrick.getShapeMatrix().get(0);
+        return holdBrick.getShapeMatrix().getFirst();
     }
 
     /* Setters */

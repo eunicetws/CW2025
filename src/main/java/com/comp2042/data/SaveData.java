@@ -1,5 +1,6 @@
-package com.comp2042.logic;
+package com.comp2042.data;
 
+import com.comp2042.enums.KeyEventType;
 import javafx.scene.input.KeyCode;
 
 import java.io.*;
@@ -15,7 +16,7 @@ public class SaveData {
     static String savePath = "src/main/resources/saveData.txt";
     static Path saveFilePath = Paths.get(savePath);
 
-    // Method to create the save file if it doesn't exist
+    // Create the save file if it doesn't exist
     public static void createSaveFile() {
         try {
             File saveFile = new File(savePath);
@@ -27,7 +28,7 @@ public class SaveData {
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -56,7 +57,7 @@ public class SaveData {
             }
             Files.write(saveFilePath, fileContent, StandardCharsets.UTF_8);
         }catch(Exception e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -72,7 +73,7 @@ public class SaveData {
             }
             Files.write(saveFilePath, fileContent, StandardCharsets.UTF_8);
         }catch(Exception e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -89,6 +90,7 @@ public class SaveData {
         };
     }
 
+    // read file for integer
     public static int ReadFileInt(int line) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
 
@@ -96,12 +98,14 @@ public class SaveData {
         return Integer.parseInt(data);
     }
 
+    // read file for string
     public static String ReadFileString(int line) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
 
         return fileContent.get(line);
     }
 
+    // read file for key code
     public static KeyCode ReadKeyCode(int line) throws IOException{
         String keyString = SaveData.ReadFileString(line);  // "!","@" etc.
         return KeyCode.valueOf(keyString);

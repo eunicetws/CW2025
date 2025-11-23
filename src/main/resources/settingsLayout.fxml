@@ -11,7 +11,7 @@
 <?import javafx.scene.image.Image?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.comp2042.Controllers.SettingsController"
+           fx:controller="com.comp2042.controllers.SettingsController"
             fx:id="SettingsRoot">
     <VBox styleClass="SettingsPane">
         <BorderPane styleClass="settingsTopPane">

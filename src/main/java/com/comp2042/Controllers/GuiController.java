@@ -1,8 +1,14 @@
-package com.comp2042.Controllers;
+package com.comp2042.controllers;
 
-import com.comp2042.*;
-import com.comp2042.logic.SaveData;
-import com.comp2042.logic.KeyEventType;
+import com.comp2042.enums.EventSource;
+import com.comp2042.enums.EventType;
+import com.comp2042.data.SaveData;
+import com.comp2042.enums.KeyEventType;
+import com.comp2042.interfaces.InputEventListener;
+import com.comp2042.logic.DownData;
+import com.comp2042.logic.MoveEvent;
+import com.comp2042.view.NotificationPanel;
+import com.comp2042.view.ViewData;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
@@ -38,77 +44,28 @@ public class GuiController implements Initializable {
 
     private static final int BRICK_SIZE = 20;
 
-    @FXML
-    private StackPane rootPane;
+// FXML
+    @FXML private StackPane rootPane;
 
     //Playing
-    @FXML
-    private GridPane gamePanel;
-
-    @FXML
-    private Group groupNotification;
-
-    @FXML
-    private GridPane brickPanel;
-
-    @FXML
-    private GridPane nextBrickDisplay;
-
-    @FXML
-    private GridPane holdBrickDisplay;
-
-    @FXML
-    private ImageView pauseImage;
-
-    @FXML
-    private Labeled scoreLabel;
-
-    @FXML
-    private Labeled totalClearedLinesLabel;
-
-    @FXML
-    private Labeled levelLabel;
+    @FXML private GridPane gamePanel, brickPanel, nextBrickDisplay, holdBrickDisplay;
+    @FXML private Group groupNotification;
+    @FXML private ImageView pauseImage;
+    @FXML private Labeled scoreLabel, totalClearedLinesLabel, levelLabel;
 
     //Pause Menu
-    @FXML
-    private StackPane PauseMenu;
-
-    @FXML
-    private StackPane Resume;
-
-    @FXML
-    private Label Pause_Restart;
-
-    @FXML
-    private Label Pause_Home;
-
-    @FXML
-    private Label Pause_Settings;
+    @FXML private StackPane PauseMenu, Resume;
+    @FXML private Label Pause_Restart, Pause_Home, Pause_Settings;
 
     // Game Over
-    @FXML
-    private StackPane GameOverMenu;
-
-    @FXML
-    private Label GameOver_Restart;
-
-    @FXML
-    private Label GameOver_Home;
-
-    @FXML
-    private Label GameOver_Settings;
+    @FXML private StackPane GameOverMenu;
+    @FXML private Label GameOver_Restart, GameOver_Home, GameOver_Settings;
 
     //Settings
 
-    private Rectangle[][] displayMatrix;
+    private Rectangle[][] displayMatrix, rectangles, rectanglesNextBrick, rectanglesHoldBrick;
 
     private InputEventListener eventListener;
-
-    private Rectangle[][] rectangles;
-
-    private Rectangle[][] rectanglesNextBrick;
-
-    private Rectangle[][] rectanglesHoldBrick;
 
     private Timeline timeLine;
 
@@ -117,8 +74,6 @@ public class GuiController implements Initializable {
     private final BooleanProperty isPause = new SimpleBooleanProperty();
 
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
-
-    private final BooleanProperty isKeyboardEnabled = new SimpleBooleanProperty(true);
 
     Parent settingsPane;
 
@@ -131,9 +86,10 @@ public class GuiController implements Initializable {
         pauseImage.setOnMouseEntered(e -> pauseImage.setImage(hover));
         pauseImage.setOnMouseExited(e -> pauseImage.setImage(normal));
 
-        // Set pause Menu
+        // Set Pause Menu
         PauseMenu.setVisible(false);
 
+        // Set Game Over Menu
         isGameOver.setValue(Boolean.FALSE);
         GameOverMenu.setVisible(false);
 
@@ -144,9 +100,10 @@ public class GuiController implements Initializable {
         gamePanel.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (rootPane.getChildren().contains(settingsPane)) {
+                // if settings is on, shortcut keys aren't triggered
+                if (rootPane.getChildren().contains(settingsPane))
                     return;
-                }
+
                 // Pause
                 if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.PAUSE))) {
                     pauseGame();
@@ -159,7 +116,7 @@ public class GuiController implements Initializable {
                     keyEvent.consume();
                 }
 
-                // Only respond if game is not paused and not over
+                // If game is not paused and not over
                 if (!isPause.getValue() && !isGameOver.getValue()) {
 
                     // Move Left
@@ -204,23 +161,19 @@ public class GuiController implements Initializable {
 
         Pause_Home.setOnMouseClicked(e -> returnHome());
 
-        Pause_Settings.setOnMouseClicked(e -> {
-            settingsPane = SettingsController.openSettings(rootPane);
-        });
+        Pause_Settings.setOnMouseClicked(e -> settingsPane = SettingsController.openSettings(rootPane));
 
         /* Game Over Mouse Events*/
-
         GameOver_Restart.setOnMouseClicked(e -> newGame());
 
         GameOver_Home.setOnMouseClicked(e -> returnHome());
 
-        GameOver_Settings.setOnMouseClicked(e -> {
-            settingsPane = SettingsController.openSettings(rootPane);
-        });
+        GameOver_Settings.setOnMouseClicked(e -> settingsPane = SettingsController.openSettings(rootPane));
 
     }
 
     public void initGameView(int[][] boardMatrix, ViewData brick) {
+        // display grid
         for (int i = 2; i < boardMatrix.length; i++) {
             for (int j = 0; j < boardMatrix[i].length; j++) {
                 Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
@@ -232,6 +185,7 @@ public class GuiController implements Initializable {
             }
         }
 
+        // display blocks that are snapped to grid
         displayMatrix = new Rectangle[boardMatrix.length][boardMatrix[0].length];
         for (int i = 2; i < boardMatrix.length; i++) {
             for (int j = 0; j < boardMatrix[i].length; j++) {
@@ -242,7 +196,7 @@ public class GuiController implements Initializable {
             }
         }
 
-        // Get Current Brick
+        // Get Current Falling Brick
         rectangles = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
         for (int i = 0; i < brick.getBrickData().length; i++) {
             for (int j = 0; j < brick.getBrickData()[i].length; j++) {
@@ -268,6 +222,7 @@ public class GuiController implements Initializable {
         }
         refreshNextBrick(brick);
 
+        // set up display for hold brick
         rectanglesHoldBrick = new Rectangle[brick.getBrickData().length][brick.getBrickData()[0].length];
         for (int i = 0; i < brick.getBrickData().length; i++) {
             for (int j = 0; j < brick.getBrickData()[i].length; j++) {
@@ -281,7 +236,7 @@ public class GuiController implements Initializable {
     }
 
     private Paint getFillColor(int i) {
-        Paint returnPaint = switch (i) {
+        return switch (i) {
             case 0 -> Color.TRANSPARENT;
             case 1 -> Color.web("#caf0f8"); //light blue
             case 2 -> Color.web("#ccdbfd"); // blue
@@ -292,11 +247,10 @@ public class GuiController implements Initializable {
             case 7 -> Color.web("#e6ccb2"); //brown
             default -> Color.WHITE;
         };
-        return returnPaint;
     }
 
     private Paint getBorderColour(int i) {
-        Paint returnPaint = switch (i) {
+        return switch (i) {
             case 0 -> Color.TRANSPARENT;
             case 1 -> Color.web("#90e0ef"); //light blue
             case 2 -> Color.web("#abc4ff"); // blue
@@ -307,10 +261,9 @@ public class GuiController implements Initializable {
             case 7 -> Color.web("#ddb892"); //brown
             default -> Color.WHITE;
         };
-        return returnPaint;
     }
 
-
+    // get current brick display
     private void refreshBrick(ViewData brick) {
         if (isPause.getValue() == Boolean.FALSE) {
             // brick x and y position
@@ -336,6 +289,7 @@ public class GuiController implements Initializable {
         }
     }
 
+    // get hold brick display
     public void refreshHoldBrick(ViewData brick){
         if (isPause.getValue() == Boolean.FALSE && brick.getHoldBrickData() != null) {
             for (int i = 0; i < brick.getHoldBrickData().length; i++) {
@@ -347,6 +301,7 @@ public class GuiController implements Initializable {
         }
     }
 
+    // get display of teh bricks snapped to the background
     public void refreshGameBackground(int[][] board) {
         for (int i = 2; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -377,6 +332,7 @@ public class GuiController implements Initializable {
         gamePanel.requestFocus();
     }
 
+    // save the score
     private void saveScore(){
         try {
             if (currentScore > SaveData.ReadFileInt(0))
@@ -387,6 +343,7 @@ public class GuiController implements Initializable {
         }
     }
 
+    // get the keyboard shortcut from save file
     private KeyCode getKeyCode(int saveDataLine){
         try {
             return SaveData.ReadKeyCode(saveDataLine);
@@ -398,6 +355,7 @@ public class GuiController implements Initializable {
 
 
     // Event
+    // pause the game
     private void pauseGame() {
         gamePanel.requestFocus();
         if (isPause.getValue() == true){
@@ -409,6 +367,7 @@ public class GuiController implements Initializable {
         pauseImage.setVisible(!isPause.getValue());
     }
 
+    // create new game
     private void newGame() {
         timeLine.stop();
         saveScore();
@@ -422,12 +381,14 @@ public class GuiController implements Initializable {
         isGameOver.setValue(Boolean.FALSE);
     }
 
+    // show game over
     public void gameOver() {
         timeLine.stop();
         GameOverMenu.setVisible(true);
         isGameOver.setValue(Boolean.TRUE);
     }
 
+    // go back to home menu
     private void returnHome(){
         saveScore();
         try {
@@ -444,7 +405,7 @@ public class GuiController implements Initializable {
         }
     }
 
-    // Label
+    // Labels
     public void bindScore(IntegerProperty integerProperty) {
         scoreLabel.textProperty().bind(integerProperty.asString("Score: %d"));
     }
@@ -469,7 +430,7 @@ public class GuiController implements Initializable {
         // Create a new timeline with updated speed
         timeLine = new Timeline(new KeyFrame(
                 Duration.millis(speed),
-                ae -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD))
+                e -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD))
         ));
         timeLine.setCycleCount(Timeline.INDEFINITE);
         timeLine.play();

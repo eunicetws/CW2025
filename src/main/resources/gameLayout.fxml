@@ -9,7 +9,7 @@
 <!-- Root -->
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<StackPane fx:controller="com.comp2042.Controllers.GuiController"
+<StackPane fx:controller="com.comp2042.controllers.GuiController"
            xmlns:fx="http://javafx.com/fxml"
            fx:id="rootPane">
 
@@ -115,7 +115,7 @@
     </StackPane>
 
     <stylesheets>
-        <URL value="@window_style.css"/>
+        <URL value="@game_Layout.css"/>
         <URL value="@overlaysLayout.css"/>
     </stylesheets>
 </StackPane>
