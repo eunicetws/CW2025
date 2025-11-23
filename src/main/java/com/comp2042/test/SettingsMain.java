@@ -20,13 +20,13 @@ public class SettingsMain extends Application {
         ResourceBundle resources = null;
         FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
         Parent root = fxmlLoader.load();
-        SettingsGuiController c = fxmlLoader.getController();
+        SettingsController c = fxmlLoader.getController();
 
         primaryStage.setTitle("Settings Menu Test");
         Scene scene = new Scene(root, 540, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
-        new SettingsGuiController();
+        new SettingsController();
     }
 
 

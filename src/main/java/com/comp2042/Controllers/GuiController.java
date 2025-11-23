@@ -2,12 +2,12 @@ package com.comp2042.Controllers;
 
 import com.comp2042.*;
 import com.comp2042.logic.SaveData;
+import com.comp2042.logic.KeyEventType;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -130,34 +130,46 @@ public class GuiController implements Initializable {
         gamePanel.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ESCAPE || keyEvent.getCode() == KeyCode.P) {
+                // Pause
+                if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.PAUSE))) {
                     pauseGame();
                     keyEvent.consume();
                 }
-                if (isPause.getValue() == Boolean.FALSE && isGameOver.getValue() == Boolean.FALSE) {
-                    if (keyEvent.getCode() == KeyCode.LEFT || keyEvent.getCode() == KeyCode.A) {
+
+                // New Game / Restart
+                if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.RESTART))) {
+                    newGame();
+                    keyEvent.consume();
+                }
+
+                // Only respond if game is not paused and not over
+                if (!isPause.getValue() && !isGameOver.getValue()) {
+
+                    // Move Left
+                    if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.LEFT))) {
                         refreshBrick(eventListener.onLeftEvent(new MoveEvent(EventType.LEFT, EventSource.USER)));
                         keyEvent.consume();
                     }
-                    if (keyEvent.getCode() == KeyCode.RIGHT || keyEvent.getCode() == KeyCode.D) {
+                    // Move Right
+                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.RIGHT))) {
                         refreshBrick(eventListener.onRightEvent(new MoveEvent(EventType.RIGHT, EventSource.USER)));
                         keyEvent.consume();
                     }
-                    if (keyEvent.getCode() == KeyCode.UP || keyEvent.getCode() == KeyCode.W) {
+                    // Rotate
+                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.ROTATE))) {
                         refreshBrick(eventListener.onRotateEvent(new MoveEvent(EventType.ROTATE, EventSource.USER)));
                         keyEvent.consume();
                     }
-                    if (keyEvent.getCode() == KeyCode.DOWN || keyEvent.getCode() == KeyCode.S) {
+                    // Move Down
+                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.DOWN))) {
                         moveDown(new MoveEvent(EventType.DOWN, EventSource.USER));
                         keyEvent.consume();
                     }
-                    if (keyEvent.getCode() == KeyCode.H) {
+                    // Hold
+                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.HOLD))) {
                         refreshHoldBrick(eventListener.onHoldEvent(new MoveEvent(EventType.HOLD, EventSource.USER)));
                         keyEvent.consume();
                     }
-                }
-                if (keyEvent.getCode() == KeyCode.N) {
-                    newGame();
                 }
             }
         });
@@ -343,8 +355,17 @@ public class GuiController implements Initializable {
 
     private void saveScore(){
         try {
-            if (currentScore > SaveData.ReadFile(0))
+            if (currentScore > SaveData.ReadFileInt(0))
                 SaveData.overWriteFile(currentScore, 0);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private KeyCode getKeyCode(int saveDataLine){
+        try {
+            return SaveData.ReadKeyCode(saveDataLine);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -367,6 +388,7 @@ public class GuiController implements Initializable {
     private void newGame() {
         timeLine.stop();
         GameOverMenu.setVisible(false);
+        PauseMenu.setVisible(false);
         eventListener.createNewGame();
         gamePanel.requestFocus();
         timeLine.play();

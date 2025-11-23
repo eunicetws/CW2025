@@ -35,7 +35,7 @@ public class HomeController implements Initializable {
         int currentHighScore;
         SaveData.createSaveFile();
         try {
-            currentHighScore = SaveData.ReadFile(0);
+            currentHighScore = Integer.parseInt(SaveData.ReadFileString(0));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

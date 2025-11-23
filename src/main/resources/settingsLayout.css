@@ -33,13 +33,36 @@
         -fx-font-size: 30px;
     }
 
+.Instruction{
+    -fx-min-width: 480px;
+    -fx-max-width: 480px;
+
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+
+    -fx-font-family: "Gluten Bold";
+    -fx-text-fill: #5F445E;
+    -fx-font-size: 15px;
+
+    -fx-alignment: center;
+
+    -fx-padding: 0 10 0 0
+}
+
+.Line{
+    -fx-border-color: #6b4f6a;
+    -fx-border-width: 2px;
+
+    -fx-max-height: 0px;
+}
+
 .shortcutPanel{
     -fx-alignment: center;
     -fx-min-width: 235px;
     -fx-max-width: 235px;
 
-    -fx-min-height: 460px;
-    -fx-max-height: 460px;
+    -fx-min-height: 420px;
+    -fx-max-height: 420px;
 }
 
     .ShortcutBox{
@@ -48,8 +71,8 @@
         -fx-min-width: 220px;
         -fx-max-width: 220px;
 
-        -fx-min-height: 110px;
-        -fx-max-height: 110px;
+        -fx-min-height: 100px;
+        -fx-max-height: 100px;
 
         -fx-spacing: 5;
     }
@@ -61,7 +84,6 @@
     }
 
     .ShortcutKey{
-        -fx-alignment: center;
         -fx-font-family: "Gluten Bold";
         -fx-text-fill: #5F445E;
         -fx-font-size: 23px;
@@ -74,6 +96,7 @@
 
         -fx-text-fill: #5F445E;
         -fx-font-size: 20px;
+        -fx-alignment: center;
 
         -fx-background-color: #f0eae4;
         -fx-background-radius: 25;
@@ -81,11 +104,6 @@
         -fx-border-color: #6b4f6a;
         -fx-border-width: 4px;
         -fx-border-radius: 20;
-    }
-
-    .ShortcutKey:hover{
-        -fx-text-fill: #da627d;
-        -fx-border-color: #da627d;
     }
 
     .ShortcutKeySelect{
