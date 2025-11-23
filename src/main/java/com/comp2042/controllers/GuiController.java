@@ -305,6 +305,16 @@ public class GuiController implements Initializable {
         }
     }
 
+    public void resetHoldBrickDisplay() {
+        if (rectanglesHoldBrick == null) return;
+
+        for (int i = 0; i < rectanglesHoldBrick.length; i++) {
+            for (int j = 0; j < rectanglesHoldBrick[i].length; j++) {
+                setRectangleData(0, rectanglesHoldBrick[i][j]); // 0 = transparent cell
+            }
+        }
+    }
+
     // get display of teh bricks snapped to the background
     public void refreshGameBackground(int[][] board) {
         for (int i = 2; i < board.length; i++) {
@@ -383,6 +393,7 @@ public class GuiController implements Initializable {
         timeLine.play();
         isPause.setValue(Boolean.FALSE);
         isGameOver.setValue(Boolean.FALSE);
+        resetHoldBrickDisplay();
     }
 
     // show game over

@@ -91,11 +91,11 @@ public class SimpleBoard implements Board {
 
     public boolean holdBrick() {
         int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
-
-        if (brickRotator.getHoldBrick() == null && !MatrixOperations.intersect( currentMatrix, brickGenerator.getNextBrick().getShapeMatrix().getFirst(), (int) currentOffset.getX(), (int) currentOffset.getY()))
+        boolean intersectWithNewBlock = !MatrixOperations.intersect( currentMatrix, brickGenerator.getNextBrick().getShapeMatrix().getFirst(), (int) currentOffset.getX(), (int) currentOffset.getY());
+        if (brickRotator.getHoldBrick() == null && intersectWithNewBlock)
         {
             brickRotator.setHoldBrick();
-            createNewBrick();
+            createNewBrick((int)currentOffset.getX(), (int)currentOffset.getY());
 
             return true;
         } else if (!MatrixOperations.intersect(currentMatrix, brickRotator.getHoldBrick(), (int) currentOffset.getX(), (int) currentOffset.getY())){
@@ -107,10 +107,10 @@ public class SimpleBoard implements Board {
 //
 
     @Override
-    public boolean createNewBrick() {
+    public boolean createNewBrick(int x, int y) {
         Brick currentBrick = brickGenerator.getBrick();
         brickRotator.setBrick(currentBrick);
-        currentOffset = new Point(4, 1);
+        currentOffset = new Point(x, y);
         return MatrixOperations.intersect(currentGameMatrix, brickRotator.getCurrentShape(), (int) currentOffset.getX(), (int) currentOffset.getY());
     }
 
@@ -159,6 +159,7 @@ public class SimpleBoard implements Board {
         score.reset();
         totalLinesCleared.reset();
         level.reset();
-        createNewBrick();
+        brickRotator.resetHoldBrick();
+        createNewBrick(4, 0);
     }
 }

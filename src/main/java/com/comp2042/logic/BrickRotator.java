@@ -50,4 +50,8 @@ public class BrickRotator {
         currentShape = 0;
     }
 
+    public void resetHoldBrick() {
+        holdBrick = null;
+    }
+
 }

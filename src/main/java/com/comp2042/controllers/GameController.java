@@ -17,7 +17,7 @@ public class GameController implements InputEventListener {
 
     public GameController(GuiController guiController) {
         this.viewGuiController = guiController;
-        board.createNewBrick();
+        board.createNewBrick(4, 1);
         viewGuiController.setEventListener(this);
         viewGuiController.initGameView(board.getBoardMatrix(), board.getViewData());
         viewGuiController.bindScore(board.getScore().scoreProperty());
@@ -44,7 +44,7 @@ public class GameController implements InputEventListener {
                     viewGuiController.setSpeed(board.getLevel().calcSpeed());
                 }
             }
-            if (board.createNewBrick()) {
+            if (board.createNewBrick(4, 1)) {
                 viewGuiController.gameOver();
             }
 
