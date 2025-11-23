@@ -19,9 +19,7 @@
         <ImageView fx:id="pauseImage" StackPane.alignment="TOP_RIGHT">
             <fitWidth>50</fitWidth>
             <preserveRatio>true</preserveRatio>
-            <image>
                 <Image url="@/images/buttons/Buttons-pause.png"/>
-            </image>
         </ImageView>
 
         <!--  Play Screen  -->
@@ -41,7 +39,7 @@
                 <Pane>
                     <BorderPane styleClass="gameBoard">
                         <center>
-                            <GridPane fx:id="gamePanel" layoutY="30" layoutX="40"/>
+                            <GridPane fx:id="gamePanel" layoutY="30" layoutX="20"/>
                         </center>
                     </BorderPane>
 
