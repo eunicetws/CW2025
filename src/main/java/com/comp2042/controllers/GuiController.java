@@ -364,17 +364,6 @@ public class GuiController implements Initializable {
         gamePanel.requestFocus();
     }
 
-    // save the score
-    private void saveScore(){
-        try {
-            if (currentScore > SaveData.ReadFileInt(0))
-                SaveData.overWriteFile(currentScore, 0);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     // get the keyboard shortcut from save file
     private KeyCode getKeyCode(int saveDataLine){
         try {
@@ -402,7 +391,6 @@ public class GuiController implements Initializable {
     // create new game
     private void newGame() {
         timeLine.stop();
-        saveScore();
         GameOverMenu.setVisible(false);
         PauseMenu.setVisible(false);
         pauseImage.setVisible(true);
@@ -423,7 +411,6 @@ public class GuiController implements Initializable {
 
     // go back to home menu
     private void returnHome(){
-        saveScore();
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/homeLayout.fxml")
