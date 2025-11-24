@@ -52,6 +52,10 @@
 
             <VBox styleClass="shortcutPanel">
                 <VBox styleClass="ShortcutBox">
+                    <Label styleClass="ShortcutLabel" text="Hard Drop"/>
+                    <Label styleClass="ShortcutKey" fx:id="Harddrop"/>
+                </VBox>
+                <VBox styleClass="ShortcutBox">
                     <Label styleClass="ShortcutLabel" text="Pause"/>
                     <Label styleClass="ShortcutKey" fx:id="Pause"/>
                 </VBox>

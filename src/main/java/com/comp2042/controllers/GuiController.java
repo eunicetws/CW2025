@@ -144,6 +144,10 @@ public class GuiController implements Initializable {
                         refreshHoldBrick(eventListener.onHoldEvent(new MoveEvent(EventType.HOLD, EventSource.USER)));
                         keyEvent.consume();
                     }
+                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.HARDDROP))) {
+                        HardDrop(new MoveEvent(EventType.DOWN, EventSource.USER));
+                        keyEvent.consume();
+                    }
                 }
             }
         });
@@ -335,7 +339,21 @@ public class GuiController implements Initializable {
     // display score when a row is cleared
     private void moveDown(MoveEvent event) {
         if (isPause.getValue() == Boolean.FALSE) {
-            DownData downData = eventListener.onDownEvent(event);
+            DownData downData = eventListener.onDownEvent(event, false);
+            if (downData.getClearRow() != null && downData.getClearRow().getLinesRemoved() > 0) {
+                NotificationPanel notificationPanel = new NotificationPanel("+" + downData.getClearRow().getScoreBonus());
+                groupNotification.getChildren().add(notificationPanel);
+                notificationPanel.showScore(groupNotification.getChildren());
+            }
+            refreshBrick(downData.getViewData());
+        }
+        gamePanel.requestFocus();
+    }
+
+    // display score when a row is cleared
+    private void HardDrop(MoveEvent event) {
+        if (isPause.getValue() == Boolean.FALSE) {
+            DownData downData = eventListener.onDownEvent(event, true);
             if (downData.getClearRow() != null && downData.getClearRow().getLinesRemoved() > 0) {
                 NotificationPanel notificationPanel = new NotificationPanel("+" + downData.getClearRow().getScoreBonus());
                 groupNotification.getChildren().add(notificationPanel);

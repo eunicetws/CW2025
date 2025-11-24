@@ -27,9 +27,18 @@ public class GameController implements InputEventListener {
     }
 
     @Override
-    public DownData onDownEvent(MoveEvent event) {
-        boolean canMove = board.moveBrickDown();
-        viewGuiController.setCurrentScore(board.getScore().scoreProperty().getValue());
+    public DownData onDownEvent(MoveEvent event, boolean isHardDrop) {
+        boolean canMove = true;
+        if (isHardDrop){
+            while (canMove) {
+                canMove = board.moveBrickDown();
+                board.getScore().add(1);
+            }
+        }
+        if (!isHardDrop) {
+            canMove = board.moveBrickDown();
+            viewGuiController.setCurrentScore(board.getScore().scoreProperty().getValue());
+        }
         ClearRow clearRow = null;
         if (!canMove) {
             board.mergeBrickToBackground();

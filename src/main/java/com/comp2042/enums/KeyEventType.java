@@ -8,5 +8,6 @@ public enum KeyEventType {
     ROTATE,
     HOLD,
     PAUSE,
-    RESTART
+    RESTART,
+    HARDDROP
 }

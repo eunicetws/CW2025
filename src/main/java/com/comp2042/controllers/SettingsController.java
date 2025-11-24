@@ -18,35 +18,9 @@ import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
 
-    @FXML
-    private StackPane rootPane;
-
-    @FXML
-    private ImageView closeImage;
-
-    @FXML
-    private Label Left;
-
-    @FXML
-    private Label Right;
-
-    @FXML
-    private Label Down;
-
-    @FXML
-    private Label Rotate;
-
-    @FXML
-    private Label Pause;
-
-    @FXML
-    private Label Hold;
-
-    @FXML
-    private Label Restart;
-
-    @FXML
-    private StackPane SettingsRoot;
+    @FXML private StackPane rootPane;
+    @FXML private ImageView closeImage;
+    @FXML private Label Left, Right, Down, Rotate, Pause, Hold, Restart, Harddrop;
 
     private Label selectedLabel = null;
 
@@ -69,6 +43,7 @@ public class SettingsController implements Initializable {
         getKeyCode(Pause, SaveData.getKeyEvent(KeyEventType.PAUSE));
         getKeyCode(Hold, SaveData.getKeyEvent(KeyEventType.HOLD));
         getKeyCode(Restart, SaveData.getKeyEvent(KeyEventType.RESTART));
+        getKeyCode(Harddrop, SaveData.getKeyEvent(KeyEventType.HARDDROP));
 
         // Setup shortcut labels
         setupShortcutLabel(Left, SaveData.getKeyEvent(KeyEventType.LEFT));
@@ -78,6 +53,7 @@ public class SettingsController implements Initializable {
         setupShortcutLabel(Pause, SaveData.getKeyEvent(KeyEventType.PAUSE));
         setupShortcutLabel(Hold, SaveData.getKeyEvent(KeyEventType.HOLD));
         setupShortcutLabel(Restart, SaveData.getKeyEvent(KeyEventType.RESTART));
+        setupShortcutLabel(Harddrop, SaveData.getKeyEvent(KeyEventType.HARDDROP));
 
         //mouse event
         closeImage.setOnMouseClicked(e -> closeSettings());

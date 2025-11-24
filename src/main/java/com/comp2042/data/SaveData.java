@@ -42,6 +42,7 @@ public class SaveData {
         write.write(KeyCode.H+"\n"); // Hold
         write.write(KeyCode.ESCAPE+"\n");// Pause
         write.write(KeyCode.N+"\n"); // Restart
+        write.write(KeyCode.SPACE+"\n"); //HardDrop
         return write;
     }
 
@@ -87,6 +88,7 @@ public class SaveData {
             case HOLD -> 5;
             case PAUSE -> 6;
             case RESTART -> 7;
+            case HARDDROP -> 8;
         };
     }
 

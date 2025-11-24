@@ -6,7 +6,7 @@ import com.comp2042.view.ViewData;
 
 public interface InputEventListener {
 
-    DownData onDownEvent(MoveEvent event);
+    DownData onDownEvent(MoveEvent event, boolean isHardDrop);
 
     ViewData onLeftEvent(MoveEvent event);
 
