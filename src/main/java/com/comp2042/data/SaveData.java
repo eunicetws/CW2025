@@ -43,6 +43,7 @@ public class SaveData {
         write.write(KeyCode.ESCAPE+"\n");// Pause
         write.write(KeyCode.N+"\n"); // Restart
         write.write(KeyCode.SPACE+"\n"); //HardDrop
+        write.write("30"); // Music
         return write;
     }
 
@@ -89,6 +90,7 @@ public class SaveData {
             case PAUSE -> 6;
             case RESTART -> 7;
             case HARDDROP -> 8;
+            case MUSIC -> 9;
         };
     }
 

@@ -2,15 +2,18 @@ package com.comp2042.controllers;
 
 import com.comp2042.enums.KeyEventType;
 import com.comp2042.data.SaveData;
+import com.comp2042.media.Bgm;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +22,9 @@ import java.util.ResourceBundle;
 public class SettingsController implements Initializable {
 
     @FXML private StackPane rootPane;
+    @FXML private VBox ControlSetting;
     @FXML private ImageView closeImage;
+    @FXML private Slider MusicSlider;
     @FXML private Label Left, Right, Down, Rotate, Pause, Hold, Restart, Harddrop;
 
     private Label selectedLabel = null;
@@ -34,6 +39,14 @@ public class SettingsController implements Initializable {
         closeImage.setImage(closeNormal);
         closeImage.setOnMouseEntered(e -> closeImage.setImage(closeHover));
         closeImage.setOnMouseExited(e -> closeImage.setImage(closeNormal));
+        ControlSetting.setVisible(false);
+
+        try {
+            MusicSlider.setValue(SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.MUSIC))); // get saved volume (0-100)
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
         // load keys
         getKeyCode(Left, SaveData.getKeyEvent(KeyEventType.LEFT));
@@ -57,6 +70,16 @@ public class SettingsController implements Initializable {
 
         //mouse event
         closeImage.setOnMouseClicked(e -> closeSettings());
+
+        MusicSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            int volume = newVal.intValue();
+            try {
+                SaveData.overWriteFile(volume, SaveData.getKeyEvent(KeyEventType.MUSIC));
+                Bgm.setVolume();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     // highlight the label and allow keyboard shortcut to change

@@ -28,6 +28,15 @@
         -fx-font-size: 30px;
     }
 
+    .SettingsArrow{
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 30px;
+    }
+
+    .SettingsArrow:hover{
+        -fx-text-fill: #da627d;
+    }
+
 .Instruction{
     -fx-min-width: 480px;
     -fx-max-width: 480px;
@@ -101,3 +110,30 @@
         -fx-text-fill: #da627d;
         -fx-border-color: #da627d;
     }
+
+#OptionsSetting{
+    -fx-spacing: 5px;
+}
+
+.MusicSlider .track{
+    -fx-background-color: #b5c99a;
+    -fx-background-radius: 5px;
+    -fx-pref-height: 15px;
+    -fx-border-color: #97a97c;
+    -fx-border-width: 2px;
+}
+
+.MusicSlider .track .filled-track {
+    -fx-background-color: #52b788;
+    -fx-background-radius: 5px;
+}
+
+.MusicSlider .thumb {
+    -fx-background-color: #469d89;
+    -fx-background-radius: 0;
+    -fx-pref-width: 20px;
+    -fx-pref-height: 20px;
+    -fx-border-color: #248277;
+    -fx-border-width: 2px;
+}
+

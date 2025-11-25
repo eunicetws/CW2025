@@ -1,6 +1,7 @@
 package com.comp2042.controllers;
 
 import com.comp2042.data.SaveData;
+import com.comp2042.media.Bgm;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -30,6 +31,10 @@ public class HomeController implements Initializable {
         int currentHighScore;
         // if no save file, create one
         SaveData.createSaveFile();
+
+        // play bgm
+        Bgm.init();
+        Bgm.play();
 
         // get previous high score
         try {
