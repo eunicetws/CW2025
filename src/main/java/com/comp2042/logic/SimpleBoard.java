@@ -15,7 +15,7 @@ public class SimpleBoard implements Board {
     private final BrickGenerator brickGenerator;
     private final BrickRotator brickRotator;
     private int[][] currentGameMatrix;
-    private Point currentOffset;
+    private Point currentOffset, ghostPieceOffset;
     private final Score score;
     private final LinesCleared totalLinesCleared;
     private final Level level;
@@ -46,6 +46,17 @@ public class SimpleBoard implements Board {
             return true;
         }
     }
+
+    public void moveGhostPiece() {
+        Point p = new Point(currentOffset);
+
+        while (!MatrixOperations.intersect(currentGameMatrix, brickRotator.getCurrentShape(), p.x, p.y + 1)) {
+            p.translate(0, 1);
+        }
+
+        ghostPieceOffset = p;
+    }
+
 
 
     @Override
@@ -111,6 +122,7 @@ public class SimpleBoard implements Board {
         Brick currentBrick = brickGenerator.getBrick();
         brickRotator.setBrick(currentBrick);
         currentOffset = new Point(x, y);
+        moveGhostPiece();
         return MatrixOperations.intersect(currentGameMatrix, brickRotator.getCurrentShape(), (int) currentOffset.getX(), (int) currentOffset.getY());
     }
 
@@ -135,7 +147,7 @@ public class SimpleBoard implements Board {
 
     @Override
     public ViewData getViewData() {
-        return new ViewData(brickRotator.getCurrentShape(), (int) currentOffset.getX(), (int) currentOffset.getY(), brickGenerator.getNextBrick().getShapeMatrix().getFirst(), brickRotator.getHoldBrick());
+        return new ViewData(brickRotator.getCurrentShape(), (int) currentOffset.getX(), (int) currentOffset.getY(), brickGenerator.getNextBrick().getShapeMatrix().getFirst(), brickRotator.getHoldBrick(), ghostPieceOffset);
     }
 
     @Override

@@ -18,6 +18,7 @@ public class GameController implements InputEventListener {
     public GameController(GuiController guiController) {
         this.viewGuiController = guiController;
         board.createNewBrick(4, 1);
+        board.moveGhostPiece();
         viewGuiController.setEventListener(this);
         viewGuiController.initGameView(board.getBoardMatrix(), board.getViewData());
         viewGuiController.bindScore(board.getScore().scoreProperty());
@@ -37,8 +38,8 @@ public class GameController implements InputEventListener {
         }
         if (!isHardDrop) {
             canMove = board.moveBrickDown();
-            viewGuiController.setCurrentScore(board.getScore().scoreProperty().getValue());
         }
+
         ClearRow clearRow = null;
         if (!canMove) {
             board.mergeBrickToBackground();
@@ -46,6 +47,7 @@ public class GameController implements InputEventListener {
             if (clearRow.getLinesRemoved() > 0) {
                 board.getScore().add(clearRow.getScoreBonus()); //Add Score
                 board.getTotalLinesCleared().add(clearRow.getLinesRemoved()); //Add Lines
+                board.moveGhostPiece();
 
                 // Level Up
                 if (board.getLevel().reachLevelRequirement(board.getTotalLinesCleared().PropertiesTotalLinesCleared().getValue())){
@@ -59,6 +61,7 @@ public class GameController implements InputEventListener {
 
             viewGuiController.refreshGameBackground(board.getBoardMatrix());
             viewGuiController.refreshNextBrick(board.getViewData());
+            board.moveGhostPiece();
 
         } else {
             if (event.getEventSource() == EventSource.USER) {
@@ -71,18 +74,21 @@ public class GameController implements InputEventListener {
     @Override
     public ViewData onLeftEvent(MoveEvent event) {
         board.moveBrickLeft();
+        board.moveGhostPiece();
         return board.getViewData();
     }
 
     @Override
     public ViewData onRightEvent(MoveEvent event) {
         board.moveBrickRight();
+        board.moveGhostPiece();
         return board.getViewData();
     }
 
     @Override
     public ViewData onRotateEvent(MoveEvent event) {
         board.rotateLeftBrick();
+        board.moveGhostPiece();
         return board.getViewData();
     }
 

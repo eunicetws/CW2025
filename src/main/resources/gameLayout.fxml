@@ -39,13 +39,14 @@
                 <Pane>
                     <BorderPane styleClass="gameBoard">
                         <center>
-                            <GridPane fx:id="gamePanel" layoutY="30" layoutX="20"/>
+                            <GridPane fx:id="gamePanel" layoutY="10" layoutX="10"/>
                         </center>
                     </BorderPane>
 
-                    <Group fx:id="groupNotification" layoutX="12" layoutY="203"/>
-
                     <GridPane fx:id="brickPanel"/>
+                    <GridPane fx:id="ghostPiecePanel"/>
+
+                    <Group fx:id="groupNotification" layoutX="12" layoutY="203"/>
                 </Pane>
             </StackPane>
 

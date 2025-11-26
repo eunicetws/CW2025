@@ -48,7 +48,7 @@ public class GuiController implements Initializable {
     @FXML private StackPane rootPane;
 
     //Playing
-    @FXML private GridPane gamePanel, brickPanel, nextBrickDisplay, holdBrickDisplay;
+    @FXML private GridPane gamePanel, brickPanel, ghostPiecePanel, nextBrickDisplay, holdBrickDisplay;
     @FXML private Group groupNotification;
     @FXML private ImageView pauseImage;
     @FXML private Labeled scoreLabel, totalClearedLinesLabel, levelLabel;
@@ -63,7 +63,7 @@ public class GuiController implements Initializable {
 
     //Settings
 
-    private Rectangle[][] displayMatrix, rectangles, rectanglesNextBrick, rectanglesHoldBrick;
+    private Rectangle[][] displayMatrix, rectangles, rectanglesNextBrick, rectanglesHoldBrick, rectanglesGhostPiece;
 
     private InputEventListener eventListener;
 
@@ -213,8 +213,23 @@ public class GuiController implements Initializable {
                 brickPanel.add(rectangle, j, i);
             }
         }
-        brickPanel.setLayoutX(gamePanel.getLayoutX() - 10 + brick.getxPosition() * BRICK_SIZE);
-        brickPanel.setLayoutY(-40 + gamePanel.getLayoutY() + (brick.getyPosition() - 1) * BRICK_SIZE);
+        brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * BRICK_SIZE);
+        brickPanel.setLayoutY(-40 + gamePanel.getLayoutY() + (brick.getyPosition()) * BRICK_SIZE);
+
+        rectanglesGhostPiece = new Rectangle[rectangles.length][rectangles[0].length];
+        for (int i = 0; i < rectangles.length; i++) {
+            for (int j = 0; j < rectangles[i].length; j++) {
+                Rectangle rectangle = new Rectangle(BRICK_SIZE, BRICK_SIZE);
+                rectangle.setFill(getFillColor(brick.getBrickData()[i][j]));
+                rectangle.setStroke(getBorderColour(brick.getBrickData()[i][j]));
+                rectangle.setStrokeType(StrokeType.INSIDE);
+                rectangle.setStrokeWidth(1);
+                rectangle.setOpacity(0.5);
+                rectanglesGhostPiece[i][j] = rectangle;
+                ghostPiecePanel.add(rectangle, j, i);
+            }
+        }
+        refreshGhostPiece(brick);
 
         //Get Next Brick
         rectanglesNextBrick = new Rectangle[brick.getNextBrickData().length][brick.getNextBrickData()[0].length];
@@ -271,6 +286,7 @@ public class GuiController implements Initializable {
     // get current brick display
     private void refreshBrick(ViewData brick) {
         if (isPause.getValue() == Boolean.FALSE) {
+            refreshGhostPiece(brick);
             // brick x and y position
             brickPanel.setLayoutX(gamePanel.getLayoutX() + brick.getxPosition() * BRICK_SIZE);
             brickPanel.setLayoutY(-40 + gamePanel.getLayoutY() + brick.getyPosition() * BRICK_SIZE);
@@ -278,6 +294,25 @@ public class GuiController implements Initializable {
             for (int i = 0; i < brick.getBrickData().length; i++) {
                 for (int j = 0; j < brick.getBrickData()[i].length; j++) {
                     setRectangleData(brick.getBrickData()[i][j], rectangles[i][j]);
+                }
+            }
+            refreshGhostPiece(brick);
+        }
+    }
+
+    private void refreshGhostPiece(ViewData brick) {
+        ghostPiecePanel.setLayoutX(gamePanel.getLayoutX() + brick.getGhostPieceXPosition() * BRICK_SIZE);
+        ghostPiecePanel.setLayoutY(-40 + gamePanel.getLayoutY() + brick.getGhostPieceYPosition() * BRICK_SIZE);
+
+        if (isPause.getValue() == Boolean.FALSE) {
+            for (int i = 0; i < brick.getBrickData().length; i++) {
+                for (int j = 0; j < brick.getBrickData()[i].length; j++) {
+                    Rectangle rectangle = rectanglesGhostPiece[i][j];
+                    int value = brick.getBrickData()[i][j];
+
+                    rectangle.setFill(getFillColor(value));
+                    rectangle.setStroke(getBorderColour(value));
+                    rectangle.setOpacity(0.5);
                 }
             }
         }
@@ -346,6 +381,7 @@ public class GuiController implements Initializable {
                 notificationPanel.showScore(groupNotification.getChildren());
             }
             refreshBrick(downData.getViewData());
+            refreshGhostPiece(downData.getViewData());
         }
         gamePanel.requestFocus();
     }

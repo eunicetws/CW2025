@@ -38,13 +38,17 @@
         -fx-border-width: 10px;
     }
 
+    .brickPanel {
+        -fx-padding: 0;
+        -fx-alignment: top-left; /* instead of center */
+    }
+
     .bonusStyle {
         -fx-font-family: "Gluten Bold";
         -fx-font-size: 30px;
     }
 
     /* Side Panel */
-
     .rightPanel{
         -fx-padding: 10 0 30 0;
     }

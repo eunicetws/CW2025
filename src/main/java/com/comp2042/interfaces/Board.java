@@ -21,6 +21,8 @@ public interface Board {
 
     boolean createNewBrick(int x, int y);
 
+    void moveGhostPiece();
+
     int[][] getBoardMatrix();
 
     ViewData getViewData();
