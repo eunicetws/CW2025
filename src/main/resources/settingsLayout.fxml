@@ -37,6 +37,14 @@
                 <Label text="Music" styleClass="ShortcutLabel"/>
                 <Slider styleClass="MusicSlider"  fx:id="MusicSlider" value="50"/>
             </VBox>
+            <VBox styleClass="volumeControl" spacing="10" alignment="CENTER">
+                <Label text="Buttons SFX" styleClass="ShortcutLabel"/>
+                <Slider styleClass="MusicSlider"  fx:id="ButtonsSlider" value="50"/>
+            </VBox>
+            <VBox styleClass="volumeControl" spacing="10" alignment="CENTER">
+                <Label text="Clear Lines SFX" styleClass="ShortcutLabel"/>
+                <Slider styleClass="MusicSlider"  fx:id="ClearLinesSlider" value="50"/>
+            </VBox>
 
         </VBox>
 

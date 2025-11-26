@@ -3,6 +3,7 @@ package com.comp2042.controllers;
 import com.comp2042.enums.KeyEventType;
 import com.comp2042.data.SaveData;
 import com.comp2042.media.Bgm;
+import com.comp2042.media.Sfx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,7 +25,7 @@ public class SettingsController implements Initializable {
     @FXML private StackPane rootPane;
     @FXML private VBox ControlSetting;
     @FXML private ImageView closeImage;
-    @FXML private Slider MusicSlider;
+    @FXML private Slider MusicSlider, ButtonsSlider, ClearLinesSlider;
     @FXML private Label Left, Right, Down, Rotate, Pause, Hold, Restart, Harddrop;
 
     private Label selectedLabel = null;
@@ -43,6 +44,22 @@ public class SettingsController implements Initializable {
 
         try {
             MusicSlider.setValue(SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.MUSIC))); // get saved volume (0-100)
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            String[] buttonsData = SaveData.ReadFileList(SaveData.getKeyEvent(KeyEventType.BUTTONS));
+            double buttonsVolume = Double.parseDouble(buttonsData[1]);
+            ButtonsSlider.setValue(buttonsVolume * 100);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            String[] clearLinesData = SaveData.ReadFileList(SaveData.getKeyEvent(KeyEventType.CLEARLINES));
+            double clearLinesVolume = Double.parseDouble(clearLinesData[1]);
+            ClearLinesSlider.setValue(clearLinesVolume * 100);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -69,13 +86,36 @@ public class SettingsController implements Initializable {
         setupShortcutLabel(Harddrop, SaveData.getKeyEvent(KeyEventType.HARDDROP));
 
         //mouse event
-        closeImage.setOnMouseClicked(e -> closeSettings());
+        closeImage.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS); // play SFX
+            closeSettings();                 // then close
+        });
 
         MusicSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             int volume = newVal.intValue();
             try {
                 SaveData.overWriteFile(volume, SaveData.getKeyEvent(KeyEventType.MUSIC));
                 Bgm.setVolume();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        ButtonsSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            double volume = newVal.doubleValue() / 100.0;
+            try {
+                SaveData.overWriteFile(volume,1, SaveData.getKeyEvent(KeyEventType.BUTTONS) );
+                Sfx.reset(KeyEventType.BUTTONS);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        ClearLinesSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            double volume = newVal.doubleValue() / 100.0;
+            try {
+                SaveData.overWriteFile(volume,1, SaveData.getKeyEvent(KeyEventType.CLEARLINES) );
+                Sfx.reset(KeyEventType.CLEARLINES);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

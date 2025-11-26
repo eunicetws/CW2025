@@ -34,17 +34,22 @@ public class SaveData {
 
     private static FileWriter getFileWriter(File saveFile) throws IOException {
         FileWriter write = new FileWriter(saveFile);
-        write.write("0\n"); // highScore
-        write.write(KeyCode.LEFT+"\n"); // go left
-        write.write(KeyCode.RIGHT+"\n"); // go right
-        write.write(KeyCode.UP+"\n"); // rotate
-        write.write(KeyCode.DOWN+"\n"); //down event
-        write.write(KeyCode.H+"\n"); // Hold
-        write.write(KeyCode.ESCAPE+"\n");// Pause
-        write.write(KeyCode.N+"\n"); // Restart
-        write.write(KeyCode.SPACE+"\n"); //HardDrop
-        write.write("30"); // Music
+        write.write(
+            "0\n" + // highScore
+            KeyCode.LEFT + "\n" + // go left
+            KeyCode.RIGHT + "\n" +// go right
+            KeyCode.UP + "\n" + // rotate
+            KeyCode.DOWN + "\n" + // down event
+            KeyCode.H + "\n" +  // Hold
+            KeyCode.ESCAPE + "\n" + // Pause
+            KeyCode.N + "\n" +  // Restart
+            KeyCode.SPACE + "\n" +// HardDrop
+            "30\n" +    // Music
+            "Modern1.mp3 : 0.2\n" +  // Buttons
+            "coin.mp3 : 0.3\n"// Clear Line
+        );
         return write;
+
     }
 
     public static void overWriteFile(String newData, int line) throws IOException {
@@ -79,6 +84,27 @@ public class SaveData {
         }
     }
 
+    public static void overWriteFile(double newData, int index, int line) throws IOException {
+        try {
+            List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
+
+            String[] data = fileContent.get(line).split("\\s*:\\s*");
+
+            if (index < 0 || index >= data.length) {
+                System.out.println("IndexOutOfBound");
+                return;
+            }
+
+            data[index] = Double.toString(newData);
+
+            fileContent.set(line, String.join(" : ", data));
+
+            Files.write(saveFilePath, fileContent, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static int getKeyEvent(KeyEventType eventType) {
         return switch (eventType) {
             case HIGHSCORE -> 0;
@@ -91,6 +117,8 @@ public class SaveData {
             case RESTART -> 7;
             case HARDDROP -> 8;
             case MUSIC -> 9;
+            case BUTTONS -> 10;
+            case CLEARLINES -> 11;
         };
     }
 
@@ -105,8 +133,16 @@ public class SaveData {
     // read file for string
     public static String ReadFileString(int line) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
-
         return fileContent.get(line);
+    }
+
+    public static String[] ReadFileList(int line) throws IOException {
+        String data = ReadFileString(line);
+        if (data.contains(" : ")) {
+            return data.split("\\s*:\\s*");
+        } else {
+            return new String[]{data};
+        }
     }
 
     // read file for key code

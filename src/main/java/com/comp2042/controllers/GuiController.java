@@ -7,6 +7,7 @@ import com.comp2042.enums.KeyEventType;
 import com.comp2042.interfaces.InputEventListener;
 import com.comp2042.logic.DownData;
 import com.comp2042.logic.MoveEvent;
+import com.comp2042.media.Sfx;
 import com.comp2042.view.NotificationPanel;
 import com.comp2042.view.ViewData;
 import javafx.animation.KeyFrame;
@@ -153,26 +154,48 @@ public class GuiController implements Initializable {
         });
 
         /* Playing Mouse Events */
-        pauseImage.setOnMouseClicked(e -> pauseGame());
+        pauseImage.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
+            pauseGame();
+        });
 
         /* Pause Mouse Events */
-        Resume.setOnMouseClicked(e -> pauseGame());
+        Resume.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
+            pauseGame();
+        });
 
         Pause_Restart.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
             pauseGame();
             newGame();
         });
 
-        Pause_Home.setOnMouseClicked(e -> returnHome());
+        Pause_Home.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
+            returnHome();
+        });
 
-        Pause_Settings.setOnMouseClicked(e -> settingsPane = SettingsController.openSettings(rootPane));
+        Pause_Settings.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
+            settingsPane = SettingsController.openSettings(rootPane);
+        });
 
         /* Game Over Mouse Events*/
-        GameOver_Restart.setOnMouseClicked(e -> newGame());
+        GameOver_Restart.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
+            newGame();
+        });
 
-        GameOver_Home.setOnMouseClicked(e -> returnHome());
+        GameOver_Home.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
+            returnHome();
+        });
 
-        GameOver_Settings.setOnMouseClicked(e -> settingsPane = SettingsController.openSettings(rootPane));
+        GameOver_Settings.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
+            settingsPane = SettingsController.openSettings(rootPane);
+        });
 
     }
 

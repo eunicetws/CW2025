@@ -10,5 +10,7 @@ public enum KeyEventType {
     PAUSE,
     RESTART,
     HARDDROP,
-    MUSIC
+    MUSIC,
+    BUTTONS,
+    CLEARLINES
 }

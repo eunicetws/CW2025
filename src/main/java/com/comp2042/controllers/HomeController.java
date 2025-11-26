@@ -1,7 +1,9 @@
 package com.comp2042.controllers;
 
 import com.comp2042.data.SaveData;
+import com.comp2042.enums.KeyEventType;
 import com.comp2042.media.Bgm;
+import com.comp2042.media.Sfx;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -9,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -36,6 +39,10 @@ public class HomeController implements Initializable {
         Bgm.init();
         Bgm.play();
 
+        //set sfx
+        Sfx.loadMap(KeyEventType.BUTTONS);
+        Sfx.loadMap(KeyEventType.CLEARLINES);
+
         // get previous high score
         try {
             currentHighScore = Integer.parseInt(SaveData.ReadFileString(0));
@@ -48,12 +55,14 @@ public class HomeController implements Initializable {
 
         // when settings button pressed
         Setting.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
             SettingsController.openSettings(rootPane);
         });
 
         // when play button pressed
         Play.setOnMouseClicked(e -> {
             try {
+                Sfx.play(KeyEventType.BUTTONS);
                 FXMLLoader loader = new FXMLLoader(
                         getClass().getClassLoader().getResource("gameLayout.fxml")
                 );
@@ -72,6 +81,7 @@ public class HomeController implements Initializable {
 
         // when exit button pressed, close everything
         Exit.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
             Platform.exit();
             System.exit(0);
         });

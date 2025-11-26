@@ -29,11 +29,6 @@ public class Bgm {
             mediaPlayer.play();
     }
 
-    public static void stop() {
-        if (mediaPlayer != null)
-            mediaPlayer.stop();
-    }
-
     public static void setVolume() {
         if (mediaPlayer != null) {
             try {
@@ -43,9 +38,5 @@ public class Bgm {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    public static void saveVolume(){
-
     }
 }
