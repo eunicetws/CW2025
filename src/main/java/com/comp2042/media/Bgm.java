@@ -4,9 +4,9 @@ import com.comp2042.data.SaveData;
 import com.comp2042.enums.KeyEventType;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import jdk.jfr.Event;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Bgm {
 
@@ -16,7 +16,7 @@ public class Bgm {
         if (mediaPlayer != null) return;
 
         Media media = new Media(
-                Bgm.class.getResource("/audio/Soda Soda.mp3").toExternalForm()
+                Objects.requireNonNull(Bgm.class.getResource("/audio/Soda Soda.mp3")).toExternalForm()
         );
 
         mediaPlayer = new MediaPlayer(media);

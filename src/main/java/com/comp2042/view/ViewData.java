@@ -7,7 +7,6 @@ import java.awt.*;
 public final class ViewData {
 
     private int[][] brickData;
-    private int[][] ghostPieceData;
     private int[][] holdBrickData;
     private final int xPosition;
     private final int yPosition;

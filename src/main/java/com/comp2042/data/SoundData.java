@@ -2,7 +2,7 @@ package com.comp2042.data;
 
 public class SoundData {
     private final String fileName;
-    private double volume;
+    private final double volume;
 
     public SoundData(String fileName, double volume) {
         this.fileName = fileName;

@@ -42,8 +42,8 @@ public class SettingsController implements Initializable {
         Image closeNormal = new Image("/images/buttons/C_X.png");
         Image closeHover = new Image("/images/buttons/C_X_P.png");
         closeImage.setImage(closeNormal);
-        closeImage.setOnMouseEntered(e -> closeImage.setImage(closeHover));
-        closeImage.setOnMouseExited(e -> closeImage.setImage(closeNormal));
+        closeImage.setOnMouseEntered(_ -> closeImage.setImage(closeHover));
+        closeImage.setOnMouseExited(_ -> closeImage.setImage(closeNormal));
         ControlSetting.setVisible(false);
         MusicNVisual.setVisible(true);
         SettingsLeft.setVisible(false);
@@ -101,12 +101,12 @@ public class SettingsController implements Initializable {
         setupShortcutLabel(Harddrop, SaveData.getKeyEvent(KeyEventType.HARDDROP));
 
         //mouse event
-        closeImage.setOnMouseClicked(e -> {
+        closeImage.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             closeSettings();
         });
 
-        SettingsLeft.setOnMouseClicked(e -> {
+        SettingsLeft.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             SettingsLeft.setVisible(false);
             SettingsRight.setVisible(true);
@@ -115,7 +115,7 @@ public class SettingsController implements Initializable {
             SettingsTitle.setText("Audio / Visuals");
         });
 
-        SettingsRight.setOnMouseClicked(e -> {
+        SettingsRight.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
 
             SettingsLeft.setVisible(true);
@@ -125,7 +125,7 @@ public class SettingsController implements Initializable {
             SettingsTitle.setText("Controls");
         });
 
-        MusicSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+        MusicSlider.valueProperty().addListener((_, _, newVal) -> {
             int volume = newVal.intValue();
             try {
                 SaveData.overWriteFile(volume, SaveData.getKeyEvent(KeyEventType.MUSIC));
@@ -135,7 +135,7 @@ public class SettingsController implements Initializable {
             }
         });
 
-        ButtonsSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+        ButtonsSlider.valueProperty().addListener((_, _, newVal) -> {
             double volume = newVal.doubleValue() / 100.0;
             try {
                 SaveData.overWriteFile(volume,1, SaveData.getKeyEvent(KeyEventType.BUTTONS) );
@@ -145,7 +145,7 @@ public class SettingsController implements Initializable {
             }
         });
 
-        ClearLinesSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+        ClearLinesSlider.valueProperty().addListener((_, _, newVal) -> {
             double volume = newVal.doubleValue() / 100.0;
             try {
                 SaveData.overWriteFile(volume,1, SaveData.getKeyEvent(KeyEventType.CLEARLINES) );
@@ -182,7 +182,7 @@ public class SettingsController implements Initializable {
     // highlight the label and allow keyboard shortcut to change
     private void setupShortcutLabel(Label label, int saveDataLine) {
         //
-        label.setOnMouseClicked(event -> {
+        label.setOnMouseClicked(_ -> {
 
             //if a prev label is selected, deselect it and select the new label instead
             if (selectedLabel != null) {
@@ -241,7 +241,7 @@ public class SettingsController implements Initializable {
     // from another gui controller, open the settings itself
     public static Parent openSettings(StackPane rootPane) {
         FXMLLoader loader;
-        Parent settingsPane = null;
+        Parent settingsPane;
         try {
             loader = new FXMLLoader(SettingsController.class.getResource("/settingsLayout.fxml"));
             settingsPane = loader.load();

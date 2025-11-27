@@ -15,7 +15,6 @@ import javafx.animation.Timeline;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +26,6 @@ import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -72,8 +70,6 @@ public class GuiController implements Initializable {
 
     private Timeline timeLine;
 
-    private int currentScore;
-
     private boolean isHoldOn;
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
@@ -88,8 +84,8 @@ public class GuiController implements Initializable {
         Image normal = new Image("/images/buttons/Buttons-pause.png");
         Image hover = new Image("/images/buttons/Buttons-pause-pressed.png");
         pauseImage.setImage(normal);
-        pauseImage.setOnMouseEntered(e -> pauseImage.setImage(hover));
-        pauseImage.setOnMouseExited(e -> pauseImage.setImage(normal));
+        pauseImage.setOnMouseEntered(_ -> pauseImage.setImage(hover));
+        pauseImage.setOnMouseExited(_ -> pauseImage.setImage(normal));
 
         // Set Pause Menu
         PauseMenu.setVisible(false);
@@ -105,101 +101,98 @@ public class GuiController implements Initializable {
         gamePanel.requestFocus();
 
         /* Keyboard Events */
-        gamePanel.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                // if settings is on, shortcut keys aren't triggered
-                if (rootPane.getChildren().contains(settingsPane))
-                    return;
+        gamePanel.setOnKeyPressed(keyEvent -> {
+            // if settings is on, shortcut keys aren't triggered
+            if (rootPane.getChildren().contains(settingsPane))
+                return;
 
-                // Pause
-                if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.PAUSE))) {
-                    pauseGame();
+            // Pause
+            if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.PAUSE))) {
+                pauseGame();
+                keyEvent.consume();
+            }
+
+            // New Game / Restart
+            if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.RESTART))) {
+                newGame();
+                keyEvent.consume();
+            }
+
+            // If game is not paused and not over
+            if (!isPause.getValue() && !isGameOver.getValue()) {
+
+                // Move Left
+                if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.LEFT))) {
+                    refreshBrick(eventListener.onLeftEvent(new MoveEvent(EventType.LEFT, EventSource.USER)));
                     keyEvent.consume();
                 }
-
-                // New Game / Restart
-                if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.RESTART))) {
-                    newGame();
+                // Move Right
+                else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.RIGHT))) {
+                    refreshBrick(eventListener.onRightEvent(new MoveEvent(EventType.RIGHT, EventSource.USER)));
                     keyEvent.consume();
                 }
-
-                // If game is not paused and not over
-                if (!isPause.getValue() && !isGameOver.getValue()) {
-
-                    // Move Left
-                    if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.LEFT))) {
-                        refreshBrick(eventListener.onLeftEvent(new MoveEvent(EventType.LEFT, EventSource.USER)));
-                        keyEvent.consume();
-                    }
-                    // Move Right
-                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.RIGHT))) {
-                        refreshBrick(eventListener.onRightEvent(new MoveEvent(EventType.RIGHT, EventSource.USER)));
-                        keyEvent.consume();
-                    }
-                    // Rotate
-                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.ROTATE))) {
-                        refreshBrick(eventListener.onRotateEvent(new MoveEvent(EventType.ROTATE, EventSource.USER)));
-                        keyEvent.consume();
-                    }
-                    // Move Down
-                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.DOWN))) {
-                        moveDown(new MoveEvent(EventType.DOWN, EventSource.USER));
-                        keyEvent.consume();
-                    }
-                    // Hold
-                    else if (isHoldOn && (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.HOLD)))) {
-                        refreshHoldBrick(eventListener.onHoldEvent(new MoveEvent(EventType.HOLD, EventSource.USER)));
-                        keyEvent.consume();
-                    }
-                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.HARDDROP))) {
-                        HardDrop(new MoveEvent(EventType.DOWN, EventSource.USER));
-                        keyEvent.consume();
-                    }
+                // Rotate
+                else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.ROTATE))) {
+                    refreshBrick(eventListener.onRotateEvent(new MoveEvent(EventType.ROTATE, EventSource.USER)));
+                    keyEvent.consume();
+                }
+                // Move Down
+                else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.DOWN))) {
+                    moveDown(new MoveEvent(EventType.DOWN, EventSource.USER));
+                    keyEvent.consume();
+                }
+                // Hold
+                else if (isHoldOn && (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.HOLD)))) {
+                    refreshHoldBrick(eventListener.onHoldEvent(new MoveEvent(EventType.HOLD, EventSource.USER)));
+                    keyEvent.consume();
+                }
+                else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.HARDDROP))) {
+                    HardDrop(new MoveEvent(EventType.DOWN, EventSource.USER));
+                    keyEvent.consume();
                 }
             }
         });
 
         /* Playing Mouse Events */
-        pauseImage.setOnMouseClicked(e -> {
+        pauseImage.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             pauseGame();
         });
 
         /* Pause Mouse Events */
-        Resume.setOnMouseClicked(e -> {
+        Resume.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             pauseGame();
         });
 
-        Pause_Restart.setOnMouseClicked(e -> {
+        Pause_Restart.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             pauseGame();
             newGame();
         });
 
-        Pause_Home.setOnMouseClicked(e -> {
+        Pause_Home.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             returnHome();
         });
 
-        Pause_Settings.setOnMouseClicked(e -> {
+        Pause_Settings.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             settingsPane = SettingsController.openSettings(rootPane);
         });
 
         /* Game Over Mouse Events*/
-        GameOver_Restart.setOnMouseClicked(e -> {
+        GameOver_Restart.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             newGame();
         });
 
-        GameOver_Home.setOnMouseClicked(e -> {
+        GameOver_Home.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             returnHome();
         });
 
-        GameOver_Settings.setOnMouseClicked(e -> {
+        GameOver_Settings.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             settingsPane = SettingsController.openSettings(rootPane);
         });
@@ -377,9 +370,9 @@ public class GuiController implements Initializable {
     public void resetHoldBrickDisplay() {
         if (rectanglesHoldBrick == null) return;
 
-        for (int i = 0; i < rectanglesHoldBrick.length; i++) {
-            for (int j = 0; j < rectanglesHoldBrick[i].length; j++) {
-                setRectangleData(0, rectanglesHoldBrick[i][j]); // 0 = transparent cell
+        for (Rectangle[] value : rectanglesHoldBrick) {
+            for (Rectangle rectangle : value) {
+                setRectangleData(0, rectangle); // 0 = transparent cell
             }
         }
     }
@@ -543,14 +536,10 @@ public class GuiController implements Initializable {
         // Create a new timeline with updated speed
         timeLine = new Timeline(new KeyFrame(
                 Duration.millis(speed),
-                e -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD))
+                _ -> moveDown(new MoveEvent(EventType.DOWN, EventSource.THREAD))
         ));
         timeLine.setCycleCount(Timeline.INDEFINITE);
         timeLine.play();
-    }
-
-    public void setCurrentScore(int currentScore) {
-        this.currentScore = currentScore;
     }
 
     public void setEventListener(InputEventListener eventListener) {

@@ -15,8 +15,6 @@ public class Sfx {
     public static void loadMap(KeyEventType sfxType) {
         try {
             String[] raw = SaveData.ReadFileList(SaveData.getKeyEvent(sfxType));
-
-            List<String> lines = Arrays.asList(raw);
             String fileName = raw[0].trim();
             double volume = Double.parseDouble(raw[1].trim());
             sfxMap.put(sfxType, new SoundData(fileName, volume));
