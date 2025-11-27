@@ -23,32 +23,56 @@
 
             <center>
                 <HBox alignment="center" spacing="10">
-                    <Label styleClass="SettingsArrow" text="&lt;"/>
-                    <Label styleClass="SettingsTitle" text="Control"/>
-                    <Label styleClass="SettingsArrow" text="&gt;"/>
+                    <Label fx:id="SettingsLeft" styleClass="SettingsArrow" text="&lt;"/>
+                    <Label fx:id="SettingsTitle"  styleClass="SettingsTitle" text="Audio / Visuals"/>
+                    <Label fx:id="SettingsRight" styleClass="SettingsArrow" text="&gt;"/>
                 </HBox>
             </center>
         </BorderPane>
 
-        <VBox fx:id="OptionsSetting">
-            <Pane styleClass="Line"/>
+        <StackPane>
+            <VBox fx:id="MusicNVisual">
+                <Pane styleClass="Line"/>
+                <VBox styleClass="volumeControl" spacing="10" alignment="CENTER">
+                    <Label text="Music" styleClass="ShortcutLabel"/>
+                    <Slider styleClass="MusicSlider"  fx:id="MusicSlider" value="50"/>
+                </VBox>
+                <VBox styleClass="volumeControl" spacing="10" alignment="CENTER">
+                    <Label text="Buttons SFX" styleClass="ShortcutLabel"/>
+                    <Slider styleClass="MusicSlider"  fx:id="ButtonsSlider" value="50"/>
+                </VBox>
+                <VBox styleClass="volumeControl" spacing="10" alignment="CENTER">
+                    <Label text="Clear Lines SFX" styleClass="ShortcutLabel"/>
+                    <Slider styleClass="MusicSlider"  fx:id="ClearLinesSlider" value="50"/>
+                </VBox>
+                <Pane styleClass="Line"/>
+                <HBox styleClass="PanelToggle">
+                    <VBox fx:id="HoldPiece" styleClass="TogglePanel">
+                        <Label text="Hold" styleClass="ShortcutLabel"/>
+                        <HBox styleClass="ToggleButtonsPanel">
+                            <Label fx:id="ToggleHoldOn" styleClass="Toggle" text="O"/>
+                            <Label fx:id="ToggleHoldOff" styleClass="Toggle" text="|"/>
+                        </HBox>
+                    </VBox>
 
-            <VBox styleClass="volumeControl" spacing="10" alignment="CENTER">
-                <Label text="Music" styleClass="ShortcutLabel"/>
-                <Slider styleClass="MusicSlider"  fx:id="MusicSlider" value="50"/>
-            </VBox>
-            <VBox styleClass="volumeControl" spacing="10" alignment="CENTER">
-                <Label text="Buttons SFX" styleClass="ShortcutLabel"/>
-                <Slider styleClass="MusicSlider"  fx:id="ButtonsSlider" value="50"/>
-            </VBox>
-            <VBox styleClass="volumeControl" spacing="10" alignment="CENTER">
-                <Label text="Clear Lines SFX" styleClass="ShortcutLabel"/>
-                <Slider styleClass="MusicSlider"  fx:id="ClearLinesSlider" value="50"/>
+                    <VBox styleClass="TogglePanel">
+                        <Label text="Next Piece" styleClass="ShortcutLabel"/>
+                        <HBox styleClass="ToggleButtonsPanel">
+                            <Label fx:id="ToggleNextOn" styleClass="Toggle" text="O"/>
+                            <Label fx:id="ToggleNextOff" styleClass="Toggle" text="|"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+                <VBox styleClass="TogglePanel">
+                    <Label text="Ghost Piece" styleClass="ShortcutLabel"/>
+                    <HBox styleClass="ToggleButtonsPanel">
+                        <Label fx:id="ToggleGhostOn" styleClass="Toggle" text="O"/>
+                        <Label fx:id="ToggleGhostOff" styleClass="Toggle" text="|"/>
+                    </HBox>
+                </VBox>
             </VBox>
 
-        </VBox>
-
-        <VBox fx:id="ControlSetting">
+            <VBox fx:id="ControlSetting">
             <Label styleClass="Instruction" text="Click a box and press a key to change its shortcut."/>
             <Pane styleClass="Line"/>
 
@@ -92,6 +116,7 @@
                 </VBox>
             </HBox>
         </VBox>
+        </StackPane>
 
     </VBox>
 

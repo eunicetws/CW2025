@@ -12,5 +12,8 @@ public enum KeyEventType {
     HARDDROP,
     MUSIC,
     BUTTONS,
-    CLEARLINES
+    CLEARLINES,
+    TOGGLE_HOLD,
+    TOGGLE_NEXT,
+    TOGGLE_GHOST
 }

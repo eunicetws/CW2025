@@ -46,7 +46,10 @@ public class SaveData {
             KeyCode.SPACE + "\n" +// HardDrop
             "30\n" +    // Music
             "Modern1.mp3 : 0.2\n" +  // Buttons
-            "coin.mp3 : 0.3\n"// Clear Line
+            "coin.mp3 : 0.3\n" + // Clear Line
+            "true\n" + // Toggle Hold
+            "true\n" + // Toggle Next
+            "true\n"  // Toggle GhostPiece
         );
         return write;
 
@@ -119,6 +122,9 @@ public class SaveData {
             case MUSIC -> 9;
             case BUTTONS -> 10;
             case CLEARLINES -> 11;
+            case TOGGLE_HOLD -> 12;
+            case TOGGLE_NEXT -> 13;
+            case TOGGLE_GHOST -> 14;
         };
     }
 
@@ -134,6 +140,13 @@ public class SaveData {
     public static String ReadFileString(int line) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
         return fileContent.get(line);
+    }
+
+    public static boolean ReadBoolean(int line) throws IOException{
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
+
+        String data = fileContent.get(line);
+        return Boolean.parseBoolean(data);
     }
 
     public static String[] ReadFileList(int line) throws IOException {

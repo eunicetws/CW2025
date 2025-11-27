@@ -30,6 +30,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -53,6 +54,7 @@ public class GuiController implements Initializable {
     @FXML private Group groupNotification;
     @FXML private ImageView pauseImage;
     @FXML private Labeled scoreLabel, totalClearedLinesLabel, levelLabel;
+    @FXML private VBox NextPanel, HoldPanel;
 
     //Pause Menu
     @FXML private StackPane PauseMenu, Resume;
@@ -71,6 +73,8 @@ public class GuiController implements Initializable {
     private Timeline timeLine;
 
     private int currentScore;
+
+    private boolean isHoldOn;
 
     private final BooleanProperty isPause = new SimpleBooleanProperty();
 
@@ -93,6 +97,9 @@ public class GuiController implements Initializable {
         // Set Game Over Menu
         isGameOver.setValue(Boolean.FALSE);
         GameOverMenu.setVisible(false);
+
+        //Check toggle Settings
+        checkToggles();
 
         gamePanel.setFocusTraversable(true);
         gamePanel.requestFocus();
@@ -141,7 +148,7 @@ public class GuiController implements Initializable {
                         keyEvent.consume();
                     }
                     // Hold
-                    else if (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.HOLD))) {
+                    else if (isHoldOn && (keyEvent.getCode() == getKeyCode(SaveData.getKeyEvent(KeyEventType.HOLD)))) {
                         refreshHoldBrick(eventListener.onHoldEvent(new MoveEvent(EventType.HOLD, EventSource.USER)));
                         keyEvent.consume();
                     }
@@ -433,6 +440,32 @@ public class GuiController implements Initializable {
         }
     }
 
+    private void checkToggles (){
+        try {
+            isHoldOn = SaveData.ReadBoolean(SaveData.getKeyEvent(KeyEventType.TOGGLE_HOLD));
+            HoldPanel.setVisible(isHoldOn);
+
+            if (!SaveData.ReadBoolean(SaveData.getKeyEvent(KeyEventType.TOGGLE_NEXT))) {
+                NextPanel.setVisible(false);
+                NextPanel.setManaged(false);
+            }
+            else {
+                NextPanel.setVisible(true);
+                NextPanel.setManaged(true);
+            }
+
+            if (!SaveData.ReadBoolean(SaveData.getKeyEvent(KeyEventType.TOGGLE_GHOST))) {
+                ghostPiecePanel.setVisible(false);
+                ghostPiecePanel.setManaged(false);
+            }else {
+                ghostPiecePanel.setVisible(true);
+                ghostPiecePanel.setManaged(true);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // Event
     // pause the game
@@ -445,6 +478,7 @@ public class GuiController implements Initializable {
         }
         PauseMenu.setVisible(isPause.getValue());
         pauseImage.setVisible(!isPause.getValue());
+        checkToggles();
     }
 
     // create new game

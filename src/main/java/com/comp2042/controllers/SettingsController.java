@@ -4,6 +4,7 @@ import com.comp2042.enums.KeyEventType;
 import com.comp2042.data.SaveData;
 import com.comp2042.media.Bgm;
 import com.comp2042.media.Sfx;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -23,10 +25,12 @@ import java.util.ResourceBundle;
 public class SettingsController implements Initializable {
 
     @FXML private StackPane rootPane;
-    @FXML private VBox ControlSetting;
+    @FXML private VBox ControlSetting, MusicNVisual;
     @FXML private ImageView closeImage;
     @FXML private Slider MusicSlider, ButtonsSlider, ClearLinesSlider;
     @FXML private Label Left, Right, Down, Rotate, Pause, Hold, Restart, Harddrop;
+    @FXML private Label ToggleGhostOn, ToggleGhostOff, ToggleHoldOn, ToggleHoldOff, ToggleNextOn, ToggleNextOff;
+    @FXML private Label SettingsLeft, SettingsRight, SettingsTitle;
 
     private Label selectedLabel = null;
 
@@ -41,6 +45,8 @@ public class SettingsController implements Initializable {
         closeImage.setOnMouseEntered(e -> closeImage.setImage(closeHover));
         closeImage.setOnMouseExited(e -> closeImage.setImage(closeNormal));
         ControlSetting.setVisible(false);
+        MusicNVisual.setVisible(true);
+        SettingsLeft.setVisible(false);
 
         try {
             MusicSlider.setValue(SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.MUSIC))); // get saved volume (0-100)
@@ -64,6 +70,10 @@ public class SettingsController implements Initializable {
             throw new RuntimeException(e);
         }
 
+        // load toggle
+        showToggle(ToggleGhostOn, ToggleGhostOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_GHOST));
+        showToggle(ToggleHoldOn, ToggleHoldOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_HOLD));
+        showToggle(ToggleNextOn, ToggleNextOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_NEXT));
 
         // load keys
         getKeyCode(Left, SaveData.getKeyEvent(KeyEventType.LEFT));
@@ -74,6 +84,11 @@ public class SettingsController implements Initializable {
         getKeyCode(Hold, SaveData.getKeyEvent(KeyEventType.HOLD));
         getKeyCode(Restart, SaveData.getKeyEvent(KeyEventType.RESTART));
         getKeyCode(Harddrop, SaveData.getKeyEvent(KeyEventType.HARDDROP));
+
+        //setup labels
+        setupToggle(ToggleGhostOn, ToggleGhostOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_GHOST));
+        setupToggle(ToggleHoldOn, ToggleHoldOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_HOLD));
+        setupToggle(ToggleNextOn, ToggleNextOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_NEXT));
 
         // Setup shortcut labels
         setupShortcutLabel(Left, SaveData.getKeyEvent(KeyEventType.LEFT));
@@ -87,8 +102,27 @@ public class SettingsController implements Initializable {
 
         //mouse event
         closeImage.setOnMouseClicked(e -> {
-            Sfx.play(KeyEventType.BUTTONS); // play SFX
-            closeSettings();                 // then close
+            Sfx.play(KeyEventType.BUTTONS);
+            closeSettings();
+        });
+
+        SettingsLeft.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
+            SettingsLeft.setVisible(false);
+            SettingsRight.setVisible(true);
+            MusicNVisual.setVisible(true);
+            ControlSetting.setVisible(false);
+            SettingsTitle.setText("Audio / Visuals");
+        });
+
+        SettingsRight.setOnMouseClicked(e -> {
+            Sfx.play(KeyEventType.BUTTONS);
+
+            SettingsLeft.setVisible(true);
+            SettingsRight.setVisible(false);
+            MusicNVisual.setVisible(false);
+            ControlSetting.setVisible(true);
+            SettingsTitle.setText("Controls");
         });
 
         MusicSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
@@ -121,6 +155,29 @@ public class SettingsController implements Initializable {
             }
         });
     }
+
+    private void setupToggle(Label optionOn, Label optionOff, int line) {
+
+        EventHandler<MouseEvent> toggleHandler = event -> {
+            Label clicked = (Label) event.getSource();
+
+            optionOn.getStyleClass().remove("ToggleSelected");
+            optionOff.getStyleClass().remove("ToggleSelected");
+
+            boolean value = clicked.getText().equals("O");
+
+            try {
+                SaveData.overWriteFile(Boolean.toString(value), line);
+                showToggle(optionOn, optionOff, line);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        };
+
+        optionOn.setOnMouseClicked(toggleHandler);
+        optionOff.setOnMouseClicked(toggleHandler);
+    }
+
 
     // highlight the label and allow keyboard shortcut to change
     private void setupShortcutLabel(Label label, int saveDataLine) {
@@ -157,6 +214,18 @@ public class SettingsController implements Initializable {
                 label.getScene().setOnKeyPressed(null); //stop listening for keys
             });
         });
+    }
+
+    private void showToggle(Label optionOn, Label optionOff, int line) {
+        try {
+            if(SaveData.ReadBoolean(line)){
+                optionOn.getStyleClass().add("ToggleSelected");
+            } else {
+                optionOff.getStyleClass().add("ToggleSelected");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void getKeyCode(Label label, int saveDataLine){

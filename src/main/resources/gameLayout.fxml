@@ -26,9 +26,9 @@
         <HBox id="playing">
 
             <!-- Left Panel -->
-            <VBox styleClass="leftPanel">
+            <VBox styleClass="leftPanel" >
                 <!-- Hold Brick -->
-                <VBox styleClass="brickPanel">
+                <VBox styleClass="brickPanel" fx:id="HoldPanel">
                     <Label styleClass="brickLabel" text="Hold:"/>
                     <GridPane styleClass="brickDisplay"  fx:id="holdBrickDisplay"/>
                 </VBox>
@@ -54,7 +54,7 @@
             <VBox styleClass="rightPanel">
 
                 <!-- Next Brick  -->
-                <VBox styleClass="brickPanel">
+                <VBox styleClass="brickPanel" fx:id="NextPanel">
                     <Label styleClass="brickLabel" text="Next:"/>
                     <GridPane styleClass="brickDisplay" fx:id="nextBrickDisplay"/>
                 </VBox>
