@@ -26,6 +26,15 @@
             <Label styleClass="HighScoreDisplay" fx:id="HighScoreDisplay"/>
         </VBox>
 
+        <VBox styleClass="TimerPanel">
+            <Label styleClass="TimerLabel" text="Timer"/>
+            <HBox styleClass="TimerHBox">
+                <Label styleClass="ChangeTimer" fx:id="TimerMinus" text="-"/>
+                <Label styleClass="TimerDisplay" fx:id="TimerDisplay"/>
+                <Label styleClass="ChangeTimer" fx:id="TimerAdd" text="+"/>
+            </HBox>
+        </VBox>
+
         <HBox styleClass="ButtonsPanel">
             <Label styleClass="Setting" fx:id="Setting"/>
             <Label styleClass="Play" fx:id="Play"/>

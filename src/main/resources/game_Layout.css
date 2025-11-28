@@ -38,11 +38,6 @@
         -fx-border-width: 10px;
     }
 
-    .brickPanel {
-        -fx-padding: 0;
-        -fx-alignment: top-left; /* instead of center */
-    }
-
     .bonusStyle {
         -fx-font-family: "Gluten Bold";
         -fx-font-size: 30px;
@@ -56,6 +51,9 @@
     .leftPanel{
         -fx-padding: 10 0 0 10;
         -fx-alignment: top-center;
+        -fx-spacing: 5;
+        -fx-min-width: 120px;
+        -fx-max-width: 120px;
     }
 
     /* Labels*/
@@ -75,6 +73,9 @@
         }
 
         .brickPanel {
+            -fx-padding: 0;
+            -fx-alignment: top-left;
+
             -fx-border-color: #5F445E;
             -fx-border-width: 5;
             -fx-border-radius: 5;
@@ -92,3 +93,29 @@
             -fx-min-width: 100px;
             -fx-max-width: 100px;
         }
+
+    /* Timer */
+
+    .TimePanel {
+        -fx-padding: 5;
+        -fx-alignment: top-left;
+
+        -fx-border-color: #5F445E;
+        -fx-border-width: 5;
+        -fx-border-radius: 5;
+
+        -fx-background-color: #02060F;
+        -fx-background-radius: 10;
+
+        -fx-alignment: center;
+        -fx-min-width: 120px;
+        -fx-max-width: 120px;
+    }
+    .TimeDisplay{
+        -fx-font-family: "Gluten Bold";
+        -fx-alignment: center;
+        -fx-min-width: 100px;
+        -fx-max-width: 100px;
+        -fx-text-fill: #da627d;
+        -fx-font-size: 18;
+    }

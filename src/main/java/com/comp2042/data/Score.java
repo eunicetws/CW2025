@@ -24,13 +24,41 @@ public final class Score {
         saveScore();
     }
 
-    private void saveScore(){
+    private void saveScore() {
+
         try {
-            if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE)))
-                SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE));
+            int minutes = Timer.getTotalSeconds() / 60;
+
+            switch (minutes) {
+                case 0 -> { // No timer
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE));
+                    }
+                }
+                case 5 -> {
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_5))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE_5));
+                    }
+                }
+                case 10 -> {
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_10))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE_10));
+                    }
+                }
+                case 15 -> {
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_15))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE_15));
+                    }
+                }
+                case 20 -> {
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_20))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE_20));
+                    }
+                }
+            }
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        }
     }
-}

@@ -9,6 +9,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
@@ -17,7 +18,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         URL location = getClass().getClassLoader().getResource("homeLayout.fxml");
-        Font.loadFont(getClass().getClassLoader().getResource("fonts/Gluten-Bold.ttf").toExternalForm(), 40);
+        Font font = Font.loadFont(Objects.requireNonNull(getClass().getClassLoader().getResource("fonts/Gluten-Bold.ttf")).toExternalForm(), 40);
+        System.out.println(font.getName());
         ResourceBundle resources = null;
         FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
         Parent root = fxmlLoader.load();

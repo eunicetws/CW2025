@@ -15,5 +15,9 @@ public enum KeyEventType {
     CLEARLINES,
     TOGGLE_HOLD,
     TOGGLE_NEXT,
-    TOGGLE_GHOST
+    TOGGLE_GHOST,
+    HIGHSCORE_5,
+    HIGHSCORE_10,
+    HIGHSCORE_15,
+    HIGHSCORE_20
 }

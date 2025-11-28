@@ -49,7 +49,11 @@ public class SaveData {
             "coin.mp3 : 0.3\n" + // Clear Line
             "true\n" + // Toggle Hold
             "true\n" + // Toggle Next
-            "true\n"  // Toggle GhostPiece
+            "true\n" + // Toggle GhostPiece
+            "0\n" + // highScore 5min
+            "0\n" + // highScore 10min
+            "0\n" + // highScore 15min
+            "0\n" // highScore 20min
         );
         return write;
 
@@ -125,6 +129,11 @@ public class SaveData {
             case TOGGLE_HOLD -> 12;
             case TOGGLE_NEXT -> 13;
             case TOGGLE_GHOST -> 14;
+            case HIGHSCORE_5 -> 15;
+            case HIGHSCORE_10 -> 16;
+            case HIGHSCORE_15 -> 17;
+            case HIGHSCORE_20 -> 18;
+
         };
     }
 

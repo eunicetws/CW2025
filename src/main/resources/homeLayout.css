@@ -46,6 +46,53 @@
         -fx-font-size: 25px;
     }
 
+.TimerPanel{
+    -fx-border-color: #5F445E;
+    -fx-border-width: 5;
+    -fx-border-radius: 10;
+
+    -fx-background-color: #F3EFE8;
+    -fx-background-radius: 20;
+
+    -fx-spacing: 5;
+
+    -fx-alignment: center;
+    -fx-min-width: 200px;
+    -fx-max-width: 200px;
+
+    -fx-min-height: 70px;
+    -fx-max-height: 70px;
+}
+
+    .TimerLabel{
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 18px;
+    }
+
+    .TimerHBox{
+         -fx-alignment: center;
+    }
+
+    .ChangeTimer{
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 18px;
+    }
+
+     .ChangeTimer:hover{
+        -fx-text-fill: #da627d;
+    }
+
+
+    .TimerDisplay{
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #da627d;
+        -fx-alignment: center;
+        -fx-font-size: 18px;
+        -fx-min-width: 150px;
+        -fx-max-width: 150px;
+    }
 
 /* Buttons */
 .ButtonsPanel{

@@ -1,5 +1,6 @@
 package com.comp2042.controllers;
 
+import com.comp2042.data.Timer;
 import com.comp2042.enums.EventSource;
 import com.comp2042.enums.EventType;
 import com.comp2042.data.SaveData;
@@ -38,6 +39,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
 import java.util.ResourceBundle;
 
 public class GuiController implements Initializable {
@@ -52,6 +54,8 @@ public class GuiController implements Initializable {
     @FXML private Group groupNotification;
     @FXML private ImageView pauseImage;
     @FXML private Labeled scoreLabel, totalClearedLinesLabel, levelLabel;
+    @FXML private Label TimerDisplay;
+    @FXML private VBox TimerPanel;
     @FXML private VBox NextPanel, HoldPanel;
 
     //Pause Menu
@@ -86,7 +90,7 @@ public class GuiController implements Initializable {
         pauseImage.setImage(normal);
         pauseImage.setOnMouseEntered(_ -> pauseImage.setImage(hover));
         pauseImage.setOnMouseExited(_ -> pauseImage.setImage(normal));
-
+        Timer.setDisplayLabel(TimerDisplay, TimerPanel);
         // Set Pause Menu
         PauseMenu.setVisible(false);
 
@@ -197,6 +201,7 @@ public class GuiController implements Initializable {
             settingsPane = SettingsController.openSettings(rootPane);
         });
 
+        Timer.start();
     }
 
     public void initGameView(int[][] boardMatrix, ViewData brick) {
@@ -437,6 +442,7 @@ public class GuiController implements Initializable {
         try {
             isHoldOn = SaveData.ReadBoolean(SaveData.getKeyEvent(KeyEventType.TOGGLE_HOLD));
             HoldPanel.setVisible(isHoldOn);
+            HoldPanel.setManaged(isHoldOn);
 
             if (!SaveData.ReadBoolean(SaveData.getKeyEvent(KeyEventType.TOGGLE_NEXT))) {
                 NextPanel.setVisible(false);
@@ -469,6 +475,7 @@ public class GuiController implements Initializable {
         } else if (isPause.getValue() == false){
             isPause.setValue(Boolean.TRUE);
         }
+        Timer.pause(isPause.getValue());
         PauseMenu.setVisible(isPause.getValue());
         pauseImage.setVisible(!isPause.getValue());
         checkToggles();
@@ -486,6 +493,7 @@ public class GuiController implements Initializable {
         isPause.setValue(Boolean.FALSE);
         isGameOver.setValue(Boolean.FALSE);
         resetHoldBrickDisplay();
+        Timer.reset();
     }
 
     // show game over
@@ -493,11 +501,14 @@ public class GuiController implements Initializable {
         timeLine.stop();
         GameOverMenu.setVisible(true);
         isGameOver.setValue(Boolean.TRUE);
+        Timer.stop();
     }
 
     // go back to home menu
     private void returnHome(){
         try {
+            Timer.stop();
+
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/homeLayout.fxml")
             );

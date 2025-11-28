@@ -1,6 +1,7 @@
 package com.comp2042.controllers;
 
 import com.comp2042.data.SaveData;
+import com.comp2042.data.Timer;
 import com.comp2042.enums.KeyEventType;
 import com.comp2042.media.Bgm;
 import com.comp2042.media.Sfx;
@@ -22,7 +23,8 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable {
 
     @FXML private StackPane rootPane;
-    @FXML private Label HighScoreDisplay, Setting, Play, Exit;
+    @FXML private Label HighScoreDisplay, Setting, Play, Exit, TimerAdd, TimerMinus, TimerDisplay;
+    int option = 1;
 
     public HomeController() {
 
@@ -34,6 +36,13 @@ public class HomeController implements Initializable {
         // if no save file, create one
         SaveData.createSaveFile();
 
+        TimerDisplay.setText("None");
+        try {
+            HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         // play bgm
         Bgm.init();
         Bgm.play();
@@ -42,22 +51,14 @@ public class HomeController implements Initializable {
         Sfx.loadMap(KeyEventType.BUTTONS);
         Sfx.loadMap(KeyEventType.CLEARLINES);
 
-        // get previous high score
-        try {
-            currentHighScore = Integer.parseInt(SaveData.ReadFileString(0));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        IntegerProperty highScore = new SimpleIntegerProperty(currentHighScore);
-        bindHighScore(highScore);
-
         // when settings button pressed
-        Setting.setOnMouseClicked(e -> {
+        Setting.setOnMouseClicked(_ -> {
             Sfx.play(KeyEventType.BUTTONS);
             SettingsController.openSettings(rootPane);
         });
 
+        TimerAdd.setOnMouseClicked(_ -> getCurrentTimer(true));
+        TimerMinus.setOnMouseClicked(_ -> getCurrentTimer(false));
         // when play button pressed
         Play.setOnMouseClicked(e -> {
             try {
@@ -88,5 +89,46 @@ public class HomeController implements Initializable {
 
     public void bindHighScore(IntegerProperty integerProperty) {
         HighScoreDisplay.textProperty().bind(integerProperty.asString());
+    }
+
+    public void getCurrentTimer(boolean add) {
+        if (add) {
+            option++;
+            if (option > 5) option = 1;   // wrap
+        } else {
+            option--;
+            if (option < 1) option = 5;   // wrap
+        }
+        try {
+            switch (option) {
+                case 1 -> {
+                    Timer.setTimer(0);
+                    TimerDisplay.setText("None");
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE)));
+                }
+                case 2 -> {
+                    Timer.setTimer(5);
+                    TimerDisplay.setText("5 minutes");
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_5)));
+                }
+                case 3 -> {
+                    Timer.setTimer(10);
+                    TimerDisplay.setText("10 minutes");
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_10)));
+                }
+                case 4 -> {
+                    Timer.setTimer(15);
+                    TimerDisplay.setText("15 minutes");
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_15)));
+                }
+                case 5 -> {
+                    Timer.setTimer(20);
+                    TimerDisplay.setText("20 minutes");
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_20)));
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

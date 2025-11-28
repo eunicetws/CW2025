@@ -32,6 +32,14 @@
                     <Label styleClass="brickLabel" text="Hold:"/>
                     <GridPane styleClass="brickDisplay"  fx:id="holdBrickDisplay"/>
                 </VBox>
+
+                <VBox styleClass="TimePanel" fx:id="TimerPanel">
+                    <Label styleClass="DisplayLabel" text="Timer:"/>
+                    <Label styleClass="TimeDisplay"  fx:id="TimerDisplay"/>
+                </VBox>
+                <VBox styleClass="KeyboardKeys" fx:id="KeyboardKeys">
+                    <Label styleClass="ScoreKeyboard"/>
+                </VBox>
             </VBox>
 
             <!-- Tetris Board -->
