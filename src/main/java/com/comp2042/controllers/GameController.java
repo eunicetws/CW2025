@@ -11,7 +11,7 @@ import com.comp2042.view.ViewData;
 
 public class GameController implements InputEventListener {
 
-    private final Board board = new SimpleBoard(25, 10);
+    private Board board = new SimpleBoard(25, 10);
 
     private final GuiController viewGuiController;
 
@@ -103,5 +103,14 @@ public class GameController implements InputEventListener {
     public void createNewGame() {
         board.newGame();
         viewGuiController.refreshGameBackground(board.getBoardMatrix());
+    }
+
+    //for testing
+    public Board getBoard(){
+        return this.board;
+    }
+
+    public void setBoard(Board board){
+        this.board = board;
     }
 }

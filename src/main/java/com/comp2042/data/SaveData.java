@@ -46,7 +46,7 @@ public class SaveData {
             KeyCode.N + "\n" +  // Restart
             KeyCode.SPACE + "\n" +// HardDrop
             "30\n" +    // Music
-            "Modern1.mp3 : 0.2\n" +  // Buttons
+            "Retro1.mp3 : 0.2\n" +  // Buttons
             "coin.mp3 : 0.3\n" + // Clear Line
             "true\n" + // Toggle Hold
             "true\n" + // Toggle Next
