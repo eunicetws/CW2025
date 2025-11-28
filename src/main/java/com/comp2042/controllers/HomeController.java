@@ -7,7 +7,6 @@ import com.comp2042.media.Bgm;
 import com.comp2042.media.Sfx;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

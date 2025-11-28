@@ -101,11 +101,11 @@
 }
 
    .Play {
-       -fx-graphic: url("images/buttons/Buttons-control.png");
+       -fx-graphic: url("images/buttons/C_RightArrow2.png");
    }
 
    .Play:hover {
-       -fx-graphic: url("images/buttons/Buttons-control-pressed.png");
+       -fx-graphic: url("images/buttons/C_RightArrow2_P.png");
    }
 
    .Setting {

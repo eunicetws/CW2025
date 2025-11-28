@@ -51,7 +51,6 @@ public class Timer {
         timerThread.start();
     }
 
-
     public static void pause(boolean isPause) {
         running = !isPause;
     }

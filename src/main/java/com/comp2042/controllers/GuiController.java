@@ -36,10 +36,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 import java.util.ResourceBundle;
 
 public class GuiController implements Initializable {
@@ -66,18 +64,12 @@ public class GuiController implements Initializable {
     @FXML private StackPane GameOverMenu;
     @FXML private Label GameOver_Restart, GameOver_Home, GameOver_Settings;
 
-    //Settings
-
+// Playing
     private Rectangle[][] displayMatrix, rectangles, rectanglesNextBrick, rectanglesHoldBrick, rectanglesGhostPiece;
-
     private InputEventListener eventListener;
-
     private Timeline timeLine;
-
     private boolean isHoldOn;
-
     private final BooleanProperty isPause = new SimpleBooleanProperty();
-
     private final BooleanProperty isGameOver = new SimpleBooleanProperty();
 
     Parent settingsPane;
@@ -332,6 +324,7 @@ public class GuiController implements Initializable {
         }
     }
 
+    // get current ghost display
     private void refreshGhostPiece(ViewData brick) {
         ghostPiecePanel.setLayoutX(gamePanel.getLayoutX() + brick.getGhostPieceXPosition() * BRICK_SIZE);
         ghostPiecePanel.setLayoutY(-40 + gamePanel.getLayoutY() + brick.getGhostPieceYPosition() * BRICK_SIZE);
@@ -376,6 +369,7 @@ public class GuiController implements Initializable {
         }
     }
 
+    // get reset brick display
     public void resetHoldBrickDisplay() {
         if (rectanglesHoldBrick == null) return;
 
@@ -386,7 +380,7 @@ public class GuiController implements Initializable {
         }
     }
 
-    // get display of teh bricks snapped to the background
+    // get display of the bricks snapped to the background
     public void refreshGameBackground(int[][] board) {
         for (int i = 2; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -403,7 +397,7 @@ public class GuiController implements Initializable {
         rectangle.setStrokeWidth(1);
     }
 
-    // display score when a row is cleared
+    // move block down
     private void moveDown(MoveEvent event) {
         if (isPause.getValue() == Boolean.FALSE) {
             DownData downData = eventListener.onDownEvent(event, false);
@@ -442,6 +436,7 @@ public class GuiController implements Initializable {
         }
     }
 
+    // check if display is on
     private void checkToggles (){
         try {
             isHoldOn = SaveData.ReadBoolean(SaveData.getKeyEvent(KeyEventType.TOGGLE_HOLD));
@@ -476,7 +471,7 @@ public class GuiController implements Initializable {
         }
     }
 
-    // Event
+// Event
     // pause the game
     private void pauseGame() {
         gamePanel.requestFocus();

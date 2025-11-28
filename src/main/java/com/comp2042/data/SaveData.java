@@ -32,6 +32,7 @@ public class SaveData {
         }
     }
 
+    //write the initial save data
     private static FileWriter getFileWriter(File saveFile) throws IOException {
         FileWriter write = new FileWriter(saveFile);
         write.write(
@@ -60,6 +61,8 @@ public class SaveData {
 
     }
 
+// rewrite the file
+    // string
     public static void overWriteFile(String newData, int line) throws IOException {
         try{
             List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
@@ -76,6 +79,7 @@ public class SaveData {
         }
     }
 
+    //int
     public static void overWriteFile(int newData, int line) throws IOException {
         try{
             List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
@@ -92,6 +96,7 @@ public class SaveData {
         }
     }
 
+    //double
     public static void overWriteFile(double newData, int index, int line) throws IOException {
         try {
             List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
@@ -113,6 +118,7 @@ public class SaveData {
         }
     }
 
+// maps key event constant to a line
     public static int getKeyEvent(KeyEventType eventType) {
         return switch (eventType) {
             case HIGHSCORE -> 0;
@@ -139,7 +145,7 @@ public class SaveData {
         };
     }
 
-    // read file for integer
+    // integer
     public static int ReadFileInt(int line) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
 
@@ -147,12 +153,13 @@ public class SaveData {
         return Integer.parseInt(data);
     }
 
-    // read file for string
+    // string
     public static String ReadFileString(int line) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
         return fileContent.get(line);
     }
 
+    // boolean
     public static boolean ReadBoolean(int line) throws IOException{
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
 
@@ -160,6 +167,7 @@ public class SaveData {
         return Boolean.parseBoolean(data);
     }
 
+    // returns a list
     public static String[] ReadFileList(int line) throws IOException {
         String data = ReadFileString(line);
         if (data.contains(" : ")) {
@@ -169,7 +177,7 @@ public class SaveData {
         }
     }
 
-    // read file for key code
+    // key code
     public static KeyCode ReadKeyCode(int line) throws IOException{
         String keyString = SaveData.ReadFileString(line);  // "!","@" etc.
         return KeyCode.valueOf(keyString);

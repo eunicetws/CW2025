@@ -9,7 +9,7 @@ public class BrickRotator {
     private Brick holdBrick;
     private int currentShape = 0;
 
-    /* Getters */
+/* Getters */
     // get next shape
     public NextShapeInfo getNextShape() {
         int nextShape = currentShape;

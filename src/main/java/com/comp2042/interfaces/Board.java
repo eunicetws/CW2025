@@ -7,7 +7,7 @@ import com.comp2042.data.LinesCleared;
 import com.comp2042.data.Score;
 
 public interface Board {
-    //Brick Controls
+//Brick Controls
     boolean moveBrickDown();
 
     boolean moveBrickLeft();
@@ -17,27 +17,28 @@ public interface Board {
     boolean rotateLeftBrick();
 
     boolean holdBrick();
-    //
 
     boolean createNewBrick(int x, int y);
 
     void moveGhostPiece();
 
+    void mergeBrickToBackground();
+
+    ClearRow clearRows();
+//
+
+// Getters
+
     int[][] getBoardMatrix();
 
     ViewData getViewData();
 
-    void mergeBrickToBackground();
-
-    ClearRow clearRows();
-
-    // Getters
     Score getScore();
-
     LinesCleared getTotalLinesCleared();
 
     Level getLevel();
-    //
+
+//
 
     void newGame();
 }

@@ -47,6 +47,7 @@ public class SimpleBoard implements Board {
         }
     }
 
+    @Override
     public void moveGhostPiece() {
         Point p = new Point(currentOffset);
 
@@ -56,8 +57,6 @@ public class SimpleBoard implements Board {
 
         ghostPieceOffset = p;
     }
-
-
 
     @Override
     public boolean moveBrickLeft() {
@@ -100,6 +99,7 @@ public class SimpleBoard implements Board {
         }
     }
 
+    @Override
     public boolean holdBrick() {
         int[][] currentMatrix = MatrixOperations.copy(currentGameMatrix);
         boolean intersectWithNewBlock = !MatrixOperations.intersect( currentMatrix, brickGenerator.getNextBrick().getShapeMatrix().getFirst(), (int) currentOffset.getX(), (int) currentOffset.getY());
@@ -139,7 +139,7 @@ public class SimpleBoard implements Board {
 
     }
 
-    //Getters
+//Getters
     @Override
     public int[][] getBoardMatrix() {
         return currentGameMatrix;
@@ -160,6 +160,7 @@ public class SimpleBoard implements Board {
         return totalLinesCleared;
     }
 
+    @Override
     public Level getLevel() {
         return level;
     }

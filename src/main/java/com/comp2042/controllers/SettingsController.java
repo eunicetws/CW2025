@@ -24,13 +24,16 @@ import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
 
+//FXML
     @FXML private StackPane rootPane;
     @FXML private VBox ControlSetting, MusicNVisual;
     @FXML private ImageView closeImage;
     @FXML private Slider MusicSlider, ButtonsSlider, ClearLinesSlider;
     @FXML private Label Left, Right, Down, Rotate, Pause, Hold, Restart, Harddrop;
-    @FXML private Label ToggleGhostOn, ToggleGhostOff, ToggleHoldOn, ToggleHoldOff, ToggleNextOn, ToggleNextOff,
-            ToggleControlOn, ToggleControlOff;
+    @FXML private Label ToggleGhostOn, ToggleGhostOff;
+    @FXML private Label ToggleHoldOn, ToggleHoldOff;
+    @FXML private Label ToggleNextOn, ToggleNextOff;
+    @FXML private Label ToggleControlOn, ToggleControlOff;
     @FXML private Label SettingsLeft, SettingsRight, SettingsTitle;
 
     private Label selectedLabel = null;
@@ -159,6 +162,7 @@ public class SettingsController implements Initializable {
         });
     }
 
+    // initiate if toggle is on or off
     private void setupToggle(Label optionOn, Label optionOff, int line) {
 
         EventHandler<MouseEvent> toggleHandler = event -> {
@@ -180,7 +184,6 @@ public class SettingsController implements Initializable {
         optionOn.setOnMouseClicked(toggleHandler);
         optionOff.setOnMouseClicked(toggleHandler);
     }
-
 
     // highlight the label and allow keyboard shortcut to change
     private void setupShortcutLabel(Label label, int saveDataLine) {
@@ -219,6 +222,7 @@ public class SettingsController implements Initializable {
         });
     }
 
+    // highlight the clicked button
     private void showToggle(Label optionOn, Label optionOff, int line) {
         try {
             if(SaveData.ReadBoolean(line)){
@@ -231,6 +235,7 @@ public class SettingsController implements Initializable {
         }
     }
 
+    // show the key related to the label
     private void getKeyCode(Label label, int saveDataLine){
         try {
             KeyCode keyCode = SaveData.ReadKeyCode(saveDataLine);

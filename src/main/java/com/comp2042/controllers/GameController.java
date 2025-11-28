@@ -99,7 +99,6 @@ public class GameController implements InputEventListener {
         } else {return null;}
     }
 
-
     @Override
     public void createNewGame() {
         board.newGame();
