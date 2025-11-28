@@ -18,7 +18,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         URL location = getClass().getClassLoader().getResource("homeLayout.fxml");
-        Font font = Font.loadFont(Objects.requireNonNull(getClass().getClassLoader().getResource("fonts/Gluten-Bold.ttf")).toExternalForm(), 40);
+        Font font = Font.loadFont(
+                Objects.requireNonNull(getClass().getResourceAsStream("/fonts/Gluten-Bold.ttf")),
+                40
+        );
         System.out.println(font.getName());
         ResourceBundle resources = null;
         FXMLLoader fxmlLoader = new FXMLLoader(location, resources);
