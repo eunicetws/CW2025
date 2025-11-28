@@ -53,7 +53,8 @@ public class SaveData {
             "0\n" + // highScore 5min
             "0\n" + // highScore 10min
             "0\n" + // highScore 15min
-            "0\n" // highScore 20min
+            "0\n" + // highScore 20min
+            "true\n" // Toggle show controls
         );
         return write;
 
@@ -133,6 +134,7 @@ public class SaveData {
             case HIGHSCORE_10 -> 16;
             case HIGHSCORE_15 -> 17;
             case HIGHSCORE_20 -> 18;
+            case TOGGLE_CONTROLS -> 19;
 
         };
     }

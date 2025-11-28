@@ -63,13 +63,23 @@
                         </HBox>
                     </VBox>
                 </HBox>
-                <VBox styleClass="TogglePanel">
-                    <Label text="Ghost Piece" styleClass="ShortcutLabel"/>
-                    <HBox styleClass="ToggleButtonsPanel">
-                        <Label fx:id="ToggleGhostOn" styleClass="Toggle" text="O"/>
-                        <Label fx:id="ToggleGhostOff" styleClass="Toggle" text="|"/>
-                    </HBox>
-                </VBox>
+
+                <HBox styleClass="PanelToggle">
+                    <VBox styleClass="TogglePanel">
+                        <Label text="Ghost Piece" styleClass="ShortcutLabel"/>
+                        <HBox styleClass="ToggleButtonsPanel">
+                            <Label fx:id="ToggleGhostOn" styleClass="Toggle" text="O"/>
+                            <Label fx:id="ToggleGhostOff" styleClass="Toggle" text="|"/>
+                        </HBox>
+                    </VBox>
+                    <VBox styleClass="TogglePanel">
+                        <Label text="Display Controls" styleClass="ShortcutLabel"/>
+                        <HBox styleClass="ToggleButtonsPanel">
+                            <Label fx:id="ToggleControlOn" styleClass="Toggle" text="O"/>
+                            <Label fx:id="ToggleControlOff" styleClass="Toggle" text="|"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
             </VBox>
 
             <VBox fx:id="ControlSetting">

@@ -53,8 +53,6 @@
 
 .Line{
     -fx-border-color: #6b4f6a;
-    -fx-border-width: 2px;
-
     -fx-max-height: 0px;
 }
 
@@ -146,7 +144,7 @@
 
 .PanelToggle{
     -fx-alignment: center;
-    -fx-spacing: 5px;
+    -fx-spacing: 10;
 }
 
 .TogglePanel{

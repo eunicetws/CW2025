@@ -19,5 +19,6 @@ public enum KeyEventType {
     HIGHSCORE_5,
     HIGHSCORE_10,
     HIGHSCORE_15,
-    HIGHSCORE_20
+    HIGHSCORE_20,
+    TOGGLE_CONTROLS
 }

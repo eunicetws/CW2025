@@ -37,9 +37,6 @@
                     <Label styleClass="DisplayLabel" text="Timer:"/>
                     <Label styleClass="TimeDisplay"  fx:id="TimerDisplay"/>
                 </VBox>
-                <VBox styleClass="KeyboardKeys" fx:id="KeyboardKeys">
-                    <Label styleClass="ScoreKeyboard"/>
-                </VBox>
             </VBox>
 
             <!-- Tetris Board -->
@@ -76,6 +73,19 @@
                 <!-- Level-->
                 <Label styleClass="DisplayLabel" fx:id="levelLabel" text="Level: 1" />
 
+                <VBox fx:id="KeyboardKeys" styleClass="KeyboardPanel">
+                    <Label styleClass="KeyboardTitle" text="Controls: "/>
+                    <VBox styleClass="KeyboardLabelPanel">
+                        <Label fx:id="LeftKeyLabel" styleClass="KeyboardLabels"/>
+                        <Label fx:id="RightKeyLabel" styleClass="KeyboardLabels"/>
+                        <Label fx:id="RotateKeyLabel"  styleClass="KeyboardLabels"/>
+                        <Label fx:id="DownKeyLabel" styleClass="KeyboardLabels"/>
+                        <Label fx:id="HoldKeyLabel"  styleClass="KeyboardLabels"/>
+                        <Label fx:id="PauseKeyLabel" styleClass="KeyboardLabels"/>
+                        <Label fx:id="RestartKeyLabel" styleClass="KeyboardLabels"/>
+                        <Label fx:id="HardDropKeyLabel"  styleClass="KeyboardLabels"/>
+                    </VBox>
+                </VBox>
             </VBox>
 
         </HBox>

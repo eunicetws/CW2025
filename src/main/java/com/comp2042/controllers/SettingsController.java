@@ -29,7 +29,8 @@ public class SettingsController implements Initializable {
     @FXML private ImageView closeImage;
     @FXML private Slider MusicSlider, ButtonsSlider, ClearLinesSlider;
     @FXML private Label Left, Right, Down, Rotate, Pause, Hold, Restart, Harddrop;
-    @FXML private Label ToggleGhostOn, ToggleGhostOff, ToggleHoldOn, ToggleHoldOff, ToggleNextOn, ToggleNextOff;
+    @FXML private Label ToggleGhostOn, ToggleGhostOff, ToggleHoldOn, ToggleHoldOff, ToggleNextOn, ToggleNextOff,
+            ToggleControlOn, ToggleControlOff;
     @FXML private Label SettingsLeft, SettingsRight, SettingsTitle;
 
     private Label selectedLabel = null;
@@ -74,6 +75,7 @@ public class SettingsController implements Initializable {
         showToggle(ToggleGhostOn, ToggleGhostOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_GHOST));
         showToggle(ToggleHoldOn, ToggleHoldOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_HOLD));
         showToggle(ToggleNextOn, ToggleNextOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_NEXT));
+        showToggle(ToggleControlOn, ToggleControlOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_CONTROLS));
 
         // load keys
         getKeyCode(Left, SaveData.getKeyEvent(KeyEventType.LEFT));
@@ -85,10 +87,11 @@ public class SettingsController implements Initializable {
         getKeyCode(Restart, SaveData.getKeyEvent(KeyEventType.RESTART));
         getKeyCode(Harddrop, SaveData.getKeyEvent(KeyEventType.HARDDROP));
 
-        //setup labels
+        //setup toggle
         setupToggle(ToggleGhostOn, ToggleGhostOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_GHOST));
         setupToggle(ToggleHoldOn, ToggleHoldOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_HOLD));
         setupToggle(ToggleNextOn, ToggleNextOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_NEXT));
+        setupToggle(ToggleControlOn, ToggleControlOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_CONTROLS));
 
         // Setup shortcut labels
         setupShortcutLabel(Left, SaveData.getKeyEvent(KeyEventType.LEFT));

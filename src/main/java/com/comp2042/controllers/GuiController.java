@@ -54,9 +54,9 @@ public class GuiController implements Initializable {
     @FXML private Group groupNotification;
     @FXML private ImageView pauseImage;
     @FXML private Labeled scoreLabel, totalClearedLinesLabel, levelLabel;
-    @FXML private Label TimerDisplay;
-    @FXML private VBox TimerPanel;
-    @FXML private VBox NextPanel, HoldPanel;
+    @FXML private Label TimerDisplay, LeftKeyLabel, RightKeyLabel, RotateKeyLabel, DownKeyLabel,
+            HoldKeyLabel, PauseKeyLabel, RestartKeyLabel, HardDropKeyLabel;
+    @FXML private VBox TimerPanel, NextPanel, HoldPanel, KeyboardKeys;
 
     //Pause Menu
     @FXML private StackPane PauseMenu, Resume;
@@ -90,7 +90,11 @@ public class GuiController implements Initializable {
         pauseImage.setImage(normal);
         pauseImage.setOnMouseEntered(_ -> pauseImage.setImage(hover));
         pauseImage.setOnMouseExited(_ -> pauseImage.setImage(normal));
+
+        // Playing Labels
         Timer.setDisplayLabel(TimerDisplay, TimerPanel);
+        updateKeyLabels();
+
         // Set Pause Menu
         PauseMenu.setVisible(false);
 
@@ -461,6 +465,12 @@ public class GuiController implements Initializable {
                 ghostPiecePanel.setManaged(true);
             }
 
+            if (!SaveData.ReadBoolean(SaveData.getKeyEvent(KeyEventType.TOGGLE_CONTROLS))) {
+                KeyboardKeys.setVisible(false);
+            }else {
+                KeyboardKeys.setVisible(true);
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -479,6 +489,7 @@ public class GuiController implements Initializable {
         PauseMenu.setVisible(isPause.getValue());
         pauseImage.setVisible(!isPause.getValue());
         checkToggles();
+        updateKeyLabels();
     }
 
     // create new game
@@ -534,6 +545,22 @@ public class GuiController implements Initializable {
     public void bindLevel(IntegerProperty integerProperty) {
         levelLabel.textProperty().bind(integerProperty.asString("Level: %d"));
     }
+
+    public void updateKeyLabels() {
+        try {
+            LeftKeyLabel.setText("Left : " +SaveData.ReadKeyCode(SaveData.getKeyEvent(KeyEventType.LEFT)).getName());
+            RightKeyLabel.setText("Right : " +SaveData.ReadKeyCode(SaveData.getKeyEvent(KeyEventType.RIGHT)).getName());
+            RotateKeyLabel.setText("Rotate : " +SaveData.ReadKeyCode(SaveData.getKeyEvent(KeyEventType.ROTATE)).getName());
+            DownKeyLabel.setText("Down : " +SaveData.ReadKeyCode(SaveData.getKeyEvent(KeyEventType.DOWN)).getName());
+            HoldKeyLabel.setText("Hold : " +SaveData.ReadKeyCode(SaveData.getKeyEvent(KeyEventType.HOLD)).getName());
+            PauseKeyLabel.setText("Pause : " +SaveData.ReadKeyCode(SaveData.getKeyEvent(KeyEventType.PAUSE)).getName());
+            RestartKeyLabel.setText("Restart : " +SaveData.ReadKeyCode(SaveData.getKeyEvent(KeyEventType.RESTART)).getName());
+            HardDropKeyLabel.setText("HardDrop : " +SaveData.ReadKeyCode(SaveData.getKeyEvent(KeyEventType.HARDDROP)).getName());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 //
 
     //setters

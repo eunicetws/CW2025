@@ -9,7 +9,7 @@
     -fx-max-height: 580px;
 
     -fx-alignment: top-right;
-    -fx-spacing: 10
+    -fx-spacing: 10;
 
 }
 
@@ -21,7 +21,7 @@
     -fx-min-height: 520px;
     -fx-max-height: 520px;
 
-    -fx-spacing: 10px;
+    -fx-spacing: 10;
 }
 
     /* Tetris Board*/
@@ -74,7 +74,6 @@
 
         .brickPanel {
             -fx-padding: 0;
-            -fx-alignment: top-left;
 
             -fx-border-color: #5F445E;
             -fx-border-width: 5;
@@ -98,19 +97,16 @@
 
     .TimePanel {
         -fx-padding: 5;
-        -fx-alignment: top-left;
-
+        -fx-alignment: center;
         -fx-border-color: #5F445E;
         -fx-border-width: 5;
         -fx-border-radius: 5;
-
         -fx-background-color: #02060F;
         -fx-background-radius: 10;
-
-        -fx-alignment: center;
         -fx-min-width: 120px;
         -fx-max-width: 120px;
     }
+
     .TimeDisplay{
         -fx-font-family: "Gluten Bold";
         -fx-alignment: center;
@@ -118,4 +114,29 @@
         -fx-max-width: 100px;
         -fx-text-fill: #da627d;
         -fx-font-size: 18;
+    }
+
+    .KeyboardPanel{
+        -fx-spacing: 5;
+        -fx-padding: 30 0 0 0;
+    }
+
+    .KeyboardTitle{
+        -fx-font-family: "Gluten Bold";
+        -fx-alignment: top-left;
+        -fx-text-fill: #b5e48c;
+        -fx-font-size: 18;
+    }
+
+    .KeyboardLabelPanel{
+        padding: 0 0 5 0;
+        -fx-min-width: 200px;
+        -fx-max-width: 200px;
+    }
+
+    .KeyboardLabels{
+        -fx-font-family: "Gluten Bold";
+        -fx-alignment: top-left;
+        -fx-text-fill: #fff;
+        -fx-font-size: 15;
     }
