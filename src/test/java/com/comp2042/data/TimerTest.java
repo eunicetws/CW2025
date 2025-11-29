@@ -9,7 +9,7 @@ class TimerTest {
         Timer.setTimer(1); // 60 seconds
 
         Timer.start();
-        Thread.sleep(2000); // allow 1 second to tick
+        Thread.sleep(2000); // allow 2 second to tick
         int before = Timer.getRemainingSeconds();
         Timer.pause(true);  // pause timer
         Thread.sleep(2000);

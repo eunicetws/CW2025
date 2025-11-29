@@ -1,9 +1,11 @@
 package com.comp2042.logic;
 
+import com.comp2042.data.SaveData;
 import com.comp2042.view.ViewData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.text.View;
 import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,8 +15,45 @@ class SimpleBoardTest {
 
     @BeforeEach
     void setUp() {
+        SaveData.createSaveFile();
         board = new SimpleBoard(10, 20);
         board.newGame();
+    }
+
+    @Test
+    public void rotateLeftBrickTest() {
+        ViewData before = board.getViewData();
+        int[][] beforeBrickData = before.getBrickData();
+        board.rotateLeftBrick();
+        ViewData after = board.getViewData();
+        int[][] afterBrickData = after.getBrickData();
+
+        boolean arraysEqual = true;
+        for (int i = 0; i < beforeBrickData.length; i++) {
+            for (int j = 0; j < beforeBrickData[i].length; j++) {
+                if (beforeBrickData[i][j] != afterBrickData[i][j]) {
+                    arraysEqual = false;
+                    break;
+                }
+            }
+            if (!arraysEqual) break;
+        }
+
+        assertFalse(arraysEqual, "The brick data should have changed and not be equal to the current brick data");
+
+        beforeBrickData = before.getNextBrickData();
+
+        arraysEqual = true;
+        for (int i = 0; i < beforeBrickData.length; i++) {
+            for (int j = 0; j < beforeBrickData[i].length; j++) {
+                if (beforeBrickData[i][j] != afterBrickData[i][j]) {
+                    arraysEqual = false;
+                    break;
+                }
+            }
+            if (!arraysEqual) break;
+        }
+        assertFalse(arraysEqual, "The brick data should have changed and not be equal to the next brick data");
     }
 
     @Test

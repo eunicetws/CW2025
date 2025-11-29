@@ -15,23 +15,25 @@ class SaveDataTest {
 
     private static Path tempFile;
 
-    @BeforeAll
-    static void setup() {
-        // use a test-only file
-        tempFile = Paths.get("src/main/resources/tempSaveData.txt");
+    @BeforeEach
+    void setup() throws Exception {
+        // Correct test file location
+        tempFile = Paths.get("src/test/resources/testSaveData.txt");
+
+        // Ensure parent directory exists
+        Files.createDirectories(tempFile.getParent());
+
+        // Remove old test file if present
+        Files.deleteIfExists(tempFile);
 
         // Override SaveData paths
         SaveData.savePath = tempFile.toString();
         SaveData.saveFilePath = tempFile;
 
-        // Create temp save file
+        // Create save file with defaults
         SaveData.createSaveFile();
     }
 
-    @AfterAll
-    static void cleanup() throws Exception {
-        Files.deleteIfExists(tempFile);
-    }
 
     @Test
     void testCreateSaveFile() {
