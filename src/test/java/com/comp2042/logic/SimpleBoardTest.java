@@ -4,7 +4,6 @@ import com.comp2042.view.ViewData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.View;
 import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;

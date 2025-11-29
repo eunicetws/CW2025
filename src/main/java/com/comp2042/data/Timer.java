@@ -6,18 +6,17 @@ import javafx.scene.layout.VBox;
 
 public class Timer {
 
-    private static int totalSeconds = 0;   // total time in seconds
-    private static int remainingSeconds; // time left
+    private static int totalSeconds = 0;
+    private static int remainingSeconds;
     private static boolean running = false;
 
-    private static Label displayLabel; // optional, updates UI
+    private static Label displayLabel;
 
     public static void setTimer(int minutes) {
         totalSeconds = minutes * 60;
         remainingSeconds = totalSeconds;
     }
 
-    // optional: pass a label to automatically update UI
     public static void setDisplayLabel(Label label, VBox vBox) {
         if (totalSeconds == 0)
             vBox.setVisible(false);
@@ -83,6 +82,10 @@ public class Timer {
 
     public static int getTotalSeconds(){
         return totalSeconds;
+    }
+
+    public static int getRemainingSeconds(){
+        return remainingSeconds;
     }
 
 }
