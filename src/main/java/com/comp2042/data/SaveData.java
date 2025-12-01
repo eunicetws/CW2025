@@ -1,6 +1,6 @@
 package com.comp2042.data;
 
-import com.comp2042.enums.KeyEventType;
+import com.comp2042.enums.SaveDataType;
 import javafx.scene.input.KeyCode;
 
 import java.io.*;
@@ -119,7 +119,7 @@ public class SaveData {
     }
 
 // maps key event constant to a line
-    public static int getKeyEvent(KeyEventType eventType) {
+    public static int getKeyEvent(SaveDataType eventType) {
         return switch (eventType) {
             case HIGHSCORE -> 0;
             case LEFT -> 1;

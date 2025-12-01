@@ -1,6 +1,5 @@
 package com.comp2042.logic;
 
-import com.comp2042.enums.KeyEventType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
