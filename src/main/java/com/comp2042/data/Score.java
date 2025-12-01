@@ -1,6 +1,6 @@
 package com.comp2042.data;
 
-import com.comp2042.enums.KeyEventType;
+import com.comp2042.enums.SaveDataType;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -31,28 +31,28 @@ public final class Score {
 
             switch (minutes) {
                 case 0 -> { // No timer
-                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE))) {
-                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE));
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(SaveDataType.HIGHSCORE))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(SaveDataType.HIGHSCORE));
                     }
                 }
                 case 5 -> {
-                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_5))) {
-                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE_5));
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(SaveDataType.HIGHSCORE_5))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(SaveDataType.HIGHSCORE_5));
                     }
                 }
                 case 10 -> {
-                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_10))) {
-                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE_10));
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(SaveDataType.HIGHSCORE_10))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(SaveDataType.HIGHSCORE_10));
                     }
                 }
                 case 15 -> {
-                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_15))) {
-                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE_15));
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(SaveDataType.HIGHSCORE_15))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(SaveDataType.HIGHSCORE_15));
                     }
                 }
                 case 20 -> {
-                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_20))) {
-                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(KeyEventType.HIGHSCORE_20));
+                    if (score.getValue() > SaveData.ReadFileInt(SaveData.getKeyEvent(SaveDataType.HIGHSCORE_20))) {
+                        SaveData.overWriteFile(score.getValue(), SaveData.getKeyEvent(SaveDataType.HIGHSCORE_20));
                     }
                 }
             }

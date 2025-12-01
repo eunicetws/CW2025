@@ -105,6 +105,8 @@
         -fx-min-height: 285px;
         -fx-max-height: 285px;
 
+        -fx-spacing: 10;
+
         -fx-alignment: center;
     }
 
@@ -138,6 +140,37 @@
         -fx-font-size: 55px;
     }
 
+    /* HighScore */
+    .HighScorePanel{
+        -fx-border-color: #5F445E;
+        -fx-border-width: 5;
+        -fx-border-radius: 10;
+
+        -fx-background-color: #F3EFE8;
+        -fx-background-radius: 20;
+
+        -fx-spacing: 5;
+
+        -fx-alignment: center;
+        -fx-min-width: 400px;
+        -fx-max-width: 400px;
+
+        -fx-min-height: 100px;
+        -fx-max-height: 100px;
+    }
+
+    .HighScoreLabel{
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #5F445E;
+        -fx-font-size: 30px;
+    }
+
+    .HighScoreDisplay{
+        -fx-font-family: "Gluten Bold";
+        -fx-text-fill: #da627d;
+        -fx-font-size: 25px;
+    }
+
 /* Shared UI */
 /* Bottom Pane */
 
@@ -147,6 +180,7 @@
         -fx-spacing: 10;
         -fx-alignment: center
     }
+
 
     /* Restart*/
         .Restart {

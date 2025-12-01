@@ -1,5 +1,6 @@
 package com.comp2042.logic.bricks;
 
+import com.comp2042.data.bricks.RandomBrickGenerator;
 import com.comp2042.interfaces.Brick;
 import org.junit.jupiter.api.Test;
 

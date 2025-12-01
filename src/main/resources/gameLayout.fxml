@@ -119,6 +119,10 @@
         <VBox styleClass="GameOverPane">
 
             <Label styleClass="GameOverTitle" text="Game Over" />
+            <VBox styleClass="HighScorePanel">
+                <Label styleClass="HighScoreLabel" text="HighScore"/>
+                <Label styleClass="HighScoreDisplay" fx:id="HighScoreDisplay"/>
+            </VBox>
             <VBox styleClass="GameOverMenu" >
                 <HBox styleClass="BottomPanel">
                     <Label styleClass="Restart" fx:id="GameOver_Restart"/>

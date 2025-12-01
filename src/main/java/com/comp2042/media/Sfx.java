@@ -2,7 +2,7 @@ package com.comp2042.media;
 
 import com.comp2042.data.SaveData;
 import com.comp2042.data.SoundData;
-import com.comp2042.enums.KeyEventType;
+import com.comp2042.enums.SaveDataType;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -10,9 +10,9 @@ import java.util.*;
 
 public class Sfx {
 
-    private static final Map<KeyEventType, SoundData> sfxMap = new HashMap<>();
+    private static final Map<SaveDataType, SoundData> sfxMap = new HashMap<>();
 
-    public static void loadMap(KeyEventType sfxType) {
+    public static void loadMap(SaveDataType sfxType) {
         try {
             String[] raw = SaveData.ReadFileList(SaveData.getKeyEvent(sfxType));
             String fileName = raw[0].trim();
@@ -25,7 +25,7 @@ public class Sfx {
     }
 
 
-    public static void play(KeyEventType type) {
+    public static void play(SaveDataType type) {
         SoundData sound = sfxMap.get(type);
         if (sound == null) return;
 
@@ -36,7 +36,7 @@ public class Sfx {
         player.play();
     }
 
-    public static void reset(KeyEventType sfxType) {
+    public static void reset(SaveDataType sfxType) {
         try {
             String[] raw = SaveData.ReadFileList(SaveData.getKeyEvent(sfxType));
 

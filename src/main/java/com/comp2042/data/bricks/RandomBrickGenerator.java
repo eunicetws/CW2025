@@ -1,4 +1,4 @@
-package com.comp2042.logic.bricks;
+package com.comp2042.data.bricks;
 
 import com.comp2042.interfaces.Brick;
 import com.comp2042.interfaces.BrickGenerator;

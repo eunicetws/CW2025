@@ -1,6 +1,6 @@
 package com.comp2042.controllers;
 
-import com.comp2042.enums.KeyEventType;
+import com.comp2042.enums.SaveDataType;
 import com.comp2042.data.SaveData;
 import com.comp2042.media.Bgm;
 import com.comp2042.media.Sfx;
@@ -53,13 +53,13 @@ public class SettingsController implements Initializable {
         SettingsLeft.setVisible(false);
 
         try {
-            MusicSlider.setValue(SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.MUSIC))); // get saved volume (0-100)
+            MusicSlider.setValue(SaveData.ReadFileInt(SaveData.getKeyEvent(SaveDataType.MUSIC))); // get saved volume (0-100)
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            String[] buttonsData = SaveData.ReadFileList(SaveData.getKeyEvent(KeyEventType.BUTTONS));
+            String[] buttonsData = SaveData.ReadFileList(SaveData.getKeyEvent(SaveDataType.BUTTONS));
             double buttonsVolume = Double.parseDouble(buttonsData[1]);
             ButtonsSlider.setValue(buttonsVolume * 100);
         } catch (IOException e) {
@@ -67,7 +67,7 @@ public class SettingsController implements Initializable {
         }
 
         try {
-            String[] clearLinesData = SaveData.ReadFileList(SaveData.getKeyEvent(KeyEventType.CLEARLINES));
+            String[] clearLinesData = SaveData.ReadFileList(SaveData.getKeyEvent(SaveDataType.CLEARLINES));
             double clearLinesVolume = Double.parseDouble(clearLinesData[1]);
             ClearLinesSlider.setValue(clearLinesVolume * 100);
         } catch (IOException e) {
@@ -75,45 +75,45 @@ public class SettingsController implements Initializable {
         }
 
         // load toggle
-        showToggle(ToggleGhostOn, ToggleGhostOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_GHOST));
-        showToggle(ToggleHoldOn, ToggleHoldOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_HOLD));
-        showToggle(ToggleNextOn, ToggleNextOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_NEXT));
-        showToggle(ToggleControlOn, ToggleControlOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_CONTROLS));
+        showToggle(ToggleGhostOn, ToggleGhostOff, SaveData.getKeyEvent(SaveDataType.TOGGLE_GHOST));
+        showToggle(ToggleHoldOn, ToggleHoldOff, SaveData.getKeyEvent(SaveDataType.TOGGLE_HOLD));
+        showToggle(ToggleNextOn, ToggleNextOff, SaveData.getKeyEvent(SaveDataType.TOGGLE_NEXT));
+        showToggle(ToggleControlOn, ToggleControlOff, SaveData.getKeyEvent(SaveDataType.TOGGLE_CONTROLS));
 
         // load keys
-        getKeyCode(Left, SaveData.getKeyEvent(KeyEventType.LEFT));
-        getKeyCode(Right, SaveData.getKeyEvent(KeyEventType.RIGHT));
-        getKeyCode(Down, SaveData.getKeyEvent(KeyEventType.DOWN));
-        getKeyCode(Rotate, SaveData.getKeyEvent(KeyEventType.ROTATE));
-        getKeyCode(Pause, SaveData.getKeyEvent(KeyEventType.PAUSE));
-        getKeyCode(Hold, SaveData.getKeyEvent(KeyEventType.HOLD));
-        getKeyCode(Restart, SaveData.getKeyEvent(KeyEventType.RESTART));
-        getKeyCode(Harddrop, SaveData.getKeyEvent(KeyEventType.HARDDROP));
+        getKeyCode(Left, SaveData.getKeyEvent(SaveDataType.LEFT));
+        getKeyCode(Right, SaveData.getKeyEvent(SaveDataType.RIGHT));
+        getKeyCode(Down, SaveData.getKeyEvent(SaveDataType.DOWN));
+        getKeyCode(Rotate, SaveData.getKeyEvent(SaveDataType.ROTATE));
+        getKeyCode(Pause, SaveData.getKeyEvent(SaveDataType.PAUSE));
+        getKeyCode(Hold, SaveData.getKeyEvent(SaveDataType.HOLD));
+        getKeyCode(Restart, SaveData.getKeyEvent(SaveDataType.RESTART));
+        getKeyCode(Harddrop, SaveData.getKeyEvent(SaveDataType.HARDDROP));
 
         //setup toggle
-        setupToggle(ToggleGhostOn, ToggleGhostOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_GHOST));
-        setupToggle(ToggleHoldOn, ToggleHoldOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_HOLD));
-        setupToggle(ToggleNextOn, ToggleNextOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_NEXT));
-        setupToggle(ToggleControlOn, ToggleControlOff, SaveData.getKeyEvent(KeyEventType.TOGGLE_CONTROLS));
+        setupToggle(ToggleGhostOn, ToggleGhostOff, SaveData.getKeyEvent(SaveDataType.TOGGLE_GHOST));
+        setupToggle(ToggleHoldOn, ToggleHoldOff, SaveData.getKeyEvent(SaveDataType.TOGGLE_HOLD));
+        setupToggle(ToggleNextOn, ToggleNextOff, SaveData.getKeyEvent(SaveDataType.TOGGLE_NEXT));
+        setupToggle(ToggleControlOn, ToggleControlOff, SaveData.getKeyEvent(SaveDataType.TOGGLE_CONTROLS));
 
         // Setup shortcut labels
-        setupShortcutLabel(Left, SaveData.getKeyEvent(KeyEventType.LEFT));
-        setupShortcutLabel(Right, SaveData.getKeyEvent(KeyEventType.RIGHT));
-        setupShortcutLabel(Down, SaveData.getKeyEvent(KeyEventType.DOWN));
-        setupShortcutLabel(Rotate, SaveData.getKeyEvent(KeyEventType.ROTATE));
-        setupShortcutLabel(Pause, SaveData.getKeyEvent(KeyEventType.PAUSE));
-        setupShortcutLabel(Hold, SaveData.getKeyEvent(KeyEventType.HOLD));
-        setupShortcutLabel(Restart, SaveData.getKeyEvent(KeyEventType.RESTART));
-        setupShortcutLabel(Harddrop, SaveData.getKeyEvent(KeyEventType.HARDDROP));
+        setupShortcutLabel(Left, SaveData.getKeyEvent(SaveDataType.LEFT));
+        setupShortcutLabel(Right, SaveData.getKeyEvent(SaveDataType.RIGHT));
+        setupShortcutLabel(Down, SaveData.getKeyEvent(SaveDataType.DOWN));
+        setupShortcutLabel(Rotate, SaveData.getKeyEvent(SaveDataType.ROTATE));
+        setupShortcutLabel(Pause, SaveData.getKeyEvent(SaveDataType.PAUSE));
+        setupShortcutLabel(Hold, SaveData.getKeyEvent(SaveDataType.HOLD));
+        setupShortcutLabel(Restart, SaveData.getKeyEvent(SaveDataType.RESTART));
+        setupShortcutLabel(Harddrop, SaveData.getKeyEvent(SaveDataType.HARDDROP));
 
         //mouse event
         closeImage.setOnMouseClicked(_ -> {
-            Sfx.play(KeyEventType.BUTTONS);
+            Sfx.play(SaveDataType.BUTTONS);
             closeSettings();
         });
 
         SettingsLeft.setOnMouseClicked(_ -> {
-            Sfx.play(KeyEventType.BUTTONS);
+            Sfx.play(SaveDataType.BUTTONS);
             SettingsLeft.setVisible(false);
             SettingsRight.setVisible(true);
             MusicNVisual.setVisible(true);
@@ -122,7 +122,7 @@ public class SettingsController implements Initializable {
         });
 
         SettingsRight.setOnMouseClicked(_ -> {
-            Sfx.play(KeyEventType.BUTTONS);
+            Sfx.play(SaveDataType.BUTTONS);
 
             SettingsLeft.setVisible(true);
             SettingsRight.setVisible(false);
@@ -134,7 +134,7 @@ public class SettingsController implements Initializable {
         MusicSlider.valueProperty().addListener((_, _, newVal) -> {
             int volume = newVal.intValue();
             try {
-                SaveData.overWriteFile(volume, SaveData.getKeyEvent(KeyEventType.MUSIC));
+                SaveData.overWriteFile(volume, SaveData.getKeyEvent(SaveDataType.MUSIC));
                 Bgm.setVolume();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -144,8 +144,8 @@ public class SettingsController implements Initializable {
         ButtonsSlider.valueProperty().addListener((_, _, newVal) -> {
             double volume = newVal.doubleValue() / 100.0;
             try {
-                SaveData.overWriteFile(volume,1, SaveData.getKeyEvent(KeyEventType.BUTTONS) );
-                Sfx.reset(KeyEventType.BUTTONS);
+                SaveData.overWriteFile(volume,1, SaveData.getKeyEvent(SaveDataType.BUTTONS) );
+                Sfx.reset(SaveDataType.BUTTONS);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -154,8 +154,8 @@ public class SettingsController implements Initializable {
         ClearLinesSlider.valueProperty().addListener((_, _, newVal) -> {
             double volume = newVal.doubleValue() / 100.0;
             try {
-                SaveData.overWriteFile(volume,1, SaveData.getKeyEvent(KeyEventType.CLEARLINES) );
-                Sfx.reset(KeyEventType.CLEARLINES);
+                SaveData.overWriteFile(volume,1, SaveData.getKeyEvent(SaveDataType.CLEARLINES) );
+                Sfx.reset(SaveDataType.CLEARLINES);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

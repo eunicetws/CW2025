@@ -2,7 +2,7 @@ package com.comp2042.controllers;
 
 import com.comp2042.data.SaveData;
 import com.comp2042.data.Timer;
-import com.comp2042.enums.KeyEventType;
+import com.comp2042.enums.SaveDataType;
 import com.comp2042.media.Bgm;
 import com.comp2042.media.Sfx;
 import javafx.application.Platform;
@@ -37,7 +37,7 @@ public class HomeController implements Initializable {
 
         TimerDisplay.setText("None");
         try {
-            HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE)));
+            HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(SaveDataType.HIGHSCORE)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -47,12 +47,12 @@ public class HomeController implements Initializable {
         Bgm.play();
 
         //set sfx
-        Sfx.loadMap(KeyEventType.BUTTONS);
-        Sfx.loadMap(KeyEventType.CLEARLINES);
+        Sfx.loadMap(SaveDataType.BUTTONS);
+        Sfx.loadMap(SaveDataType.CLEARLINES);
 
         // when settings button pressed
         Setting.setOnMouseClicked(_ -> {
-            Sfx.play(KeyEventType.BUTTONS);
+            Sfx.play(SaveDataType.BUTTONS);
             SettingsController.openSettings(rootPane);
         });
 
@@ -61,7 +61,7 @@ public class HomeController implements Initializable {
         // when play button pressed
         Play.setOnMouseClicked(e -> {
             try {
-                Sfx.play(KeyEventType.BUTTONS);
+                Sfx.play(SaveDataType.BUTTONS);
                 FXMLLoader loader = new FXMLLoader(
                         getClass().getClassLoader().getResource("gameLayout.fxml")
                 );
@@ -80,14 +80,10 @@ public class HomeController implements Initializable {
 
         // when exit button pressed, close everything
         Exit.setOnMouseClicked(e -> {
-            Sfx.play(KeyEventType.BUTTONS);
+            Sfx.play(SaveDataType.BUTTONS);
             Platform.exit();
             System.exit(0);
         });
-    }
-
-    public void bindHighScore(IntegerProperty integerProperty) {
-        HighScoreDisplay.textProperty().bind(integerProperty.asString());
     }
 
     public void getCurrentTimer(boolean add) {
@@ -103,27 +99,27 @@ public class HomeController implements Initializable {
                 case 1 -> {
                     Timer.setTimer(0);
                     TimerDisplay.setText("None");
-                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE)));
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(SaveDataType.HIGHSCORE)));
                 }
                 case 2 -> {
                     Timer.setTimer(5);
                     TimerDisplay.setText("5 minutes");
-                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_5)));
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(SaveDataType.HIGHSCORE_5)));
                 }
                 case 3 -> {
                     Timer.setTimer(10);
                     TimerDisplay.setText("10 minutes");
-                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_10)));
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(SaveDataType.HIGHSCORE_10)));
                 }
                 case 4 -> {
                     Timer.setTimer(15);
                     TimerDisplay.setText("15 minutes");
-                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_15)));
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(SaveDataType.HIGHSCORE_15)));
                 }
                 case 5 -> {
                     Timer.setTimer(20);
                     TimerDisplay.setText("20 minutes");
-                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(KeyEventType.HIGHSCORE_20)));
+                    HighScoreDisplay.setText(SaveData.ReadFileString(SaveData.getKeyEvent(SaveDataType.HIGHSCORE_20)));
                 }
             }
         } catch (IOException e) {

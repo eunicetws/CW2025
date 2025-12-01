@@ -1,6 +1,6 @@
 package com.comp2042.enums;
 
-public enum KeyEventType {
+public enum SaveDataType {
     HIGHSCORE,
     LEFT,
     RIGHT,

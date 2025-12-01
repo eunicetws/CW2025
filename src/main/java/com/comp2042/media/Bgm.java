@@ -1,7 +1,7 @@
 package com.comp2042.media;
 
 import com.comp2042.data.SaveData;
-import com.comp2042.enums.KeyEventType;
+import com.comp2042.enums.SaveDataType;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -32,7 +32,7 @@ public class Bgm {
     public static void setVolume() {
         if (mediaPlayer != null) {
             try {
-                int savedVolume = SaveData.ReadFileInt(SaveData.getKeyEvent(KeyEventType.MUSIC));
+                int savedVolume = SaveData.ReadFileInt(SaveData.getKeyEvent(SaveDataType.MUSIC));
                 mediaPlayer.setVolume(savedVolume / 100.0);
             } catch (IOException e) {
                 throw new RuntimeException(e);

@@ -1,6 +1,6 @@
 package com.comp2042.data;
 
-import com.comp2042.enums.KeyEventType;
+import com.comp2042.enums.SaveDataType;
 import javafx.scene.input.KeyCode;
 import org.junit.jupiter.api.*;
 
@@ -78,8 +78,8 @@ class SaveDataTest {
 
     @Test
     void testGetKeyEvent() {
-        assertEquals(0, SaveData.getKeyEvent(KeyEventType.HIGHSCORE));
-        assertEquals(3, SaveData.getKeyEvent(KeyEventType.ROTATE));
-        assertEquals(8, SaveData.getKeyEvent(KeyEventType.HARDDROP));
+        assertEquals(0, SaveData.getKeyEvent(SaveDataType.HIGHSCORE));
+        assertEquals(3, SaveData.getKeyEvent(SaveDataType.ROTATE));
+        assertEquals(8, SaveData.getKeyEvent(SaveDataType.HARDDROP));
     }
 }
