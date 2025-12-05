@@ -12,7 +12,21 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * This class initialises and starts the game.
+ */
 public class Main extends Application {
+
+    /**
+     * Starts the game application.
+     *
+     * <p>This method loads the {@code homeLayout.fxml} file and applies the
+     * custom font before setting up the primary stage and showing
+     * the home screen.</p>
+     *
+     * @param primaryStage the main stage
+     * @throws Exception if the FXML file or font cannot be loaded
+     */
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -35,7 +49,11 @@ public class Main extends Application {
         new HomeController();
     }
 
-
+    /**
+     * Launches the JavaFX application.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,0 +1,20 @@
+0
+A
+RIGHT
+UP
+DOWN
+H
+ESCAPE
+N
+SPACE
+30
+Retro1.mp3 : 0.2
+coin.mp3 : 0.3
+true
+true
+true
+0
+0
+0
+0
+true

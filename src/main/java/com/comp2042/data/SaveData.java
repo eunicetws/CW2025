@@ -11,12 +11,36 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The {@code SaveData} class manages reading and writing the game settings
+ * and player saved data to a text file.
+ *
+ * <p>The save file is stored as a simple line-based text file. Each line
+ * corresponds to a specific setting defined in {@link SaveDataType}.
+ *
+ * <p>This class is responsible for:
+ * <ul>
+ *     <li>Create the save file with default settings</li>
+ *     <li>Overwrite individual settings by line</li>
+ *     <li>Read integers, strings, booleans, key codes, and formatted lists</li>
+ *     <li>Map {@code SaveDataType} values to their corresponding line number</li>
+ * </ul>
+ *
+ * <p>All fields and methods are static because save data is shared globally.
+ */
 public class SaveData {
-    // Define the path for the saved file
+    /** Path to the save data text file. */
     static String savePath = "src/main/resources/saveData.txt";
+
+    /** Representation of the save file  */
     static Path saveFilePath = Paths.get(savePath);
 
-    // Create the save file if it doesn't exist
+    /**
+     * Creates a save file if it does not already exist.
+     * <p>
+     *     The save file is created with default game settings and controls.
+     * </p>
+     */
     public static void createSaveFile() {
         try {
             File saveFile = new File(savePath);
@@ -32,7 +56,13 @@ public class SaveData {
         }
     }
 
-    //write the initial save data
+    /**
+     * Writes the default save data content to a newly created file.
+     *
+     * @param saveFile the save file to write into
+     * @return {@link FileWriter} after writing the initial content
+     * @throws IOException if writing fails
+     */
     private static FileWriter getFileWriter(File saveFile) throws IOException {
         FileWriter write = new FileWriter(saveFile);
         write.write(
@@ -62,7 +92,13 @@ public class SaveData {
     }
 
 // rewrite the file
-    // string
+    /**
+     * Overwrites a specific line in the save file with a new string value.
+     *
+     * @param newData the new string to write
+     * @param line the line number to overwrite
+     * @throws IOException if file access fails
+     */
     public static void overWriteFile(String newData, int line) throws IOException {
         try{
             List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
@@ -79,7 +115,13 @@ public class SaveData {
         }
     }
 
-    //int
+    /**
+     * Overwrites a specific line in the save file with an integer value.
+     *
+     * @param newData the new integer to write
+     * @param line the line number to overwrite
+     * @throws IOException if file access fails
+     */
     public static void overWriteFile(int newData, int line) throws IOException {
         try{
             List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
@@ -96,7 +138,14 @@ public class SaveData {
         }
     }
 
-    //double
+    /**
+     * Overwrites a value inside a list separated by colons on a specific line.
+     *
+     * @param newData the new double value to replace
+     * @param index the position in the list to modify
+     * @param line the file line to modify
+     * @throws IOException if file access fails
+     */
     public static void overWriteFile(double newData, int index, int line) throws IOException {
         try {
             List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
@@ -118,7 +167,13 @@ public class SaveData {
         }
     }
 
-// maps key event constant to a line
+    /**
+     * Maps a {@link SaveDataType} constant to its corresponding line number
+     * in the save file.
+     *
+     * @param eventType the type of save data
+     * @return the line number
+     */
     public static int getKeyEvent(SaveDataType eventType) {
         return switch (eventType) {
             case HIGHSCORE -> 0;
@@ -145,7 +200,13 @@ public class SaveData {
         };
     }
 
-    // integer
+    /**
+     * Reads an integer value from the specified line.
+     *
+     * @param line the line to read
+     * @return the integer value stored on that line
+     * @throws IOException if reading fails
+     */
     public static int ReadFileInt(int line) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
 
@@ -153,13 +214,25 @@ public class SaveData {
         return Integer.parseInt(data);
     }
 
-    // string
+    /**
+     * Reads a string from the specified line.
+     *
+     * @param line the line to read
+     * @return the string located at the line
+     * @throws IOException if reading fails
+     */
     public static String ReadFileString(int line) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
         return fileContent.get(line);
     }
 
-    // boolean
+    /**
+     * Reads a boolean value from the specified line.
+     *
+     * @param line the line to read
+     * @return {@code true} or {@code false} from the file
+     * @throws IOException if reading fails
+     */
     public static boolean ReadBoolean(int line) throws IOException{
         List<String> fileContent = new ArrayList<>(Files.readAllLines(saveFilePath, StandardCharsets.UTF_8));
 
@@ -167,7 +240,14 @@ public class SaveData {
         return Boolean.parseBoolean(data);
     }
 
-    // returns a list
+    /**
+     * Reads a list separated by colons from the specified line.
+     * If no colon is present, returns a single-element array.
+     *
+     * @param line the line to read
+     * @return an array of values from the line
+     * @throws IOException if reading fails
+     */
     public static String[] ReadFileList(int line) throws IOException {
         String data = ReadFileString(line);
         if (data.contains(" : ")) {
@@ -177,7 +257,14 @@ public class SaveData {
         }
     }
 
-    // key code
+    /**
+     * Reads a saved keyboard shortcut from the specified line and converts it
+     * * into a {@link KeyCode}.
+     *
+     * @param line the line containing the saved key code
+     * @return the corresponding {@code KeyCode}
+     * @throws IOException if reading fails
+     */
     public static KeyCode ReadKeyCode(int line) throws IOException{
         String keyString = SaveData.ReadFileString(line);  // "!","@" etc.
         return KeyCode.valueOf(keyString);

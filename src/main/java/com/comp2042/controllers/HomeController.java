@@ -6,7 +6,6 @@ import com.comp2042.enums.SaveDataType;
 import com.comp2042.media.Bgm;
 import com.comp2042.media.Sfx;
 import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,16 +18,50 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This is the controller for the Home screen of the application.
+ *
+ * <p>This class handles the following in the Home Menu:</p>
+ * <ul>
+ *     <li>Initializing UI elements (high score, timer text, audio)</li>
+ *     <li>Binding button interactions for settings, play, timer adjustment, and exit</li>
+ * </ul>
+ *
+ * <p>
+ *  This controller is automatically instantiated by JavaFX when the
+ *  {@code homeLayout.fxml} file is loaded.
+ * </p>
+ */
+
 public class HomeController implements Initializable {
 
     @FXML private StackPane rootPane;
     @FXML private Label HighScoreDisplay, Setting, Play, Exit, TimerAdd, TimerMinus, TimerDisplay;
     int option = 1;
 
+    /**
+     * Default constructor required by JavaFX.
+     */
     public HomeController() {
 
     }
 
+    /**
+     * Initializes the Home screen.
+     *
+     * <p>This method will:
+     * <ul>
+     *     <li>Ensures a save file exists using {@link SaveData#createSaveFile()}</li>
+     *     <li>Loads and displays the current high score</li>
+     *     <li>Plays the background music (BGM)</li>
+     *     <li>Loads sound effects when a button is pressed</li>
+     *     <li>Assigns mouse event handlers to the Settings, Play, Timer, and Exit buttons</li>
+     *     <li>Handles scene switching when the Play button is clicked</li>
+     * </ul>
+     *
+     * @param location  unused but required by {@link javafx.fxml.Initializable}
+     * @param resources unused but required by {@link javafx.fxml.Initializable}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         int currentHighScore;
@@ -86,6 +119,22 @@ public class HomeController implements Initializable {
         });
     }
 
+    /**
+     * Allow users to choose the timer option
+     *
+     * <p> This method updates: </p>
+     *
+     * <ul>
+     *     <li>The displayed timer chosen</li>
+     *     <li>Update the game timer duration using {@link Timer}</li>
+     *     <li>The displayed high score belonging to the selected timer</li>
+     * </ul>
+     *
+     * <p>Timer modes wrap around (1–5).
+     * Example: moving forward from option 5 returns to option 1.
+     *
+     * @param add {@code true} to increment the timer option, {@code false} to decrement
+     */
     public void getCurrentTimer(boolean add) {
         if (add) {
             option++;

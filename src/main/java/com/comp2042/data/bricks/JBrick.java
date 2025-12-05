@@ -6,10 +6,15 @@ import com.comp2042.logic.MatrixOperations;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the "J" Tetris brick shape.
+ */
 final class JBrick implements Brick {
 
     private final List<int[][]> brickMatrix = new ArrayList<>();
-
+    /**
+     * Creates all possible rotations of the brick.
+     */
     public JBrick() {
         brickMatrix.add(new int[][]{
                 {0, 0, 0, 0},
@@ -36,7 +41,10 @@ final class JBrick implements Brick {
                 {0, 0, 0, 0}
         });
     }
-
+    /**
+     * Returns the shape of the brick
+     * @return matrix of the brick
+     */
     @Override
     public List<int[][]> getShapeMatrix() {
         return MatrixOperations.deepCopyList(brickMatrix);
