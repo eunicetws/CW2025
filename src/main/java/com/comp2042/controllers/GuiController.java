@@ -637,7 +637,7 @@ public class GuiController implements Initializable {
     }
 
     /**
-     * Handles a soft drop action, moving the active brick downward by one tile.
+     * Handles a soft drop action, moving the active brick downward by one tile and check if the time is up
      *
      * <p>
      * If the game is not paused, this method calls
@@ -645,6 +645,7 @@ public class GuiController implements Initializable {
      * movement, passing {@code false} to indicate that the action not a hard drop.
      * If there is any rows cleared, a score notification will is displayed based on how many
      * rows were removed.
+     * If the time is up return game over.
      * </p>
      *
      * <p>
@@ -658,6 +659,9 @@ public class GuiController implements Initializable {
     // move block down
     private void moveDown(MoveEvent event) {
         if (isPause.getValue() == Boolean.FALSE) {
+            if (Timer.getStartingTime()!=0 && Timer.getRemainingSeconds() <= 0) {
+                gameOver();
+            }
             DownData downData = eventListener.onDownEvent(event, false);
             if (downData.getClearRow() != null && downData.getClearRow().getLinesRemoved() > 0) {
                 NotificationPanel notificationPanel = new NotificationPanel("+" + downData.getClearRow().getScoreBonus());

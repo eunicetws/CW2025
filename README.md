@@ -273,6 +273,11 @@ Moved to package com.comp2042.controllers
     |------------------------------------------|----------------------------------------------------------------------------------------------------------------|
     | new function `HardDrop(MoveEvent event)` | Handles the hard-drop action in which the the active brick is instantly dropped to the lowest valid position.  |
     
+  - #### Display GameOver when the timer ends
+    | Changes                                  | Reason                                                                                                      |
+    |------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+    | new function `moveDown(MoveEvent event)` | Checks if the timer has reached 0 each time the brick moves down. If yes, the game over panel is displayed. |
+
   - #### Change the speed of the game
     | Changes                             | Reason                        |
     |-------------------------------------|-------------------------------|
