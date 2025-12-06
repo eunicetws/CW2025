@@ -8,6 +8,7 @@
  *       the game matrices.</li>
  *   <li>{@link com.comp2042.logic.SimpleBoard} – is the implementation of {@link com.comp2042.interfaces.Board} and
  *      handles the board and movement logics.</li>
+ *   <li>{@link com.comp2042.logic.Timer} – acts as the game's timer</li>
  * </ul>
  *
  * <p>

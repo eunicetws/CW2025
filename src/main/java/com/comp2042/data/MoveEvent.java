@@ -1,4 +1,4 @@
-package com.comp2042.logic;
+package com.comp2042.data;
 
 import com.comp2042.enums.EventSource;
 import com.comp2042.enums.EventType;

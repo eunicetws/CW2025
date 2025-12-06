@@ -1,13 +1,13 @@
 package com.comp2042.controllers;
 
-import com.comp2042.data.Timer;
+import com.comp2042.logic.Timer;
 import com.comp2042.enums.EventSource;
 import com.comp2042.enums.EventType;
 import com.comp2042.data.SaveData;
 import com.comp2042.enums.SaveDataType;
 import com.comp2042.interfaces.InputEventListener;
-import com.comp2042.logic.DownData;
-import com.comp2042.logic.MoveEvent;
+import com.comp2042.data.DownData;
+import com.comp2042.data.MoveEvent;
 import com.comp2042.media.Sfx;
 import com.comp2042.view.NotificationPanel;
 import com.comp2042.view.ViewData;

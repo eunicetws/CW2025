@@ -1,6 +1,7 @@
 package com.comp2042.data;
 
 import com.comp2042.enums.SaveDataType;
+import com.comp2042.logic.Timer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 

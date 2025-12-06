@@ -1,5 +1,6 @@
 package com.comp2042.data;
 
+import com.comp2042.logic.Timer;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 class TimerTest {

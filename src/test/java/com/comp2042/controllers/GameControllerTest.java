@@ -3,8 +3,8 @@ package com.comp2042.controllers;
 import com.comp2042.enums.EventSource;
 import com.comp2042.enums.EventType;
 import com.comp2042.interfaces.InputEventListener;
-import com.comp2042.logic.DownData;
-import com.comp2042.logic.MoveEvent;
+import com.comp2042.data.DownData;
+import com.comp2042.data.MoveEvent;
 import javafx.beans.property.IntegerProperty;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
 package com.comp2042.logic;
 
+import com.comp2042.data.ClearRow;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

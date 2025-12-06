@@ -3,9 +3,9 @@ package com.comp2042.controllers;
 import com.comp2042.enums.EventSource;
 import com.comp2042.interfaces.Board;
 import com.comp2042.interfaces.InputEventListener;
-import com.comp2042.logic.ClearRow;
-import com.comp2042.logic.DownData;
-import com.comp2042.logic.MoveEvent;
+import com.comp2042.data.ClearRow;
+import com.comp2042.data.DownData;
+import com.comp2042.data.MoveEvent;
 import com.comp2042.logic.SimpleBoard;
 import com.comp2042.view.ViewData;
 

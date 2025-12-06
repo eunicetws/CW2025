@@ -1,5 +1,6 @@
-package com.comp2042.data;
+package com.comp2042.logic;
 
+import com.comp2042.data.Score;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;

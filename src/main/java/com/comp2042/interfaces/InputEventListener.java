@@ -1,7 +1,7 @@
 package com.comp2042.interfaces;
 
-import com.comp2042.logic.DownData;
-import com.comp2042.logic.MoveEvent;
+import com.comp2042.data.DownData;
+import com.comp2042.data.MoveEvent;
 import com.comp2042.view.ViewData;
 
 /**

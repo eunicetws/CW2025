@@ -1,7 +1,7 @@
 package com.comp2042.controllers;
 
 import com.comp2042.data.SaveData;
-import com.comp2042.data.Timer;
+import com.comp2042.logic.Timer;
 import com.comp2042.enums.SaveDataType;
 import com.comp2042.media.Bgm;
 import com.comp2042.media.Sfx;

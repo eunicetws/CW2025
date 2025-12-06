@@ -1,4 +1,6 @@
-package com.comp2042.logic;
+package com.comp2042.data;
+
+import com.comp2042.logic.MatrixOperations;
 
 /**
  * This class represents the result of clearing the rows in the game matrix.

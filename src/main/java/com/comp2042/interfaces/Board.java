@@ -1,6 +1,6 @@
 package com.comp2042.interfaces;
 
-import com.comp2042.logic.ClearRow;
+import com.comp2042.data.ClearRow;
 import com.comp2042.view.ViewData;
 import com.comp2042.data.Level;
 import com.comp2042.data.LinesCleared;
