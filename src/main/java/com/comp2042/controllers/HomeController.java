@@ -64,7 +64,6 @@ public class HomeController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        int currentHighScore;
         // if no save file, create one
         SaveData.createSaveFile();
 
