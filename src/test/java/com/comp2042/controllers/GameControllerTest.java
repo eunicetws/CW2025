@@ -1,5 +1,6 @@
 package com.comp2042.controllers;
 
+import com.comp2042.data.SaveData;
 import com.comp2042.enums.EventSource;
 import com.comp2042.enums.EventType;
 import com.comp2042.interfaces.InputEventListener;
@@ -19,8 +20,8 @@ class GameControllerTest {
 
     @BeforeEach
     void setup() {
+        SaveData.createSaveFile();
         GuiController dummyGui = new GuiController() {
-
             @Override public void setEventListener(InputEventListener eventListener) {}
             @Override public void initGameView(int[][] m, ViewData v) {}
             @Override public void bindScore(IntegerProperty p) {}
