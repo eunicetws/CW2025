@@ -70,7 +70,7 @@ public final class Level {
      * @return {@code true} if the player can level up; {@code false} otherwise
      */
     public boolean reachLevelRequirement(int lines){
-        int level = this.level.getValue()-1;
+        int level = this.level.getValue();
         return lines >= (5 * (level * level)) + (5 * level) && level != 20;
             // Cleared lines >= level Up Requirement and stop increasing after lvl20
     }
